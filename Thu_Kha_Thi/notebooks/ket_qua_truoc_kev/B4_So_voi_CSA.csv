@@ -1,0 +1,5 @@
+﻿Cách ưu tiên,Lỗ hổng KEV được ưu tiên trước khi vào KEV,Khối lượng vá (ngày 30/06/2025)
+"Quy tắc CSA: CVSS từ 8,0","391 / 609 = 64,20%","58.133 / 209.623 = 27,73%"
+"Công thức S, 1 ngày trước khi vào KEV: S từ 70","108 / 609 = 17,73%","2.803 / 209.623 = 1,34%"
+"Công thức S, 1 ngày trước khi vào KEV: S từ 50","147 / 609 = 24,14%","6.868 / 209.623 = 3,28%"
+"Công thức S, 1 ngày trước khi vào KEV: S từ 30","202 / 609 = 33,17%","18.178 / 209.623 = 8,67%"

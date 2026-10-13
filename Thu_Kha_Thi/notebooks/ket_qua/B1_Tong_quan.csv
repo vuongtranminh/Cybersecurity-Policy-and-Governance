@@ -1,0 +1,8 @@
+﻿Hạng mục,Giá trị
+"Lỗ hổng từ 1999 đến 2025, không tính lỗ hổng bị hủy",316.367
+"Có điểm CVSS 3.x, dùng cho thống kê","240.409 / 316.367 = 75,99%"
+Chỉ có điểm CVSS 2.0,"72.405 / 316.367 = 22,89%"
+Không có điểm CVSS,"3.553 / 316.367 = 1,12%"
+Lỗ hổng trong danh mục KEV,1.739
+"Lỗ hổng KEV có mã năm sau 2025, nằm ngoài phạm vi",169
+Lỗ hổng KEV thuộc phạm vi và có CVSS 3.x,1.570

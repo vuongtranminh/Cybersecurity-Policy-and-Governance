@@ -1,0 +1,18 @@
+# He thong va tam
+.DS_Store
+~$*
+__pycache__/
+.ipynb_checkpoints/
+.claude/
+
+# Du lieu tho tai ve (chay lai code de tai)
+**/data/
+**/du_lieu_nvd/
+Thu_Kha_Thi/notebooks/cvss_kev_tat_ca.csv
+Thu_Kha_Thi/output/du_lieu_phan_tich.csv
+W5_Implementation/output/
+
+# Tai lieu cua ben thu ba va bao cao Word
+*.pdf
+*.docx
+Thu_Kha_Thi/hinh/

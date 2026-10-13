@@ -1,0 +1,167 @@
+{
+  "nguon_diem": {
+    "co_nvd": 16665,
+    "co_cna": 40443,
+    "ca_hai": 11721,
+    "nvd_cao_hon": 6613,
+    "chenh_tb": 0.9271905127548846
+  },
+  "viec1": {
+    "tong": 49972,
+    "rejected": 1820,
+    "chi_cvss4": 1868,
+    "khong_cvss": 897,
+    "co_cvss3": 45387
+  },
+  "thoi_gian": [
+    {
+      "khoang": "Truoc hoac cung ngay cong bo",
+      "so_luong": 49,
+      "ty_le_pct": 24.873096446700508
+    },
+    {
+      "khoang": "Tu 1 den 7 ngay",
+      "so_luong": 48,
+      "ty_le_pct": 24.365482233502537
+    },
+    {
+      "khoang": "Tu 8 den 30 ngay",
+      "so_luong": 29,
+      "ty_le_pct": 14.720812182741117
+    },
+    {
+      "khoang": "Tu 31 den 180 ngay",
+      "so_luong": 49,
+      "ty_le_pct": 24.873096446700508
+    },
+    {
+      "khoang": "Sau 180 ngay",
+      "so_luong": 22,
+      "ty_le_pct": 11.16751269035533
+    }
+  ],
+  "kev_2025": 197,
+  "tap": {
+    "N": 45277,
+    "P": 66,
+    "loai_da_kev": 110,
+    "thieu_epss": 974
+  },
+  "viec2_cna": {
+    "phai_va": 8596,
+    "bat": 46,
+    "bo_sot": 20,
+    "ty_le_bo_sot": 30.303030303030305,
+    "ci_thap": 20.553868699544754,
+    "ci_cao": 42.21903455582168
+  },
+  "viec2": {
+    "phai_va": 11252,
+    "ty_le_phai_va": 24.851469841199727,
+    "bat": 39,
+    "bo_sot": 27,
+    "ty_le_bo_sot": 40.90909090909091,
+    "ci_thap": 29.867234579227308,
+    "ci_cao": 52.95102846171105,
+    "bo_sot_7": 19,
+    "bo_sot_4_7": 8,
+    "bo_sot_duoi_4": 0
+  },
+  "viec3": {
+    "bang": [
+      {
+        "phuong_phap": "CVSS",
+        "can_va_de_bat_50pct": 9055,
+        "can_va_de_bat_80pct": 17643,
+        "can_va_de_bang_CSA": 11194,
+        "bat_khi_va_bang_CSA": 39
+      },
+      {
+        "phuong_phap": "EPSS luc quyet dinh",
+        "can_va_de_bat_50pct": 3954,
+        "can_va_de_bat_80pct": 20368,
+        "can_va_de_bang_CSA": 6576,
+        "bat_khi_va_bang_CSA": 42
+      },
+      {
+        "phuong_phap": "EPSS hien tai (nhin truoc dap an)",
+        "can_va_de_bat_50pct": 74,
+        "can_va_de_bat_80pct": 976,
+        "can_va_de_bang_CSA": 130,
+        "bat_khi_va_bang_CSA": 64
+      }
+    ],
+    "chenh_lech": 3,
+    "ci": [
+      -6.0,
+      12.0
+    ]
+  },
+  "do_nhay": {
+    "P": 40,
+    "loai": 139,
+    "W": 11233,
+    "cvss_bat": 22,
+    "epss_bat": 27,
+    "cvss_50": 8932,
+    "epss_50": 2102
+  },
+  "viec4": [
+    {
+      "quy_tac": "CVSS tu 8.0 (khuyen nghi CSA)",
+      "phai_va": 11252,
+      "bat_duoc": 39,
+      "ty_le_bat_pct": 59.09090909090909,
+      "bat_tren_1000_ban_va": 3.466050479914682
+    },
+    {
+      "quy_tac": "Chi EPSS tu 0.01",
+      "phai_va": 532,
+      "bat_duoc": 14,
+      "ty_le_bat_pct": 21.21212121212121,
+      "bat_tren_1000_ban_va": 26.31578947368421
+    },
+    {
+      "quy_tac": "Chi EPSS tu 0.05",
+      "phai_va": 158,
+      "bat_duoc": 9,
+      "ty_le_bat_pct": 13.636363636363637,
+      "bat_tren_1000_ban_va": 56.962025316455694
+    },
+    {
+      "quy_tac": "Chi EPSS tu 0.1",
+      "phai_va": 101,
+      "bat_duoc": 5,
+      "ty_le_bat_pct": 7.575757575757576,
+      "bat_tren_1000_ban_va": 49.504950495049506
+    },
+    {
+      "quy_tac": "CVSS tu 8.0 HOAC EPSS tu 0.01",
+      "phai_va": 11478,
+      "bat_duoc": 42,
+      "ty_le_bat_pct": 63.63636363636363,
+      "bat_tren_1000_ban_va": 3.6591740721380033
+    },
+    {
+      "quy_tac": "CVSS tu 8.0 HOAC EPSS tu 0.05",
+      "phai_va": 11329,
+      "bat_duoc": 41,
+      "ty_le_bat_pct": 62.121212121212125,
+      "bat_tren_1000_ban_va": 3.6190308058963723
+    },
+    {
+      "quy_tac": "CVSS tu 7.0 VA EPSS tu 0.01",
+      "phai_va": 397,
+      "bat_duoc": 14,
+      "ty_le_bat_pct": 21.21212121212121,
+      "bat_tren_1000_ban_va": 35.26448362720403
+    },
+    {
+      "quy_tac": "CVSS tu 7.0 VA EPSS tu 0.05",
+      "phai_va": 107,
+      "bat_duoc": 9,
+      "ty_le_bat_pct": 13.636363636363637,
+      "bat_tren_1000_ban_va": 84.11214953271028
+    }
+  ]
+}

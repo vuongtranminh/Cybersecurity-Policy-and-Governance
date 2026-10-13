@@ -1,0 +1,36 @@
+==========================================================================
+PHEP THU A. KHA NANG DU BAO (thiet ke cong bang)
+==========================================================================
+45,277 lo hong, 66 bi khai thac trong 180 ngay sau ngay quyet dinh.
+Lo hong da vao KEV truoc ngay quyet dinh da bi loai, nen KEV = 0 voi moi lo hong.
+
+Cach xep                                Vua 11,252   Top 500   Bat 50%   Bat 80%
+CVSS (quy tac CSA khi xep hang)             39/66      7/66     9,055    17,643
+EPSS luc quyet dinh                         42/66     14/66     3,954    20,368
+Cong thuc Risk Score, so mu 0.3             43/66     14/66     3,278    15,978
+
+Cung vua 11,252 lo hong: cong thuc bat nhieu hon CVSS +4 ca, khoang tin cay 95% bootstrap tu -3 den +11
+  Ket luan: khong co khac biet co y nghia thong ke
+
+Thu cac so mu khac nhau cho EPSS:
+So mu       Vua 11,252   Top 500   Bat 50%   Bat 80%
+0.05            44/66     12/66     6,980    16,327
+0.1             43/66     14/66     3,987    17,725
+0.2             43/66     14/66     2,990    18,482
+0.3             43/66     14/66     3,278    15,978
+0.5             46/66     13/66     3,018    15,453
+0.7             45/66     14/66     3,282    15,316
+1.0             44/66     14/66     3,454    14,698
+
+==========================================================================
+PHEP THU B. KHA NANG PHAN UNG KHI LO HONG VUA VAO KEV
+==========================================================================
+Lo hong cong bo nam 2025 da vao KEV: 197, phan tich duoc 172 (bo 25 vao KEV sau thang 1 nam 2026)
+Moi lo hong duoc xet tai ngay cuoi thang dau tien sau khi vao KEV.
+
+Cach cham diem                      Hang trung vi    Top 1%    Top 5%   Top 25%
+CVSS                                   top 17.07%      8.1%     16.3%     65.7%
+CVSS x EPSS^0.3, khong co KEV           top 0.67%     62.8%     90.1%     99.4%
+Cong thuc day du, co KEV                top 0.20%     98.8%    100.0%    100.0%
+
+(Top 1% nghia la lo hong vua vao KEV nam trong 1% lo hong co diem cao nhat tai ngay do.)

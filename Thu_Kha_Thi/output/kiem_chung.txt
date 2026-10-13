@@ -1,0 +1,116 @@
+==============================================================================
+DU LIEU
+==============================================================================
+Nam      Lo hong   Loai vi da vao KEV   Phan tich  Bi khai thac sau
+2023      28,815                   92      28,723                43
+2024      39,629                   85      39,544                50
+2025      45,387                  110      45,277                66
+
+Phien ban mo hinh EPSS xuat hien: v2022.01.01, v2023.03.01, v2025.03.14
+
+==============================================================================
+RQ3. CHON SO MU TREN DU LIEU CU (walk-forward)
+==============================================================================
+Kiem thu 2024, chon tren [2023]: 0.1:26.9%, 0.2:24.7%, 0.3:23.9%, 0.5:23.8%, 0.7:23.8%, 1.0:23.8%  ket qua: chon so mu 0.1
+Kiem thu 2025, chon tren [2023, 2024]: 0.1:30.7%, 0.2:28.3%, 0.3:27.1%, 0.5:27.2%, 0.7:26.9%, 1.0:26.9%  ket qua: chon so mu 0.1
+
+==============================================================================
+RQ1. KHA NANG DU BAO TREN NAM KIEM THU
+==============================================================================
+
+Nam 2023 (chi mo ta): 28,723 lo hong, 43 bi khai thac sau ngay quyet dinh
+  Phuong phap                      top 1%   top 5%  top 10%  top 25%    vua=8,440     vua=73  NDCG@1%
+  CVSS                               3.6%    13.4%    25.6%    52.2%     24.0/43    0.4/43    0.018
+  EPSS                               9.3%    16.3%    22.3%    41.9%     20.7/43    3.0/43    0.091
+  Cong thuc so mu 0.3               11.6%    14.0%    25.6%    44.2%     19.7/43    4.0/43    0.109
+  Quy tac CSA (CVSS tu 8.0): va 8,440, bat 24/43
+  Cay Shimizu, nhanh High (EPSS tu 0.088 va CVSS tu 7.0): va 73, bat 3/43
+
+Nam 2024 (kiem thu): 39,544 lo hong, 50 bi khai thac sau ngay quyet dinh
+  Phuong phap                      top 1%   top 5%  top 10%  top 25%   vua=10,040     vua=23  NDCG@1%
+  CVSS                               1.8%    19.4%    41.4%    54.0%     27.0/50    0.0/50    0.010
+  EPSS                              14.0%    19.2%    22.0%    29.4%     14.8/50    3.0/50    0.164
+  Cong thuc so mu 0.3               14.0%    20.0%    27.4%    58.0%     29.0/50    3.0/50    0.132
+  Cong thuc so mu chon (0.1)        14.0%    20.0%    45.7%    56.0%     28.0/50    2.0/50    0.114
+  Quy tac CSA (CVSS tu 8.0): va 10,040, bat 27/50
+  Cay Shimizu, nhanh High (EPSS tu 0.088 va CVSS tu 7.0): va 23, bat 3/50
+
+Nam 2025 (kiem thu): 45,277 lo hong, 66 bi khai thac sau ngay quyet dinh
+  Phuong phap                      top 1%   top 5%  top 10%  top 25%   vua=11,252     vua=75  NDCG@1%
+  CVSS                               9.9%    18.3%    28.8%    59.2%     39.0/66    2.4/66    0.069
+  EPSS                              21.2%    39.4%    54.5%    63.6%     42.0/66    4.0/66    0.187
+  Cong thuc so mu 0.3               19.7%    45.5%    53.0%    65.2%     43.0/66    6.0/66    0.191
+  Cong thuc so mu chon (0.1)        21.2%    40.9%    50.0%    65.2%     43.0/66    8.0/66    0.197
+  Quy tac CSA (CVSS tu 8.0): va 11,252, bat 39/66
+  Cay Shimizu, nhanh High (EPSS tu 0.088 va CVSS tu 7.0): va 75, bat 6/66
+
+H1: cong thuc so mu 0.3 so voi CVSS khi va bang quy tac CSA, gop 2024 va 2025
+  so voi CVSS : chenh lech +6.0 ca, khoang tin cay 95% [-2.0, +15.0]  ket qua: CHUA DAT
+  so voi EPSS : chenh lech +15.2 ca, khoang tin cay 95% [+5.2, +26.7]  ket qua: DAT
+
+==============================================================================
+RQ2. MO PHONG VAN HANH HANG THANG, CUNG NGAN SACH VA
+==============================================================================
+
+Nam 2024, ngan sach va 10% so lo hong trong nam:
+  Cach chon             Va truoc khi bi khai thac   An toan trong 30 ngay  Tre trung vi   Chua va
+  CVSS                                      10.9%                   21.9%       36 ngay     65.6%
+  EPSS                                      12.5%                   89.1%       17 ngay      5.5%
+  Cong thuc bo KEV                          14.1%                   82.8%       17 ngay     10.9%
+  Cong thuc day du                          14.1%                  100.0%       17 ngay      0.0%
+  Cay Shimizu                               14.1%                  100.0%       16 ngay      0.0%
+  (moi thang va 305 lo hong; 128 lo hong bi khai thac trong ky)
+
+Nam 2024, ngan sach va 25% so lo hong trong nam:
+  Cach chon             Va truoc khi bi khai thac   An toan trong 30 ngay  Tre trung vi   Chua va
+  CVSS                                      20.3%                   55.5%       14 ngay     42.2%
+  EPSS                                      16.4%                   93.8%       16 ngay      3.9%
+  Cong thuc bo KEV                          23.4%                   91.4%       16 ngay      5.5%
+  Cong thuc day du                          23.4%                  100.0%       16 ngay      0.0%
+  Cay Shimizu                               22.7%                  100.0%       16 ngay      0.0%
+  (moi thang va 762 lo hong; 128 lo hong bi khai thac trong ky)
+
+Nam 2024, ngan sach va 50% so lo hong trong nam:
+  Cach chon             Va truoc khi bi khai thac   An toan trong 30 ngay  Tre trung vi   Chua va
+  CVSS                                      29.7%                   83.6%       17 ngay      8.6%
+  EPSS                                      21.1%                   96.1%       17 ngay      1.6%
+  Cong thuc bo KEV                          30.5%                   99.2%       16 ngay      0.8%
+  Cong thuc day du                          30.5%                  100.0%       16 ngay      0.0%
+  Cay Shimizu                               28.9%                  100.0%       16 ngay      0.0%
+  (moi thang va 1,524 lo hong; 128 lo hong bi khai thac trong ky)
+
+Nam 2025, ngan sach va 10% so lo hong trong nam:
+  Cach chon             Va truoc khi bi khai thac   An toan trong 30 ngay  Tre trung vi   Chua va
+  CVSS                                       7.0%                   18.6%       37 ngay     66.9%
+  EPSS                                      16.9%                   94.8%       17 ngay      3.5%
+  Cong thuc bo KEV                          19.8%                   91.3%       17 ngay      4.7%
+  Cong thuc day du                          19.8%                  100.0%       17 ngay      0.0%
+  Cay Shimizu                               12.8%                  100.0%       17 ngay      0.0%
+  (moi thang va 349 lo hong; 172 lo hong bi khai thac trong ky)
+
+Nam 2025, ngan sach va 25% so lo hong trong nam:
+  Cach chon             Va truoc khi bi khai thac   An toan trong 30 ngay  Tre trung vi   Chua va
+  CVSS                                      19.2%                   56.4%       15 ngay     37.2%
+  EPSS                                      24.4%                   98.3%       17 ngay      0.6%
+  Cong thuc bo KEV                          26.7%                   98.3%       17 ngay      1.7%
+  Cong thuc day du                          26.7%                  100.0%       17 ngay      0.0%
+  Cay Shimizu                               20.3%                  100.0%       17 ngay      0.0%
+  (moi thang va 873 lo hong; 172 lo hong bi khai thac trong ky)
+
+Nam 2025, ngan sach va 50% so lo hong trong nam:
+  Cach chon             Va truoc khi bi khai thac   An toan trong 30 ngay  Tre trung vi   Chua va
+  CVSS                                      31.4%                   86.6%       16 ngay     11.6%
+  EPSS                                      28.5%                  100.0%       17 ngay      0.0%
+  Cong thuc bo KEV                          30.2%                  100.0%       17 ngay      0.0%
+  Cong thuc day du                          30.2%                  100.0%       17 ngay      0.0%
+  Cay Shimizu                               31.4%                  100.0%       17 ngay      0.0%
+  (moi thang va 1,746 lo hong; 172 lo hong bi khai thac trong ky)
+
+H2 (ngan sach 25%, ca hai nam kiem thu): DAT
+
+==============================================================================
+RQ4. DO ON DINH QUA CAC NAM (bat duoc khi va bang quy tac CSA)
+==============================================================================
+  2023: CVSS 24.0/43, EPSS 20.7/43, cong thuc 0.3 19.7/43
+  2024: CVSS 27.0/50, EPSS 14.8/50, cong thuc 0.3 29.0/50
+  2025: CVSS 39.0/66, EPSS 42.0/66, cong thuc 0.3 43.0/66

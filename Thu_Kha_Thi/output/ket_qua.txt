@@ -1,0 +1,65 @@
+==========================================================================
+VIEC 1. DU LIEU
+==========================================================================
+Lo hong cong bo nam 2025                 : 49,972
+  loai: bi tu choi (Rejected)            : 1,820
+  loai: chi co CVSS 4.0, khong co 3.x     : 1,868
+  loai: khong co diem CVSS nao            : 897
+  con lai co diem CVSS 3.x               : 45,387
+    co diem do NVD cham                  : 16,665
+    co diem do don vi cong bo (CNA) cham : 40,443
+    co ca hai diem                       : 11,721, trong do NVD cham cao hon 6,613 truong hop, chenh lech trung binh +0.93 diem
+
+Lo hong cong bo nam 2025 va da vao KEV: 197
+                      khoang  so_luong  ty_le_pct
+Truoc hoac cung ngay cong bo        49  24.873096
+             Tu 1 den 7 ngay        48  24.365482
+            Tu 8 den 30 ngay        29  14.720812
+          Tu 31 den 180 ngay        49  24.873096
+                Sau 180 ngay        22  11.167513
+
+Tap phan tich (quyet dinh vao cuoi thang cong bo):
+  loai vi da vao KEV truoc thoi diem quyet dinh : 110
+  chua co diem EPSS luc quyet dinh (gan = 0)    : 974
+  so lo hong phan tich                           : 45,277
+  bi khai thac trong 180 ngay sau quyet dinh    : 66 (0.146%)
+
+==========================================================================
+VIEC 2. KIEM CHUNG KHUYEN NGHI CSA (CVSS tu 8.0)
+==========================================================================
+So lo hong phai va theo quy tac CSA : 11,252 (24.9% tong so)
+Bat duoc                            : 39/66
+Bo sot                              : 27/66 = 40.9%  (khoang tin cay 95%: 29.9% den 53.0%)
+Cac lo hong bi bo sot co diem CVSS  : tu 7.0 den 7.9: 19;  tu 4.0 den 6.9: 8;  duoi 4.0: 0
+
+Do nhay theo nguon diem: neu uu tien diem cua don vi cong bo thay vi cua NVD:
+  phai va 8,596 (19.0%), bat duoc 46/66, bo sot 20/66 = 30.3% (khoang tin cay 95%: 20.6% den 42.2%)
+
+==========================================================================
+VIEC 3. SO SANH CVSS VA EPSS
+==========================================================================
+                      phuong_phap  can_va_de_bat_50pct  can_va_de_bat_80pct  can_va_de_bang_CSA  bat_khi_va_bang_CSA
+                             CVSS                 9055                17643               11194                   39
+              EPSS luc quyet dinh                 3954                20368                6576                   42
+EPSS hien tai (nhin truoc dap an)                   74                  976                 130                   64
+
+Cung va 11,252 lo hong: EPSS bat nhieu hon CVSS +3 ca (khoang tin cay 95% bootstrap: -6 den +12)
+  Ket luan: khong co khac biet co y nghia thong ke
+
+Do nhay: neu quyet dinh MUON HON 1 THANG (EPSS da co them 1 thang du lieu):
+  loai them vi da vao KEV: 139,  con 40 ca bi khai thac de du bao
+  cung va 11,233: CVSS bat 22/40, EPSS bat 27/40
+  de bat 50%: CVSS can 8,932, EPSS can 2,102
+
+==========================================================================
+VIEC 4. CAC QUY TAC KET HOP
+==========================================================================
+                      quy_tac  phai_va  bat_duoc  ty_le_bat_pct  bat_tren_1000_ban_va
+CVSS tu 8.0 (khuyen nghi CSA)    11252        39           59.1                   3.5
+             Chi EPSS tu 0.01      532        14           21.2                  26.3
+             Chi EPSS tu 0.05      158         9           13.6                  57.0
+              Chi EPSS tu 0.1      101         5            7.6                  49.5
+CVSS tu 8.0 HOAC EPSS tu 0.01    11478        42           63.6                   3.7
+CVSS tu 8.0 HOAC EPSS tu 0.05    11329        41           62.1                   3.6
+  CVSS tu 7.0 VA EPSS tu 0.01      397        14           21.2                  35.3
+  CVSS tu 7.0 VA EPSS tu 0.05      107         9           13.6                  84.1

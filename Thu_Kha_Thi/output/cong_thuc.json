@@ -1,0 +1,103 @@
+{
+  "A": [
+    {
+      "cach": "CVSS (quy tac CSA khi xep hang)",
+      "bat_khi_vua_W": 39,
+      "bat_top500": 7,
+      "can_va_50": 9055,
+      "can_va_80": 17643
+    },
+    {
+      "cach": "EPSS luc quyet dinh",
+      "bat_khi_vua_W": 42,
+      "bat_top500": 14,
+      "can_va_50": 3954,
+      "can_va_80": 20368
+    },
+    {
+      "cach": "Cong thuc Risk Score, so mu 0.3",
+      "bat_khi_vua_W": 43,
+      "bat_top500": 14,
+      "can_va_50": 3278,
+      "can_va_80": 15978
+    }
+  ],
+  "A_ci": [
+    -3.0,
+    11.0
+  ],
+  "so_mu": [
+    {
+      "so_mu": 0.05,
+      "bat_khi_vua_W": 44,
+      "bat_top500": 12,
+      "can_va_50": 6980,
+      "can_va_80": 16327
+    },
+    {
+      "so_mu": 0.1,
+      "bat_khi_vua_W": 43,
+      "bat_top500": 14,
+      "can_va_50": 3987,
+      "can_va_80": 17725
+    },
+    {
+      "so_mu": 0.2,
+      "bat_khi_vua_W": 43,
+      "bat_top500": 14,
+      "can_va_50": 2990,
+      "can_va_80": 18482
+    },
+    {
+      "so_mu": 0.3,
+      "bat_khi_vua_W": 43,
+      "bat_top500": 14,
+      "can_va_50": 3278,
+      "can_va_80": 15978
+    },
+    {
+      "so_mu": 0.5,
+      "bat_khi_vua_W": 46,
+      "bat_top500": 13,
+      "can_va_50": 3018,
+      "can_va_80": 15453
+    },
+    {
+      "so_mu": 0.7,
+      "bat_khi_vua_W": 45,
+      "bat_top500": 14,
+      "can_va_50": 3282,
+      "can_va_80": 15316
+    },
+    {
+      "so_mu": 1.0,
+      "bat_khi_vua_W": 44,
+      "bat_top500": 14,
+      "can_va_50": 3454,
+      "can_va_80": 14698
+    }
+  ],
+  "B": [
+    {
+      "cach": "CVSS",
+      "phan_tram_trung_vi": 17.065459272478904,
+      "top1": 8.13953488372093,
+      "top5": 16.27906976744186,
+      "top25": 65.69767441860465
+    },
+    {
+      "cach": "CVSS x EPSS^0.3, khong co KEV",
+      "phan_tram_trung_vi": 0.6701875518416642,
+      "top1": 62.7906976744186,
+      "top5": 90.11627906976744,
+      "top25": 99.4186046511628
+    },
+    {
+      "cach": "Cong thuc day du, co KEV",
+      "phan_tram_trung_vi": 0.19904457249710805,
+      "top1": 98.83720930232558,
+      "top5": 100.0,
+      "top25": 100.0
+    }
+  ]
+}

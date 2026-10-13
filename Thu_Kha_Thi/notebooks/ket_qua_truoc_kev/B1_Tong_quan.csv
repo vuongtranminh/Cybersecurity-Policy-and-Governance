@@ -1,0 +1,7 @@
+﻿Hạng mục,Số lượng
+Lỗ hổng vào KEV từ 01/04/2023,836
+Có điểm CVSS 3.x,"836 / 836 = 100,00%"
+Có điểm EPSS 1 ngày trước khi vào KEV (dùng để so sánh),"609 / 836 = 72,85%"
+Chưa có điểm EPSS 1 ngày trước khi vào KEV,"227 / 836 = 27,15%"
+Trong đó công bố cùng ngày hoặc 1 ngày trước khi vào KEV,"226 / 227 = 99,56%"
+Có điểm EPSS 30 ngày trước khi vào KEV,"385 / 836 = 46,05%"

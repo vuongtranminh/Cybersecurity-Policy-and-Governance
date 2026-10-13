@@ -1,0 +1,17 @@
+==============================================================================
+DU LIEU
+==============================================================================
+Nam      Lo hong   Loai vi da vao KEV   Phan tich  Bi khai thac sau
+2023      28,815                   92      28,723                43
+2024      39,629                   85      39,544                50
+2025      45,387                  110      45,277                66
+
+Phien ban mo hinh EPSS xuat hien: v2022.01.01, v2023.03.01, v2025.03.14
+
+==============================================================================
+PHAN TICH KHAM PHA: VA IT, GOP 2024 VA 2025
+==============================================================================
+  va 1%, cong thuc so voi CVSS : +12.6 ca, khoang tin cay 95% [+3.9, +21.8]
+  va 1%, cong thuc so voi EPSS : -1.0 ca, khoang tin cay 95% [-3.0, +2.0]
+  va 5%, cong thuc so voi CVSS : +18.2 ca, khoang tin cay 95% [+8.3, +28.5]
+  va 5%, cong thuc so voi EPSS : +4.4 ca, khoang tin cay 95% [-0.7, +10.5]

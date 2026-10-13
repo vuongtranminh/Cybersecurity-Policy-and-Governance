@@ -1,0 +1,353 @@
+{
+  "kev_phien_ban": "2026.10.08",
+  "tong_quan": {
+    "tat_ca": 316367,
+    "co3": 240409,
+    "chi_v2": 72405,
+    "khong_diem": 3553,
+    "kev_tong": 1739,
+    "kev_sau": 169,
+    "kev_co3": 1570
+  },
+  "1999 đến 2025": {
+    "N": 240409,
+    "K": 1570,
+    "KK": 238839,
+    "a": 877,
+    "b": 65845,
+    "c": 693,
+    "e": 172994,
+    "cao": 66722,
+    "thap": 173687
+  },
+  "2023 đến 2025": {
+    "N": 109597,
+    "K": 518,
+    "KK": 109079,
+    "a": 295,
+    "b": 28984,
+    "c": 223,
+    "e": 80095,
+    "cao": 29279,
+    "thap": 80318
+  },
+  "phan_bo": {
+    "Dưới 4,0": {
+      "tat_ca": 4785,
+      "kev": 5
+    },
+    "4,0 đến 6,9": {
+      "tat_ca": 104999,
+      "kev": 174
+    },
+    "7,0 đến 7,9": {
+      "tat_ca": 63903,
+      "kev": 514
+    },
+    "8,0 đến 8,9": {
+      "tat_ca": 32025,
+      "kev": 343
+    },
+    "9,0 đến 10": {
+      "tat_ca": 34697,
+      "kev": 534
+    }
+  },
+  "nguong": {
+    "7.0": {
+      "N": 240409,
+      "K": 1570,
+      "KK": 238839,
+      "a": 1391,
+      "b": 129234,
+      "c": 179,
+      "e": 109605,
+      "cao": 130625,
+      "thap": 109784
+    },
+    "8.0": {
+      "N": 240409,
+      "K": 1570,
+      "KK": 238839,
+      "a": 877,
+      "b": 65845,
+      "c": 693,
+      "e": 172994,
+      "cao": 66722,
+      "thap": 173687
+    },
+    "9.0": {
+      "N": 240409,
+      "K": 1570,
+      "KK": 238839,
+      "a": 534,
+      "b": 34163,
+      "c": 1036,
+      "e": 204676,
+      "cao": 34697,
+      "thap": 205712
+    }
+  },
+  "theo_nam": {
+    "2010": {
+      "kev": 23,
+      "duoi": 13
+    },
+    "2011": {
+      "kev": 9,
+      "duoi": 4
+    },
+    "2012": {
+      "kev": 22,
+      "duoi": 7
+    },
+    "2013": {
+      "kev": 38,
+      "duoi": 18
+    },
+    "2014": {
+      "kev": 34,
+      "duoi": 12
+    },
+    "2015": {
+      "kev": 48,
+      "duoi": 21
+    },
+    "2016": {
+      "kev": 60,
+      "duoi": 32
+    },
+    "2017": {
+      "kev": 86,
+      "duoi": 33
+    },
+    "2018": {
+      "kev": 89,
+      "duoi": 41
+    },
+    "2019": {
+      "kev": 119,
+      "duoi": 59
+    },
+    "2020": {
+      "kev": 146,
+      "duoi": 58
+    },
+    "2021": {
+      "kev": 216,
+      "duoi": 104
+    },
+    "2022": {
+      "kev": 132,
+      "duoi": 54
+    },
+    "2023": {
+      "kev": 166,
+      "duoi": 81
+    },
+    "2024": {
+      "kev": 164,
+      "duoi": 68
+    },
+    "2025": {
+      "kev": 188,
+      "duoi": 74
+    }
+  },
+  "nha_cung_cap": {
+    "Microsoft": 248,
+    "Apple": 54,
+    "Cisco": 41,
+    "Adobe": 28,
+    "Linux": 24,
+    "Android": 15,
+    "Oracle": 13,
+    "Ivanti": 12,
+    "Synacor": 11,
+    "Samsung": 11
+  },
+  "n_bo_sot": 693,
+  "vi_du": [
+    [
+      "CVE-2024-55550",
+      2.7,
+      "Mitel",
+      "MiCollab"
+    ],
+    [
+      "CVE-2023-26083",
+      3.3,
+      "Arm",
+      "Mali Graphics Processing Unit (GPU)"
+    ],
+    [
+      "CVE-2013-2423",
+      3.7,
+      "Oracle",
+      "Java Runtime Environment (JRE)"
+    ],
+    [
+      "CVE-2013-0431",
+      3.7,
+      "Oracle",
+      "Java Runtime Environment (JRE)"
+    ],
+    [
+      "CVE-2023-20867",
+      3.9,
+      "VMware",
+      "Tools"
+    ],
+    [
+      "CVE-2025-48928",
+      4.0,
+      "TeleMessage",
+      "TM SGNL"
+    ],
+    [
+      "CVE-2025-43200",
+      4.2,
+      "Apple",
+      "Multiple Products"
+    ],
+    [
+      "CVE-2020-0878",
+      4.2,
+      "Microsoft",
+      "Edge and Internet Explorer"
+    ],
+    [
+      "CVE-2020-9819",
+      4.3,
+      "Apple",
+      "iOS, iPadOS, and watchOS"
+    ],
+    [
+      "CVE-2020-8196",
+      4.3,
+      "Citrix",
+      "Application Delivery Controller (ADC), Gateway, and SD-WAN WANOP Appliance"
+    ],
+    [
+      "CVE-2020-4430",
+      4.3,
+      "IBM",
+      "Data Risk Manager"
+    ],
+    [
+      "CVE-2018-13374",
+      4.3,
+      "Fortinet",
+      "FortiOS and FortiADC"
+    ],
+    [
+      "CVE-2017-0059",
+      4.3,
+      "Microsoft",
+      "Internet Explorer"
+    ],
+    [
+      "CVE-2025-47813",
+      4.3,
+      "Wing FTP Server",
+      "Wing FTP Server"
+    ],
+    [
+      "CVE-2016-0162",
+      4.3,
+      "Microsoft",
+      "Internet Explorer"
+    ]
+  ],
+  "khoi_luong": {
+    "2020": {
+      "n": 5532,
+      "k": 88
+    },
+    "2021": {
+      "n": 5603,
+      "k": 112
+    },
+    "2022": {
+      "n": 6879,
+      "k": 78
+    },
+    "2023": {
+      "n": 8416,
+      "k": 85
+    },
+    "2024": {
+      "n": 9693,
+      "k": 96
+    },
+    "2025": {
+      "n": 11170,
+      "k": 114
+    }
+  },
+  "ransomware": {
+    "tong": 343,
+    "cao": 198,
+    "thap": 145,
+    "n_cao": 877,
+    "n_thap": 693
+  },
+  "epss_ngay": "2026-10-13",
+  "epss_mo_hinh": "#model_version:v2026.06.15,score_date:2026-10-13T12:03:00Z",
+  "epss_bac": {
+    "Dưới 0,001": {
+      "CVSS từ 8,0, có KEV": 0,
+      "CVSS từ 8,0, không KEV": 38,
+      "CVSS dưới 8,0, có KEV": 0,
+      "CVSS dưới 8,0, không KEV": 2222
+    },
+    "0,001 đến dưới 0,01": {
+      "CVSS từ 8,0, có KEV": 3,
+      "CVSS từ 8,0, không KEV": 29311,
+      "CVSS dưới 8,0, có KEV": 33,
+      "CVSS dưới 8,0, không KEV": 123720
+    },
+    "0,01 đến dưới 0,05": {
+      "CVSS từ 8,0, có KEV": 60,
+      "CVSS từ 8,0, không KEV": 28469,
+      "CVSS dưới 8,0, có KEV": 158,
+      "CVSS dưới 8,0, không KEV": 40190
+    },
+    "0,05 đến dưới 0,1": {
+      "CVSS từ 8,0, có KEV": 51,
+      "CVSS từ 8,0, không KEV": 3288,
+      "CVSS dưới 8,0, có KEV": 58,
+      "CVSS dưới 8,0, không KEV": 2903
+    },
+    "0,1 đến dưới 0,3": {
+      "CVSS từ 8,0, có KEV": 127,
+      "CVSS từ 8,0, không KEV": 2642,
+      "CVSS dưới 8,0, có KEV": 117,
+      "CVSS dưới 8,0, không KEV": 2466
+    },
+    "0,3 đến dưới 0,5": {
+      "CVSS từ 8,0, có KEV": 72,
+      "CVSS từ 8,0, không KEV": 811,
+      "CVSS dưới 8,0, có KEV": 59,
+      "CVSS dưới 8,0, không KEV": 567
+    },
+    "0,5 đến dưới 0,7": {
+      "CVSS từ 8,0, có KEV": 64,
+      "CVSS từ 8,0, không KEV": 539,
+      "CVSS dưới 8,0, có KEV": 70,
+      "CVSS dưới 8,0, không KEV": 493
+    },
+    "0,7 đến dưới 0,9": {
+      "CVSS từ 8,0, có KEV": 142,
+      "CVSS từ 8,0, không KEV": 594,
+      "CVSS dưới 8,0, có KEV": 103,
+      "CVSS dưới 8,0, không KEV": 346
+    },
+    "0,9 đến 1": {
+      "CVSS từ 8,0, có KEV": 358,
+      "CVSS từ 8,0, không KEV": 153,
+      "CVSS dưới 8,0, có KEV": 95,
+      "CVSS dưới 8,0, không KEV": 87
+    }
+  }
+}

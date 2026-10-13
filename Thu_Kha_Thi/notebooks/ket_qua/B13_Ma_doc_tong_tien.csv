@@ -1,0 +1,4 @@
+﻿Nhóm lỗ hổng KEV (1999 đến 2025),Số lượng,Đã dùng trong mã độc tống tiền,So với tổng số lỗ hổng KEV dùng trong mã độc tống tiền
+"CVSS từ 8,0 (được vá trong 48 giờ)",877,"198 / 877 = 22,58%","198 / 343 = 57,73%"
+"CVSS dưới 8,0 (bị bỏ qua)",693,"145 / 693 = 20,92%","145 / 343 = 42,27%"
+Toàn bộ nhóm KEV,1.570,"343 / 1.570 = 21,85%","343 / 343 = 100,00%"

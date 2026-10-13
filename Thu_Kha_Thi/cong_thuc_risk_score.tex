@@ -1,0 +1,150 @@
+% Cong thuc xep hang rui ro lo hong (Risk Score)
+% Bien dich bang XeLaTeX:  xelatex cong_thuc_risk_score.tex
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\renewcommand{\refname}{Tài liệu tham khảo}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\renewcommand{\arraystretch}{1.3}
+
+\begin{document}
+
+\begin{center}
+  {\Large\bfseries Công thức xếp hạng rủi ro lỗ hổng (Risk Score)}\\[4pt]
+  Học phần Chính sách và Quản trị an ninh mạng, Nhóm 14
+\end{center}
+
+\section{Công thức}
+
+Điểm rủi ro nhận giá trị từ 0 đến 100, kết hợp bốn yếu tố: mức quan trọng của tài sản,
+danh mục CISA KEV, điểm CVSS và điểm EPSS.
+
+\begin{equation}
+\label{eq:risk}
+\begin{split}
+\text{Risk Score} = {}& \text{Asset Criticality} \times \Bigl[ \bigl( K_{\text{KEV}} \times 10 \bigr) \\
+  &+ \bigl( 1 - K_{\text{KEV}} \bigr) \times \bigl( \text{CVSS} \times \text{EPSS}^{0{,}3} \bigr) \Bigr] \times 10
+\end{split}
+\end{equation}
+
+Vì $K_{\text{KEV}}$ chỉ nhận giá trị 0 hoặc 1, công thức tương đương với dạng hai nhánh:
+
+\begin{equation}
+\text{Risk Score} =
+\begin{cases}
+  100 \times \text{Asset Criticality}, & \text{nếu } K_{\text{KEV}} = 1 \\[6pt]
+  10 \times \text{Asset Criticality} \times \text{CVSS} \times \text{EPSS}^{0{,}3}, & \text{nếu } K_{\text{KEV}} = 0
+\end{cases}
+\end{equation}
+
+\section{Cơ sở của công thức}
+
+Shimizu và Hashimoto~\cite{shimizu2026vmc} đề xuất phương pháp Vulnerability Management Chaining,
+xếp ưu tiên lỗ hổng bằng một cây quyết định hai tầng kết hợp KEV, EPSS và CVSS:
+
+\begin{center}
+\begin{tabular}{>{\raggedright}p{4.2cm} >{\raggedright}p{6.2cm} >{\raggedright\arraybackslash}p{4.6cm}}
+\toprule
+\textbf{Tầng} & \textbf{Điều kiện} & \textbf{Nếu không đạt} \\
+\midrule
+1. Lọc theo mối đe dọa & Có trong KEV, hoặc EPSS từ 0,088 trở lên & Dời sang chu kỳ vá thông thường \\
+2. Đánh giá mức nghiêm trọng & CVSS từ 7,0 trở lên & Ưu tiên thấp hơn \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Trên 28.377 lỗ hổng công bố từ tháng 4 năm 2022 đến tháng 4 năm 2023, cách tiếp cận này cho hiệu quả
+gấp 14 đến 18 lần so với cách chỉ dùng CVSS, với độ bao phủ 85,6\% số lỗ hổng bị khai thác, và giảm
+khoảng 95\% khối lượng vá khẩn cấp~\cite{shimizu2026vmc}.
+
+Nhóm giữ nguyên nguyên tắc của bài báo là xét KEV trước, rồi mới tới EPSS và CVSS. Nhóm bổ sung yếu tố
+mức quan trọng của tài sản, vốn được chính bài báo nêu là chưa xét tới, và biểu diễn lại toàn bộ thành
+công thức~\eqref{eq:risk}. Phần bổ sung này, cùng số mũ 0,3 và hệ số nhân 10, là đề xuất của nhóm,
+không có trong bài báo gốc.
+
+\section{Giải thích các biến}
+
+\begin{center}
+\begin{tabular}{>{\raggedright}p{3.4cm} >{\raggedright}p{3.8cm} >{\raggedright\arraybackslash}p{7.4cm}}
+\toprule
+\textbf{Biến} & \textbf{Miền giá trị} & \textbf{Ý nghĩa} \\
+\midrule
+Asset Criticality & $\{0{,}2;\ 0{,}5;\ 0{,}8;\ 1{,}0\}$ & Mức quan trọng của tài sản chứa lỗ hổng \\
+$K_{\text{KEV}}$ & $\{0,\ 1\}$ & Bằng 1 nếu lỗ hổng có trong danh mục CISA KEV, tức đã được xác nhận bị khai thác thực tế; bằng 0 nếu không \\
+CVSS & $[0,\ 10]$ & Điểm CVSS Base, đo mức nghiêm trọng kỹ thuật \\
+EPSS & $[0,\ 1]$ & Xác suất lỗ hổng bị khai thác trong 30 ngày tới, do FIRST công bố hằng ngày \\
+$\text{EPSS}^{0{,}3}$ & $[0,\ 1]$ & Nâng các giá trị EPSS nhỏ lên để không bị điểm CVSS lấn át \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Quy đổi mức quan trọng của tài sản}
+
+\begin{center}
+\begin{tabular}{>{\raggedright}p{2.6cm} >{\centering}p{2.4cm} >{\raggedright\arraybackslash}p{10cm}}
+\toprule
+\textbf{Mức} & \textbf{Hệ số} & \textbf{Ví dụ} \\
+\midrule
+Critical & 1,0 & Hệ thống cốt lõi, cơ sở dữ liệu khách hàng, hệ thống mở ra Internet \\
+High & 0,8 & Máy chủ nội bộ, Active Directory \\
+Medium & 0,5 & Máy trạm nhân viên, máy chủ staging \\
+Low & 0,2 & Thiết bị thử nghiệm, máy in, phòng lab \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Ví dụ tính toán}
+
+\begin{center}
+\begin{tabular}{>{\raggedright}p{4.6cm} c c c c >{\raggedright\arraybackslash}p{2.2cm}}
+\toprule
+\textbf{Kịch bản} & \textbf{AC} & \textbf{KEV} & \textbf{CVSS} & \textbf{EPSS} & \textbf{Risk Score} \\
+\midrule
+Lỗ hổng đang bị khai thác trên máy chủ cốt lõi & 1,0 & 1 & 10,0 & & 100 \\
+Lỗ hổng mới trên máy chủ cốt lõi, dự báo khả năng bị khai thác trung bình & 1,0 & 0 & 7,5 & 0,45 & 59,0 \\
+Lỗ hổng đang bị khai thác trên máy tính lễ tân & 0,2 & 1 & 8,0 & & 20,0 \\
+Lỗ hổng nặng trên máy thử nghiệm, chưa có dấu hiệu khai thác & 0,2 & 0 & 9,8 & 0,001 & 2,47 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Trong bảng, AC là viết tắt của Asset Criticality. Chi tiết phép tính của kịch bản 2 và kịch bản 4:
+\begin{align*}
+\text{Kịch bản 2:}\quad & 1{,}0 \times 7{,}5 \times 0{,}45^{0{,}3} \times 10 = 1{,}0 \times 7{,}5 \times 0{,}787 \times 10 \approx 59{,}0 \\
+\text{Kịch bản 4:}\quad & 0{,}2 \times 9{,}8 \times 0{,}001^{0{,}3} \times 10 = 0{,}2 \times 9{,}8 \times 0{,}126 \times 10 \approx 2{,}47
+\end{align*}
+
+\section{Lưu ý khi áp dụng}
+
+\begin{itemize}[leftmargin=1.4em]
+  \item Số mũ 0,3 được chọn theo kinh nghiệm, chưa được hiệu chỉnh bằng dữ liệu.
+  \item Ở nhánh $K_{\text{KEV}} = 1$, điểm chỉ phụ thuộc vào mức quan trọng của tài sản. Một lỗ hổng
+        đang bị khai thác trên tài sản mức Low chỉ được 20 điểm, dù máy bị chiếm có thể trở thành
+        bàn đạp để tấn công sang các máy khác. Vì vậy mọi lỗ hổng trong KEV vẫn nên có hạn vá bắt
+        buộc, mức quan trọng của tài sản chỉ quyết định hạn vá dài hay ngắn.
+  \item Điểm EPSS thay đổi hằng ngày, nên điểm rủi ro cần được tính lại hằng ngày thay vì chỉ tính một lần.
+  \item Bài báo của Shimizu và Hashimoto lấy điểm EPSS tại một thời điểm duy nhất vào cuối kỳ nghiên cứu
+        cho mọi lỗ hổng. Điểm EPSS lấy muộn có thể đã phản ánh việc lỗ hổng bị khai thác, nên mức hiệu quả
+        báo cáo có thể cao hơn khi áp dụng thực tế, lúc doanh nghiệp phải quyết định ngay sau khi lỗ hổng
+        được công bố.
+\end{itemize}
+
+\begin{thebibliography}{9}
+\bibitem{shimizu2026vmc}
+N.~Shimizu and M.~Hashimoto, ``Vulnerability Management Chaining: An Integrated Framework for Efficient
+Cybersecurity Risk Prioritization,'' \emph{IEEE Access}, vol.~14, pp.~31407--31424, 2026,
+doi: \href{https://doi.org/10.1109/ACCESS.2026.3665768}{10.1109/ACCESS.2026.3665768}.
+Bản tiền ấn phẩm: \href{https://arxiv.org/abs/2506.01220}{arXiv:2506.01220}.
+\end{thebibliography}
+
+\end{document}
