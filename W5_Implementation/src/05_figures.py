@@ -22,7 +22,9 @@ for col, lab, st in [("epss", "EPSS", "-"), ("cvss", "CVSS", "--"), ("aeg_ei", "
     d = test.sort_values(col, ascending=False).reset_index(drop=True)
     cum = d["kev"].cumsum() / tot * 100
     ax.plot(np.arange(1, len(d) + 1), cum, st, label=lab, linewidth=1.8)
-ax.plot([1, len(test)], [0, 100], color="gray", linewidth=0.8, label="Chon ngau nhien")
+# Chon ngau nhien: va k lo hong bat duoc k/N. Truc hoanh la logarit nen phai ve nhieu diem, khong noi thang hai dau
+xs = np.unique(np.logspace(0, np.log10(len(test)), 200).astype(int))
+ax.plot(xs, 100 * xs / len(test), color="gray", linewidth=0.8, label="Chon ngau nhien")
 ax.set_xscale("log")
 ax.set_xlabel("So lo hong phai va (thang logarit)")
 ax.set_ylabel("Ty le lo hong da bi khai thac duoc bao phu (%)")

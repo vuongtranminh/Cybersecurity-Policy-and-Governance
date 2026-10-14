@@ -24,12 +24,15 @@ S = AC × CVSS × [KEV + (1 - KEV) × EPSS^0,3] × 10
 | `Thu_Kha_Thi/notebooks/kiem_chung_cong_thuc_S.ipynb` | Kiểm chứng công thức S tại ba ngày đánh giá trong quá khứ |
 | `Thu_Kha_Thi/notebooks/so_sanh_truoc_khi_vao_kev.ipynb` | So sánh điểm S trước khi vào KEV và khi vào KEV |
 | `Thu_Kha_Thi/notebooks/kev_cvss_theo_nam.ipynb` | Lỗ hổng KEV theo năm và điểm CVSS |
+| `Thu_Kha_Thi/notebooks/phan_tich_bo_sung.ipynb` | Phân tích bổ sung từ kết quả đã có (không tải dữ liệu): S, EPSS, CVSS theo khối lượng vá; điểm trước khi vào KEV theo tuổi lỗ hổng; nhóm vá khẩn cấp có quy tắc KEV |
+| `Thu_Kha_Thi/notebooks/do_nhay_quy_tac_csa.ipynb` | Độ nhạy của quy tắc CSA: ngưỡng trên 8,0, chỉ lỗ hổng AV:N, thêm PoC trên Exploit-DB |
+| `Thu_Kha_Thi/notebooks/kiem_chung_S_nhieu_ngay.ipynb` | Kiểm chứng công thức S tại 11 ngày cuối quý và quét số mũ |
 | `Thu_Kha_Thi/notebooks/ket_qua*/` | Bảng (CSV, Excel), hình và số liệu do các notebook sinh ra |
 | `Thu_Kha_Thi/src/` | Bộ script kiểm chứng CVSS và EPSS (chạy bằng `run_all.sh`) |
 | `Thu_Kha_Thi/output/` | Kết quả của bộ script trong `src/` |
 | `Thu_Kha_Thi/cong_thuc_risk_score.tex` | Công thức viết bằng LaTeX |
-| `ReportLatexType1/bao_cao.tex` | Báo cáo theo mẫu Springer LNCS (một cột, 15 trang), tiếng Việt |
-| `ReportLatexType2/IEEE-conference-template-062824/bao_cao_ieee.tex` | Báo cáo theo mẫu IEEE conference (hai cột, 6 trang), tiếng Việt |
+| `ReportLatexType1/bao_cao.tex` | Báo cáo theo mẫu Springer LNCS (một cột, 21 trang), tiếng Việt |
+| `ReportLatexType2/IEEE-conference-template-062824/bao_cao_ieee.tex` | Cùng nội dung, theo mẫu IEEE conference (hai cột, 10 trang) |
 | `ReportLatexType1/`, `ReportLatexType2/` (các tệp còn lại) | Mẫu gốc của Springer và IEEE |
 | `tools/latex/Dockerfile` | Môi trường biên dịch LaTeX cho hai bản báo cáo |
 | `SrcPaper/` | Bài báo gốc của CSA (PDF, không đưa lên git) |
@@ -49,6 +52,8 @@ jupyter notebook Thu_Kha_Thi/notebooks
 
 Lần đầu chạy cần tải khoảng 300 MB dữ liệu NVD. Notebook so sánh trước khi vào KEV gọi API EPSS cho khoảng 400 ngày, mất khoảng 25 phút.
 
+`phan_tich_bo_sung.ipynb` không tải dữ liệu mà đọc kết quả đã lưu, nên chỉ chạy được sau `kiem_chung_cong_thuc_S.ipynb`, `so_sanh_truoc_khi_vao_kev.ipynb` và bộ script trong `src/`.
+
 ## Biên dịch báo cáo
 
 Cần Docker. Lần đầu build môi trường (image khoảng 3,3 GB):
@@ -60,17 +65,18 @@ docker build -t nhom14-latex tools/latex
 Sau đó biên dịch từng bản (chạy tại thư mục gốc của repo):
 
 ```bash
-docker run --rm -v "$PWD:/work" -w /work/ReportLatexType1 nhom14-latex latexmk -xelatex bao_cao.tex
-docker run --rm -v "$PWD:/work" -w /work/ReportLatexType2/IEEE-conference-template-062824 nhom14-latex latexmk -xelatex bao_cao_ieee.tex
+docker run --rm -v "${PWD}:/work" -w /work/ReportLatexType1 nhom14-latex latexmk -xelatex bao_cao.tex
+docker run --rm -v "${PWD}:/work" -w /work/ReportLatexType2/IEEE-conference-template-062824 nhom14-latex latexmk -xelatex bao_cao_ieee.tex
 ```
 
-Trên Git Bash của Windows, thêm `MSYS_NO_PATHCONV=1` vào đầu lệnh `docker run`.
+Lệnh chạy được trên cả PowerShell và bash. Trên Git Bash của Windows, thêm `MSYS_NO_PATHCONV=1` vào đầu lệnh `docker run`.
 
 ## Nguồn dữ liệu
 
 - NVD (NIST): điểm CVSS, tệp dữ liệu theo năm định dạng JSON 2.0
 - CISA KEV: danh mục lỗ hổng đã bị khai thác, lấy từ kho `cisagov/kev-data` trên GitHub
 - FIRST EPSS: điểm EPSS theo ngày, qua API `api.first.org` và tệp điểm hằng ngày
+- Exploit-DB: danh sách mã khai thác minh chứng công khai kèm ngày công bố (chỉ dùng siêu dữ liệu, không tải mã khai thác)
 
 Dữ liệu thô không được đưa lên repo, chạy lại code để tải.
 

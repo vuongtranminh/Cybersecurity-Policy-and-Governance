@@ -1,8 +1,8 @@
 % Bao cao Nhom 14 theo mau IEEE conference (IEEEtran), ban tieng Viet.
 % Bien dich bang XeLaTeX:  xelatex bao_cao_ieee.tex  (chay 2 lan de cap nhat tham chieu)
 % Mau goc cua IEEE giu nguyen o IEEE-conference-template-062824.tex de tham khao.
+% Noi dung giong ban LNCS trong ReportLatexType1/bao_cao.tex, chi khac dinh dang hai cot.
 \documentclass[conference]{IEEEtran}
-\IEEEoverridecommandlockouts
 
 % Tieng Viet: XeLaTeX + fontspec. Tren Windows dung Times New Roman,
 % tren Linux/Docker dung TeX Gyre Termes (ban Times co du dau tieng Viet).
@@ -16,6 +16,20 @@
 \usepackage{xcolor}
 \usepackage[hidelinks]{hyperref}
 \graphicspath{{hinh/}}
+% Cot can trai cho bang hep, tranh gian chu khi can deu hai ben
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+% Bao cao co nhieu bang: cho phep dat nhieu bang/hinh hon tren mot trang de chung nam gan doan van
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.6}
+\renewcommand{\textfraction}{0.12}
+\renewcommand{\floatpagefraction}{0.75}
+\renewcommand{\dbltopfraction}{0.85}
+\renewcommand{\dblfloatpagefraction}{0.75}
+\setcounter{topnumber}{3}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{5}
+\setcounter{dbltopnumber}{3}
 
 % Viet hoa cac nhan co dinh cua IEEEtran
 \renewcommand{\abstractname}{Tóm tắt}
@@ -28,7 +42,7 @@
 
 \title{Kiểm chứng ngưỡng CVSS 8,0 của CSA và đề xuất công thức ưu tiên vá lỗ hổng kết hợp CVSS, EPSS và KEV}
 
-% TODO: dien ten thanh vien nhom, moi nguoi mot \IEEEauthorblockN
+% TODO: dien ten thanh vien nhom va ten truong, moi nguoi mot \IEEEauthorblockN
 \author{\IEEEauthorblockN{Nhóm 14}
 \IEEEauthorblockA{\textit{Học phần Chính sách và Quản trị an ninh mạng}}
 }
@@ -36,17 +50,18 @@
 \maketitle
 
 \begin{abstract}
-Báo cáo của Cloud Security Alliance (CSA) ngày 02/04/2026 cho rằng mô hình ngôn ngữ lớn
-đã vượt ngưỡng tự động tạo mã khai thác, và khuyến nghị vá trong 48 giờ các lỗ hổng có
-CVSS trên 8,0 ảnh hưởng tới hệ thống phơi ra Internet. Chúng tôi kiểm chứng khuyến nghị này
-trên 240.409 lỗ hổng có điểm CVSS 3.x giai đoạn 1999--2025, dùng danh mục KEV của CISA làm
-căn cứ về việc bị khai thác thực tế. Ngưỡng 8,0 vừa vá thừa, khi 98,69\% lỗ hổng trong diện
-vá khẩn cấp chưa ghi nhận bị khai thác, vừa bỏ sót 44,14\% lỗ hổng đã bị khai thác. Chúng
-tôi đề xuất điểm ưu tiên S kết hợp mức nghiêm trọng CVSS, xác suất bị khai thác EPSS, trạng
-thái KEV và mức quan trọng của tài sản. Kiểm thử ngược tại ba ngày đánh giá cho thấy khi chỉ
-vá 1 đến 5\% số lỗ hổng, công thức bắt được số lỗ hổng sắp bị khai thác nhiều gấp 2,7 đến
-8,9 lần so với xếp theo CVSS. Tuy vậy, công thức không dự báo tốt hơn EPSS dùng riêng,
-27\% lỗ hổng KEV là zero-day không thể chấm điểm trước, và hệ số tài sản chưa kiểm chứng được.
+Báo cáo của Cloud Security Alliance (CSA) ngày 02/04/2026 cho rằng mô hình ngôn ngữ lớn đã
+vượt ngưỡng tự động tạo mã khai thác, và khuyến nghị vá trong 48 giờ các lỗ hổng có CVSS trên
+8,0 trên hệ thống phơi ra Internet. Chúng tôi kiểm chứng khuyến nghị này trên 240.409 lỗ hổng có
+CVSS 3.x, dùng danh mục KEV của CISA làm căn cứ. Với mọi cách đọc khuyến nghị, chỉ 1,3--1,5\% lỗ
+hổng trong diện vá khẩn cấp bị khai thác; tỷ lệ bỏ sót là 44\% theo cách đọc đơn giản nhất và
+21\% theo cách đọc sát nhất. Chúng tôi đề xuất điểm ưu tiên S kết hợp CVSS, EPSS, KEV và mức quan
+trọng của tài sản, kèm quy tắc luôn vá khẩn cấp lỗ hổng đã có trong KEV. Kiểm thử ngược tại 11
+ngày đánh giá cho thấy nhóm có S từ 70 trở lên chỉ chiếm 0,8--1,4\% số lỗ hổng nhưng có hiệu suất
+gấp 16--34 lần chọn ngẫu nhiên, so với 1,7--2,3 lần của quy tắc CSA; khi vá ít, S bắt được nhiều
+hơn xếp theo CVSS ở cả 11 ngày và gần như ngang EPSS dùng riêng. Hạn chế chính: S gần như không
+cảnh báo trước được lỗ hổng mới công bố, 27\% lỗ hổng KEV là zero-day, và hệ số tài sản chưa kiểm
+chứng được.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -57,105 +72,168 @@ CVSS, EPSS, CISA KEV, ưu tiên vá lỗ hổng, quản lý lỗ hổng, chính 
 \section{Giới thiệu}
 % =====================================================================
 
-Mỗi năm có hàng chục nghìn lỗ hổng mới được công bố; riêng năm 2025 có 45.387 lỗ hổng có
-điểm CVSS 3.x trong NVD. Không tổ chức nào vá kịp tất cả, nên câu hỏi thực tế của quản trị
-an ninh mạng là \emph{vá lỗ hổng nào trước}.
+Mỗi năm có hàng chục nghìn lỗ hổng mới được công bố: riêng năm 2025 có 45.387 lỗ hổng có điểm
+CVSS 3.x trong cơ sở dữ liệu NVD. Không tổ chức nào đủ nhân lực và thời gian bảo trì để vá ngay
+tất cả, nên câu hỏi thực tế của quản trị an ninh mạng là \emph{vá lỗ hổng nào trước}. Một chính
+sách ưu tiên tốt phải tập trung nguồn lực có hạn vào những lỗ hổng thực sự bị khai thác.
 
 Báo cáo \emph{Automated Exploit Generation: LLMs Cross the Threshold} của CSA~\cite{csa2026}
-lập luận rằng mô hình ngôn ngữ lớn (LLM) đã rút ngắn thời gian từ khi công bố lỗ hổng đến
-khi có mã khai thác, và khuyến nghị vá trong 48 giờ các CVE có CVSS trên 8,0 ảnh hưởng tới
-hệ thống phơi ra Internet. Khuyến nghị này dễ áp dụng nhưng dựa hoàn toàn vào CVSS, vốn đo
-\emph{mức nghiêm trọng} chứ không đo \emph{khả năng bị khai thác}.
+lập luận rằng mô hình ngôn ngữ lớn (LLM) đã rút ngắn khoảng thời gian từ khi công bố lỗ hổng đến
+khi có mã khai thác, và đưa ra một khuyến nghị chính sách cụ thể: coi các CVE có CVSS trên 8,0
+ảnh hưởng tới hệ thống phơi ra Internet là trường hợp khẩn cấp, mục tiêu khắc phục trong 48 giờ.
+Khuyến nghị này đơn giản và dễ áp dụng, nhưng dựa vào điểm CVSS, vốn đo \emph{mức nghiêm trọng}
+chứ không đo \emph{khả năng bị khai thác}.
 
-Báo cáo trả lời ba câu hỏi: (CH1) ngưỡng CVSS 8,0 vá thừa và bỏ sót bao nhiêu lỗ hổng bị
-khai thác; (CH2) một công thức kết hợp CVSS, EPSS, KEV và mức quan trọng của tài sản có sắp
-thứ tự ưu tiên tốt hơn không, khi chỉ dùng thông tin có tại thời điểm ra quyết định; (CH3)
-công thức đó có khả thi để triển khai không.
+Báo cáo trả lời ba câu hỏi. (CH1) Trên dữ liệu thực, quy tắc ngưỡng CVSS 8,0 vá thừa và bỏ sót
+bao nhiêu lỗ hổng bị khai thác, và kết luận có thay đổi khi đọc khuyến nghị của CSA sát hơn
+không? (CH2) Một công thức kết hợp CVSS, EPSS, KEV và mức quan trọng của tài sản có sắp thứ tự ưu
+tiên tốt hơn không, khi chỉ dùng thông tin có tại thời điểm ra quyết định? (CH3) Công thức đó có
+khả thi để triển khai trong thực tế không, và giới hạn của nó ở đâu?
+
+Đóng góp của báo cáo gồm: (i) phân tích bài báo gốc và tách khuyến nghị chính sách có thể kiểm
+chứng được; (ii) đánh giá định lượng ngưỡng 8,0 trên 240.409 lỗ hổng, kèm phân tích độ nhạy theo
+năm cách đọc khuyến nghị; (iii) đề xuất công thức điểm ưu tiên $S$ và một quy tắc xử lý lỗ hổng
+đã bị khai thác; (iv) kiểm chứng $S$ bằng kiểm thử ngược có chống rò rỉ dữ liệu tương lai tại 11
+ngày đánh giá, kèm đánh giá tính khả thi và các hạn chế được nêu rõ.
 
 % =====================================================================
 \section{Phân tích bài báo gốc}\label{sec:baibao}
 % =====================================================================
 
 \subsection{Vấn đề bài báo giải quyết}
-Bài báo~\cite{csa2026} là báo cáo tổng hợp 20 trang thuộc CSA AI Safety Initiative. Câu hỏi
-trung tâm là LLM đã đủ khả năng đi từ \emph{phát hiện lỗ hổng} tới \emph{vũ khí hóa} hay
-chưa. Kết luận của CSA là ngưỡng này đã bị vượt qua: chi phí và kỹ năng để biến một mô tả
-CVE thành mã khai thác đã giảm mạnh.
+Bài báo của CSA~\cite{csa2026} là một báo cáo tổng hợp (whitepaper, 20 trang) thuộc chương trình
+AI Safety Initiative. Câu hỏi trung tâm là: LLM đã thực sự làm thay đổi cán cân tấn công --
+phòng thủ chưa, cụ thể là đã đủ khả năng đi từ \emph{phát hiện lỗ hổng} tới \emph{vũ khí hóa}
+(tạo mã khai thác hoạt động được) chưa. Kết luận của CSA là ngưỡng này đã bị vượt qua: chi phí và
+kỹ năng cần để biến một mô tả CVE thành mã khai thác đã giảm mạnh.
 
-\subsection{Bằng chứng được sử dụng}
-Bài báo không có thực nghiệm riêng mà tổng hợp các kết quả đã công bố: GPT-4 khai thác 87\%
-trong 15 lỗ hổng one-day khi có mô tả CVE, chỉ 7\% khi không có~\cite{fang2024}; PwnGPT nâng
-tỷ lệ giải bài khai thác nhị phân từ 26,3\% lên 57,9\%; DARPA AIxCC phát hiện 86\% lỗ hổng
-tổng hợp; Google Big Sleep và CVE-2025-37899 cho thấy LLM tìm được lỗ hổng thật; Incalmo
-tấn công nhiều bước thành công 37/40 môi trường với chi phí dưới 15 USD.
+\subsection{Bằng chứng bài báo sử dụng}
+Bài báo không có thực nghiệm riêng mà tổng hợp các kết quả đã công bố:
+\begin{itemize}
+\item \textbf{Nghiên cứu của UIUC}~\cite{fang2024}: GPT-4 khai thác thành công 87\% trong 15 lỗ
+hổng one-day khi được cung cấp mô tả CVE, nhưng chỉ 7\% khi không có mô tả.
+\item \textbf{PwnGPT} (ACL 2025): khung tự động tạo mã khai thác nhị phân, nâng tỷ lệ hoàn thành
+bài CTF từ 26,3\% lên 57,9\% với o1-preview.
+\item \textbf{DARPA AIxCC} (2025): các hệ thống tự động phát hiện 86\% lỗ hổng tổng hợp và tìm
+ra 18 lỗ hổng thật chưa từng biết.
+\item \textbf{Google Big Sleep} tìm ra lỗ hổng thật trong SQLite; nhà nghiên cứu Sean Heelan dùng
+mô hình o3 tìm ra \textbf{CVE-2025-37899} trong mô-đun ksmbd của nhân Linux.
+\item \textbf{Incalmo} (2025): tấn công nhiều bước thành công 37/40 môi trường mạng mô phỏng, mất
+12--54 phút, chi phí dưới 15 USD.
+\item \textbf{Sử dụng thực tế}: nhóm tấn công cấp nhà nước dùng LLM từ 2024; vụ việc tại Mexico
+(2025--2026) được báo chí mô tả là dùng LLM tạo mã khai thác.
+\end{itemize}
 
-\subsection{Khuyến nghị được kiểm chứng}
-Bài báo viết: \emph{``Security teams should treat published CVEs affecting internet-exposed
-systems with CVSS scores above 8.0 as requiring emergency patching timelines \ldots\ CSA
-recommends organizations target remediation within 48 hours''}. Đây là khuyến nghị duy nhất
-có dạng quy tắc định lượng, nên kiểm chứng được:
+\subsection{Khuyến nghị chính sách được kiểm chứng}
+Trong mục \emph{Organizational Vulnerability Management in the New Environment}, bài báo viết:
+\emph{``Security teams should treat published CVEs affecting internet-exposed systems with CVSS
+scores above 8.0 as requiring emergency patching timelines \ldots\ CSA recommends organizations
+target remediation within 48 hours for such vulnerabilities''}. Cùng mục đó, bài báo khuyên
+\emph{``any vulnerability for which a CVE advisory exists and which has a working public proof of
+concept should be treated as exploitable on the day of publication''}, và phần kết luận nhắc lại
+yêu cầu rà soát thời gian vá cho lỗ hổng ``CVSS 8.0+'' trên hệ thống phơi ra Internet.
+
+Ngưỡng CVSS là phần cụ thể nhất của các khuyến nghị này vì có con số rõ ràng, nên kiểm chứng
+được bằng dữ liệu. Chúng tôi diễn đạt nó thành điều kiện:
 \begin{equation}
-\text{vá khẩn cấp} \iff \mathit{CVSS} \ge 8{,}0 \wedge \text{phơi ra Internet}.
+\mathit{CVSS} > 8{,}0 \wedge \text{phơi ra Internet} \Longrightarrow \text{vá trong 48 giờ}.
 \label{eq:csa}
 \end{equation}
+CSA không nói các lỗ hổng còn lại được bỏ qua, chỉ nói chúng không thuộc hạn 48 giờ. Khi đánh
+giá, chúng tôi coi \eqref{eq:csa} là một \emph{quy tắc phân loại}: nhóm ``vá khẩn cấp'' gồm các
+lỗ hổng thỏa điều kiện, và hỏi nhóm này chứa được bao nhiêu lỗ hổng thực sự bị khai thác. Bài
+báo viết ``above 8.0'' ở thân bài nhưng ``8.0+'' ở phần kết luận; thống kê chính dùng $\ge 8{,}0$,
+còn phân tích độ nhạy (Mục~\ref{sec:donhay}) thử cả cách đọc $> 8{,}0$, điều kiện phơi ra
+Internet và điều kiện có mã khai thác minh chứng (PoC) công khai.
 
-\subsection{Nhận xét}
-Thứ nhất, bài báo tự ghi là \emph{``Unofficial AI-assisted Research''}, chưa qua xét duyệt
-chính thức. Thứ hai, ngưỡng 8,0 không được giải thích hay kiểm chứng. Thứ ba, chính bài báo
-khuyên \emph{``prioritization frameworks should weight exploitability heavily''}, mâu thuẫn
-một phần với việc chọn CVSS làm tiêu chí duy nhất. Thứ tư, điều kiện phơi ra Internet phụ
-thuộc tài sản của từng tổ chức, không có trong dữ liệu công khai; vì vậy chúng tôi áp ngưỡng
-8,0 cho mọi lỗ hổng và đưa yếu tố tài sản vào công thức dưới dạng hệ số $AC$.
-
-% =====================================================================
-\section{Các nghiên cứu liên quan}
-% =====================================================================
-
-Allodi và Massacci~\cite{allodi2014} chỉ ra rằng vá theo CVSS cao gần như tương đương vá ngẫu
-nhiên xét về giảm rủi ro bị khai thác. Jacobs và cộng sự~\cite{jacobs2020} cho thấy mô hình
-dự đoán khai thác hiệu quả hơn nhiều so với quy tắc ngưỡng CVSS ở cùng khối lượng vá, sau đó
-phát triển EPSS~\cite{jacobs2021}. CISA ban hành BOD 22-01~\cite{bod2201} năm 2021, đưa danh
-mục KEV~\cite{kev} thành nguồn công khai phổ biến nhất về khai thác thực tế. SSVC~\cite{ssvc}
-dùng cây quyết định theo tình trạng khai thác, mức phơi nhiễm và tác động tới nhiệm vụ.
-Shimizu và Hashimoto~\cite{shimizu2026} đề xuất cây VMC xét lần lượt KEV, EPSS rồi CVSS.
-Công thức của chúng tôi gần với VMC về thứ tự xét, nhưng cho điểm liên tục 0--100 và có
-thêm hệ số tài sản.
+\subsection{Nhận xét về bài báo}
+Thứ nhất, bài báo ghi rõ là \emph{``Unofficial AI-assisted Research''}, chưa qua quy trình xét
+duyệt chính thức của CSA. Thứ hai, lập luận ``LLM rút ngắn thời gian tạo mã khai thác'' dẫn tới
+kết luận ``phải vá nhanh hơn'', nhưng không trả lời \emph{lỗ hổng nào} sẽ bị nhắm tới; ngưỡng 8,0
+không được bài báo giải thích hay kiểm chứng. Thứ ba, chính bài báo viết \emph{``Prioritization
+frameworks should weight exploitability heavily''}; ngưỡng CVSS lại là thước đo mức nghiêm trọng,
+còn điều kiện PoC là phần duy nhất trong khuyến nghị đo trực tiếp khả năng bị khai thác. Thứ tư,
+điều kiện ``hệ thống phơi ra Internet'' phụ thuộc vào tài sản của từng tổ chức, không có trong dữ
+liệu công khai; phân tích độ nhạy dùng vector tấn công qua mạng của CVSS làm cách gần đúng, và
+công thức đề xuất đưa yếu tố tài sản vào dưới dạng hệ số $AC$.
 
 % =====================================================================
-\section{Kiến thức nền tảng}
+\section{Các nghiên cứu liên quan}\label{sec:lienquan}
 % =====================================================================
+
+Allodi và Massacci~\cite{allodi2014} dùng phương pháp nghiên cứu ca -- chứng và chỉ ra rằng vá
+theo điểm CVSS cao gần như tương đương vá ngẫu nhiên xét về giảm rủi ro bị khai thác; yếu tố có
+giá trị hơn là việc đã tồn tại mã khai thác minh chứng. Bản đặc tả CVSS v3.1~\cite{cvss31} cũng
+nêu rõ điểm cơ sở đo mức nghiêm trọng, không phải rủi ro.
+
+Jacobs và cộng sự~\cite{jacobs2020} so sánh các chiến lược vá và cho thấy mô hình dự đoán khai
+thác đạt hiệu quả cao hơn nhiều so với quy tắc ngưỡng CVSS. Cùng nhóm tác giả đề xuất
+EPSS~\cite{jacobs2021}: phiên bản đầu ước lượng xác suất một lỗ hổng bị khai thác trong 12 tháng
+sau khi công bố; phiên bản hiện hành do FIRST duy trì ước lượng xác suất bị khai thác trong 30
+ngày tới và cập nhật hằng ngày~\cite{epss}.
+
+CISA ban hành Chỉ thị BOD 22-01~\cite{bod2201} năm 2021, yêu cầu các cơ quan liên bang Mỹ vá lỗ
+hổng trong danh mục KEV~\cite{kev} theo hạn định, bất kể điểm CVSS. KEV trở thành nguồn công khai
+phổ biến nhất về việc lỗ hổng bị khai thác thực tế.
+
+SSVC~\cite{ssvc} của CERT/CC đề xuất cây quyết định dựa trên tình trạng khai thác, mức độ phơi
+nhiễm và tác động tới nhiệm vụ, thay cho một điểm số đơn lẻ. Shimizu và
+Hashimoto~\cite{shimizu2026} đề xuất Vulnerability Management Chaining (VMC), một khung hai bước:
+lọc theo mối đe dọa (lỗ hổng có trong KEV hoặc có EPSS $\ge 0{,}088$), sau đó lọc theo mức nghiêm
+trọng (CVSS $\ge 7{,}0$). Trên 28.377 lỗ hổng, các tác giả báo cáo VMC hiệu quả gấp 18 lần mà vẫn
+bao phủ 85,6\% lỗ hổng bị khai thác. Công thức của chúng tôi dùng cùng ba nguồn dữ liệu nhưng cho
+điểm liên tục 0--100, xử lý lỗ hổng trong KEV bằng một quy tắc riêng và có thêm hệ số tài sản.
+
+% =====================================================================
+\section{Kiến thức nền tảng}\label{sec:nentang}
+% =====================================================================
+
+\subsection{CVE và NVD}
+CVE (Common Vulnerabilities and Exposures) là mã định danh chuẩn của một lỗ hổng, ví dụ
+\texttt{CVE-2021-44228}. NVD~\cite{nvd} của NIST là cơ sở dữ liệu công khai lưu mô tả và điểm
+CVSS của mọi CVE. Mỗi CVE có thể có hai điểm: điểm do NVD chấm (\emph{Primary}) và điểm do đơn vị
+công bố chấm (CNA). Lỗ hổng bị hủy có trạng thái \emph{Rejected}.
 
 \subsection{CVSS}
-CVSS v3.x~\cite{cvss31} tính điểm 0--10 từ nhóm chỉ số khả năng khai thác kỹ thuật (AV, AC,
-PR, UI) và nhóm tác động (C, I, A, S). Điểm này cho biết \emph{nếu bị khai thác thì hậu quả
-nặng đến đâu}, không cho biết kẻ tấn công \emph{có} nhắm tới lỗ hổng hay không. NVD~\cite{nvd}
-lưu điểm do NVD chấm và điểm do đơn vị công bố (CNA) chấm.
+CVSS v3.x~\cite{cvss31} tính điểm cơ sở 0--10 từ hai nhóm chỉ số. Nhóm \emph{khả năng khai thác
+kỹ thuật} gồm Attack Vector (đường tấn công: qua mạng, mạng liền kề, cục bộ hay vật lý), Attack
+Complexity, Privileges Required và User Interaction. Nhóm \emph{tác động} gồm Confidentiality,
+Integrity, Availability và Scope. Vector \texttt{AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H} cho điểm
+9,8; \texttt{AV:N} nghĩa là khai thác được qua mạng. Điểm CVSS cho biết \emph{nếu bị khai thác thì
+hậu quả nặng đến đâu}, không cho biết kẻ tấn công \emph{có} nhắm tới lỗ hổng đó hay không.
 
 \subsection{EPSS}
-EPSS~\cite{jacobs2021,epss} là mô hình học máy ước lượng xác suất một CVE bị khai thác trong
-30 ngày tới, cập nhật hằng ngày và có lưu lịch sử. Phân bố điểm rất lệch: 64\% lỗ hổng trong
-dữ liệu có EPSS từ 0,001 đến dưới 0,01. Mô hình có nhiều phiên bản (v2022.01.01, v2023.03.01,
-v2025.03.14 trong giai đoạn nghiên cứu).
+EPSS~\cite{epss} là mô hình học máy ước lượng xác suất một CVE bị khai thác trong 30 ngày tới,
+dựa trên đặc trưng của lỗ hổng và dữ liệu khai thác quan sát được. Điểm nằm trong $[0, 1]$, cập
+nhật hằng ngày, có lưu lịch sử. Phân bố rất lệch: 64\% lỗ hổng trong dữ liệu có EPSS từ 0,001 đến
+dưới 0,01. Trong giai đoạn nghiên cứu xuất hiện các phiên bản mô hình v2022.01.01, v2023.03.01 và
+v2025.03.14.
 
 \subsection{CISA KEV}
-KEV~\cite{kev} là danh mục lỗ hổng CISA xác nhận đã bị khai thác, ghi ngày đưa vào. Chúng tôi
-dùng KEV làm căn cứ đúng (ground truth). Đây là căn cứ thận trọng: lỗ hổng ngoài KEV chưa chắc
-không bị khai thác.
+KEV~\cite{kev} là danh mục lỗ hổng CISA xác nhận đã bị khai thác, ghi ngày đưa vào. Chúng tôi dùng
+KEV làm căn cứ đúng (ground truth). Đây là căn cứ thận trọng theo hai nghĩa: lỗ hổng ngoài KEV chưa
+chắc không bị khai thác; và CISA chỉ thêm lỗ hổng sau khi có bằng chứng bị khai thác, nên ngày vào
+KEV luôn muộn hơn thời điểm bắt đầu bị khai thác.
+
+\subsection{Mức quan trọng của tài sản}
+Cùng một lỗ hổng gây rủi ro khác nhau tùy tài sản chứa nó. Nhóm chỉ số môi trường của CVSS và yếu
+tố \emph{Mission Impact} của SSVC đều phản ánh điều này. Mức quan trọng của tài sản thường lấy từ
+cơ sở dữ liệu quản lý cấu hình (CMDB) của tổ chức, không có dữ liệu công khai.
 
 \subsection{Đánh giá quy tắc ưu tiên}
-Đối chiếu nhóm ``vá'' với KEV cho ma trận nhầm lẫn gồm vá đúng (TP), vá thừa (FP), bỏ sót
-(FN), bỏ qua đúng (TN). Độ chính xác $TP/(TP+FP)$ là tỷ lệ bị khai thác trong nhóm phải vá;
-độ bao phủ $TP/(TP+FN)$ là tỷ lệ lỗ hổng bị khai thác được ưu tiên. So sánh các cách xếp hạng
-phải cố định \emph{cùng khối lượng vá}.
+Đối chiếu nhóm ``vá'' với KEV cho ma trận nhầm lẫn gồm vá đúng (TP), vá thừa (FP), bỏ sót (FN),
+bỏ qua đúng (TN). Độ chính xác $TP/(TP+FP)$ là tỷ lệ bị khai thác trong nhóm phải vá; độ bao phủ
+$TP/(TP+FN)$ là tỷ lệ lỗ hổng bị khai thác được ưu tiên. So sánh các cách xếp hạng phải cố định
+\emph{cùng khối lượng vá}. \emph{Hiệu suất} là tỷ lệ bắt được chia cho tỷ lệ khối lượng vá, tức
+gấp bao nhiêu lần chọn ngẫu nhiên.
 
 \subsection{Kiểm thử ngược}
-Kiểm thử ngược đứng ở một ngày $T$ trong quá khứ, chỉ dùng thông tin có tại $T$, rồi đối
-chiếu với những gì xảy ra sau $T$. EPSS hiện tại của lỗ hổng đã bị khai thác thường cao
-\emph{vì} việc khai thác đã xảy ra, nên phải dùng EPSS lịch sử đúng ngày $T$ để tránh rò rỉ
-dữ liệu tương lai.
+Kiểm thử ngược đứng ở một ngày $T$ trong quá khứ, chỉ dùng thông tin có tại $T$, rồi đối chiếu
+với những gì xảy ra sau $T$. EPSS hiện tại của lỗ hổng đã bị khai thác thường cao \emph{vì} việc
+khai thác đã xảy ra, nên phải dùng EPSS lịch sử đúng ngày $T$ để tránh rò rỉ dữ liệu tương lai.
 
 % =====================================================================
-\section{Giải pháp đề xuất}
+\section{Giải pháp đề xuất}\label{sec:giaiphap}
 % =====================================================================
 
 \subsection{Công thức điểm ưu tiên}
@@ -164,9 +242,10 @@ Với mỗi cặp (lỗ hổng, tài sản), điểm ưu tiên là
 S = AC \cdot \mathit{CVSS} \cdot \left[\mathit{KEV} + (1-\mathit{KEV})\, \mathit{EPSS}^{0{,}3}\right] \cdot 10,
 \label{eq:S}
 \end{equation}
-với $AC \in [0,1]$ là mức quan trọng của tài sản, $\mathit{KEV} \in \{0,1\}$ bằng 1 nếu lỗ
-hổng đã có trong KEV tại thời điểm đánh giá, và $\mathit{EPSS}$ lấy tại thời điểm đánh giá.
-Do đó $S \in [0,100]$. Vì $\mathit{KEV}$ chỉ nhận 0 hoặc 1, \eqref{eq:S} là một phép rẽ nhánh:
+với $AC \in [0,1]$ là mức quan trọng của tài sản (asset criticality, không liên quan tới chỉ số
+Attack Complexity của CVSS), $\mathit{KEV} \in \{0,1\}$ bằng 1 nếu lỗ hổng đã có trong KEV tại
+thời điểm đánh giá, và $\mathit{EPSS}$ lấy tại thời điểm đánh giá. Do đó $S \in [0,100]$. Vì
+$\mathit{KEV}$ chỉ nhận 0 hoặc 1, \eqref{eq:S} là một phép rẽ nhánh:
 \begin{equation}
 S =
 \begin{cases}
@@ -177,15 +256,29 @@ S =
 \end{equation}
 
 \subsection{Ý nghĩa các thành phần}
-Lỗ hổng đã bị khai thác thì không cần dự đoán, hệ số khả năng bị khai thác bằng 1. Lỗ hổng
-chưa bị khai thác có mức nghiêm trọng được điều chỉnh theo EPSS; đây là phần cần chứng minh.
-Số mũ 0,3 nén thang EPSS mà giữ thứ tự ($0{,}001 \mapsto 0{,}13$; $0{,}01 \mapsto 0{,}25$;
-$0{,}1 \mapsto 0{,}50$; $0{,}9 \mapsto 0{,}97$) để CVSS không mất tác dụng. Hệ số $AC$ đưa
-mức quan trọng và mức phơi ra Internet của tài sản vào công thức.
+Lỗ hổng đã bị khai thác thì không cần dự đoán, hệ số khả năng bị khai thác bằng 1. Lỗ hổng chưa
+bị khai thác có mức nghiêm trọng được điều chỉnh theo EPSS; đây là phần cần chứng minh. Số mũ 0,3
+nén thang EPSS mà giữ thứ tự ($0{,}001 \mapsto 0{,}13$; $0{,}01 \mapsto 0{,}25$; $0{,}1 \mapsto
+0{,}50$; $0{,}9 \mapsto 0{,}97$) để CVSS không mất tác dụng. Vì nâng lên lũy thừa dương không đổi
+thứ tự, xếp hạng theo $S$ ở nhánh chưa KEV trùng với xếp hạng theo
+$\mathit{EPSS} \cdot \mathit{CVSS}^{1/0{,}3} \approx \mathit{EPSS} \cdot \mathit{CVSS}^{3{,}33}$: một
+lỗ hổng CVSS 10 chỉ cần EPSS bằng khoảng 1/10 của một lỗ hổng CVSS 5 để có cùng thứ hạng. Hệ số
+$AC$ đưa mức quan trọng và mức phơi ra Internet của tài sản vào công thức.
+
+\subsection{Quy tắc cho lỗ hổng đã bị khai thác}
+Ở nhánh KEV, $S = 10\, AC \cdot \mathit{CVSS}$. Một lỗ hổng đã bị khai thác có CVSS 6,5 chỉ được
+65 điểm, thấp hơn ngưỡng vá khẩn cấp 70 dùng trong thực nghiệm. Ngày 30/06/2025, 160 trong 1.371
+lỗ hổng đã có trong KEV (11,67\%) có $S < 70$. Nếu chỉ dùng ngưỡng, chính sách đề xuất sẽ mắc đúng
+lỗi mà ta phê bình quy tắc CSA, dù ở mức nhẹ hơn. Vì vậy chính sách đi kèm một quy tắc, giống cách
+làm của BOD 22-01: \emph{mọi lỗ hổng đã có trong KEV luôn thuộc nhóm vá khẩn cấp}, bất kể $S$;
+điểm $S$ dùng để sắp thứ tự bên trong nhóm này và cho các lỗ hổng chưa có trong KEV. Nhóm vá khẩn
+cấp gồm các lỗ hổng có trong KEV và các lỗ hổng có $S \ge 70$; các mức thấp hơn dùng cho hạn vá dài
+hơn.
 
 \subsection{Ví dụ}
-Bảng~\ref{tab:vidu} so sánh trên bốn lỗ hổng giả định với $AC = 1$. Quy tắc CSA chọn A và D,
-bỏ qua B (EPSS 0,9) và C (đã bị khai thác); công thức $S$ xếp B và C lên đầu.
+Bảng~\ref{tab:vidu} so sánh trên bốn lỗ hổng giả định với $AC = 1$. Quy tắc CSA chọn A và D, bỏ
+qua B (EPSS 0,9) và C (đã bị khai thác). Công thức $S$ xếp B lên đầu; C thuộc nhóm vá khẩn cấp nhờ
+quy tắc KEV.
 
 \begin{table}[htbp]
 \caption{Ví dụ tính điểm $S$ với $AC = 1$ (số liệu giả định)}\label{tab:vidu}
@@ -202,55 +295,93 @@ D & 9,0 & 0,10  & 0 & 45 & vá khẩn cấp \\
 \end{tabular}
 \end{table}
 
+\subsection{Phạm vi chứng minh}
+Nhánh KEV không cần chứng minh vì lỗ hổng đã bị khai thác. Phần cần chứng minh là nhánh chưa KEV:
+điểm $\mathit{CVSS} \cdot \mathit{EPSS}^{0{,}3}$ có xếp những lỗ hổng \emph{sắp} bị khai thác lên
+trên không. Do không có dữ liệu tài sản công khai, mọi thực nghiệm đặt $AC = 1$. Hệ số 10 chỉ đổi
+thang điểm, không đổi thứ tự.
+
 % =====================================================================
-\section{Phương án triển khai và cách đánh giá}
+\section{Phương án triển khai và cách đánh giá}\label{sec:trienkhai}
 % =====================================================================
 
 \subsection{Dữ liệu và quy trình}
-Dữ liệu gồm tệp JSON 2.0 của NVD (2002--2025, khoảng 300~MB), danh mục KEV phiên bản
-2026.10.08, và điểm EPSS lịch sử theo ngày từ tệp hằng ngày và API của FIRST. Chúng tôi loại
-lỗ hổng bị hủy và lấy CVSS 3.x, ưu tiên điểm do NVD chấm. Trong 316.367 lỗ hổng, 240.409
-(75,99\%) có CVSS 3.x, trong đó 1.570 nằm trong KEV. Quy trình viết bằng Python (pandas, numpy,
-matplotlib) gồm bốn notebook và bảy script: thu thập, làm sạch và ghép theo mã CVE, tính $S$,
-kiểm thử ngược, xuất bảng và hình. Mã nguồn chỉ đọc siêu dữ liệu công khai, không tạo mã khai
-thác và không tác động tới hệ thống nào.
+Toàn bộ dữ liệu là công khai và miễn phí (Bảng~\ref{tab:dulieu}). Mã nguồn chỉ đọc siêu dữ liệu
+mô tả lỗ hổng: không tạo hay tải mã khai thác, không quét hay tấn công hệ thống nào.
+
+\begin{table}[htbp]
+\caption{Nguồn dữ liệu}\label{tab:dulieu}
+\centering
+\small
+\begin{tabular}{L{1.45cm}L{3.2cm}L{2.75cm}}
+\toprule
+Nguồn & Cách lấy & Dùng để \\
+\midrule
+NVD & Tệp JSON 2.0 theo năm, 2002--2025 (khoảng 300~MB) & Điểm, vector CVSS, ngày công bố \\
+CISA KEV & Kho \texttt{cisagov/kev-data}, phiên bản 2026.10.08 & Căn cứ bị khai thác \\
+FIRST EPSS & Tệp hằng ngày và API \texttt{api.first.org} & EPSS lịch sử theo ngày \\
+Exploit-DB & Danh sách mã khai thác công khai~\cite{exploitdb} & Ngày có PoC của mỗi CVE \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Chúng tôi loại lỗ hổng bị hủy và lấy CVSS 3.x, ưu tiên điểm do NVD chấm. Trong 316.367 lỗ hổng,
+240.409 (75,99\%) có CVSS 3.x, trong đó 1.570 nằm trong KEV. Các notebook dùng danh mục KEV phiên
+bản 2026.10.08 (các notebook của thực nghiệm 5 và 6 cắt danh mục về ngày này) để kết quả so sánh
+được với nhau; bộ script của thực nghiệm 4 dùng bản KEV tải tại thời điểm chạy. Hệ thống viết bằng
+Python (pandas, numpy, matplotlib) gồm bảy notebook và bảy script: thu thập, làm sạch và ghép theo
+mã CVE, tính $S$, kiểm thử ngược, xuất bảng và hình. Hàm tính điểm cốt lõi:
+\begin{verbatim}
+def diem_S(cvss, epss, kev, ac=1.0):
+    he_so = kev + (1 - kev) * epss ** 0.3
+    return ac * cvss * he_so * 10
+\end{verbatim}
 
 \subsection{Thiết kế thực nghiệm}
-\textbf{TN1 -- ngưỡng 8,0.} Lập ma trận nhầm lẫn của quy tắc CSA trên 240.409 lỗ hổng, lặp
-cho giai đoạn 2023--2025 và các ngưỡng 7,0, 9,0. Đây là thực nghiệm mô tả, dùng trạng thái
-KEV hiện tại.
+\textbf{TN1 -- ngưỡng 8,0.} Lập ma trận nhầm lẫn của quy tắc CSA trên 240.409 lỗ hổng, lặp cho giai
+đoạn 2023--2025 và các ngưỡng 7,0, 9,0. Đây là thực nghiệm mô tả, dùng trạng thái KEV hiện tại.
 
-\textbf{TN2 -- kiểm thử ngược $S$.} Tại ba ngày $T$ (31/12/2023, 31/12/2024, 30/06/2025):
-lấy lỗ hổng công bố trước $T$, tách phần đã có trong KEV; với phần còn lại lấy EPSS đúng ngày
-$T$, tính $S$, gắn nhãn $y=1$ nếu vào KEV trong 365 ngày sau $T$. Đếm tỷ lệ $y=1$ theo mười
-mức điểm, so với quy tắc CSA, và so với xếp theo CVSS, EPSS ở cùng khối lượng vá. Khi nhiều
-lỗ hổng bằng điểm ở ranh giới chọn, lấy giá trị kỳ vọng; khoảng tin cậy 95\% tính bằng
+\textbf{TN2 -- kiểm thử ngược $S$.} Tại ba ngày $T$ (31/12/2023, 31/12/2024, 30/06/2025): lấy lỗ
+hổng công bố trước $T$, tách phần đã có trong KEV; với phần còn lại lấy EPSS đúng ngày $T$ (lỗ hổng
+không có điểm coi bằng 0), tính $S$, gắn nhãn $y=1$ nếu vào KEV trong 365 ngày sau $T$. Đếm tỷ lệ
+$y=1$ theo mười mức điểm, so với quy tắc CSA, và so với xếp theo CVSS, EPSS ở cùng khối lượng vá.
+Khi nhiều lỗ hổng bằng điểm ở ranh giới chọn, lấy giá trị kỳ vọng; khoảng tin cậy 95\% tính bằng
 bootstrap.
 
-\textbf{TN3 -- trước khi vào KEV.} Với 836 lỗ hổng vào KEV từ 01/04/2023, tính $S$ bằng EPSS
-1 ngày và 30 ngày trước ngày vào KEV, so với $S$ khi đã vào KEV.
+\textbf{TN3 -- trước khi được CISA xác nhận.} Với 836 lỗ hổng vào KEV từ 01/04/2023, tính $S$ bằng
+EPSS 1 ngày và 30 ngày trước ngày vào KEV. Vì CISA chỉ thêm lỗ hổng sau khi có bằng chứng bị khai
+thác, thực nghiệm này đo khả năng phát hiện trước khi CISA xác nhận, chưa phải dự báo trước khi bị
+khai thác; lỗ hổng được chia theo khoảng thời gian từ ngày công bố đến ngày vào KEV.
 
-\textbf{TN4 -- giả thuyết đặt trước.} Lỗ hổng 2023--2025 chia đợt theo tháng, ngày quyết định
-là cuối tháng, nhãn là vào KEV trong 180 ngày; 2024 và 2025 là năm kiểm thử, số mũ chọn lại
-trên năm trước (walk-forward). \emph{H1}: ở cùng khối lượng vá với quy tắc CSA, công thức bắt
-được nhiều hơn CVSS, đạt nếu khoảng tin cậy 95\% (1.000 lần bootstrap) nằm trên 0. \emph{H2}:
-trong mô phỏng vá hằng tháng với ngân sách 25\%, công thức đầy đủ có tỷ lệ ``an toàn trong 30
-ngày'' (vá trước khi bị khai thác hoặc chậm nhất 30 ngày sau) cao nhất. Đối chứng gồm CVSS,
-EPSS, công thức bỏ KEV và nhánh ``High'' của cây VMC~\cite{shimizu2026}.
+\textbf{TN4 -- giả thuyết đặt trước.} Lỗ hổng 2023--2025 chia đợt theo tháng, ngày quyết định là
+cuối tháng, nhãn là vào KEV trong 180 ngày; 2024 và 2025 là năm kiểm thử, số mũ chọn lại trên năm
+trước (walk-forward). \emph{H1}: ở cùng khối lượng vá với quy tắc CSA, công thức bắt được nhiều
+hơn CVSS, đạt nếu khoảng tin cậy 95\% (1.000 lần bootstrap) nằm trên 0. \emph{H2}: trong mô phỏng
+vá hằng tháng với ngân sách 25\%, công thức đầy đủ có tỷ lệ ``an toàn trong 30 ngày'' (vá trước
+khi bị khai thác hoặc chậm nhất 30 ngày sau) cao nhất. Đối chứng gồm CVSS, EPSS, công thức bỏ KEV
+và một biến thể của cây VMC do nhóm cài đặt: tách lỗ hổng trong KEV và lỗ hổng có EPSS
+$\ge 0{,}088$ thành hai tầng, trong khi bài báo gốc gộp hai điều kiện này vào một bước lọc.
+
+\textbf{TN5 -- độ nhạy của quy tắc CSA.} Thử năm cách đọc: Q0, CVSS $\ge 8{,}0$ (như TN1); Q1,
+CVSS $> 8{,}0$; Q2, CVSS $\ge 8{,}0$ nhưng chỉ xét lỗ hổng có vector \texttt{AV:N}, dùng gần đúng
+cho điều kiện phơi ra Internet; Q3, CVSS $\ge 8{,}0$ \emph{hoặc} đã có PoC trên Exploit-DB; Q4, như
+Q3 nhưng chỉ xét lỗ hổng \texttt{AV:N}. Phần mô tả lặp lại TN1; phần kiểm thử ngược lặp lại thiết
+kế TN2, chỉ tính PoC công bố trước hoặc đúng ngày $T$, và so mỗi cách đọc với EPSS và $S$ ở cùng
+khối lượng vá.
+
+\textbf{TN6 -- độ ổn định.} Lặp lại đúng thiết kế TN2 tại 11 ngày cuối quý từ 31/03/2023 đến
+30/09/2025, xét riêng ba ngày có cửa sổ 365 ngày không chồng nhau (31/03 các năm 2023, 2024,
+2025), và thử các số mũ 0,1; 0,2; 0,3; 0,5; 0,7 và 1,0.
 
 % =====================================================================
-\section{Kết quả thực nghiệm}
+\section{Kết quả thực nghiệm}\label{sec:ketqua}
 % =====================================================================
 
 \subsection{Ngưỡng CVSS 8,0 vá thừa và bỏ sót}
-Trong 66.722 lỗ hổng phải vá khẩn cấp, chỉ 877 (1,31\%) nằm trong KEV; trung bình phải vá
-76,1 lỗ hổng mới trúng một lỗ hổng bị khai thác. Ngược lại 693/1.570 lỗ hổng KEV (44,14\%) có
-CVSS dưới 8,0 và bị bỏ qua (Bảng~\ref{tab:bonnhom}, Hình~\ref{fig:hailoi}). Giai đoạn
-2023--2025 gần như giống hệt: bỏ sót 43,05\%. Đổi ngưỡng không giải quyết được vấn đề: ngưỡng
-7,0 bỏ sót 11,40\% nhưng phải vá 54,33\% số lỗ hổng; ngưỡng 9,0 bỏ sót 65,99\%. Tỷ lệ bị khai
-thác trong nhóm phải vá luôn chỉ 1--1,5\%, vì xác suất vào KEV chỉ tăng từ 0,17\% (CVSS 4,0--6,9)
-lên 1,54\% (CVSS 9,0--10). Tỷ lệ lỗ hổng KEV có CVSS dưới 8,0 dao động 32--57\% qua các năm
-2010--2025; Microsoft chiếm 35,8\% số lỗ hổng bị bỏ sót.
+Trong 66.722 lỗ hổng phải vá khẩn cấp, chỉ 877 (1,31\%) nằm trong KEV; trung bình phải vá 76,1
+lỗ hổng mới trúng một lỗ hổng bị khai thác. Ngược lại 693/1.570 lỗ hổng KEV (44,14\%) có CVSS dưới
+8,0 và bị bỏ qua (Bảng~\ref{tab:bonnhom}, Hình~\ref{fig:hailoi}). Giai đoạn 2023--2025 gần như
+giống hệt: bỏ sót 43,05\%, phải vá 99,3 lỗ hổng cho mỗi lỗ hổng bắt được.
 
 \begin{table}[htbp]
 \caption{Ma trận nhầm lẫn của quy tắc CVSS $\ge 8{,}0$, 1999--2025}\label{tab:bonnhom}
@@ -271,14 +402,94 @@ Cộng & 1.570 & 238.839 & 240.409 \\
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.85\textwidth]{nguong_hai_loi.png}
-\caption{Ngưỡng CVSS 8,0 bỏ sót khoảng 44\% lỗ hổng bị khai thác, trong khi khoảng 99\% lỗ
-hổng phải vá khẩn cấp chưa ghi nhận bị khai thác.}\label{fig:hailoi}
+\caption{Ngưỡng CVSS 8,0 bỏ sót khoảng 44\% lỗ hổng bị khai thác, trong khi khoảng 99\% lỗ hổng
+phải vá khẩn cấp chưa ghi nhận bị khai thác.}\label{fig:hailoi}
 \end{figure*}
 
+Đổi ngưỡng không giải quyết được vấn đề (Bảng~\ref{tab:nguong}): ngưỡng 7,0 bỏ sót 11,40\% nhưng
+phải vá 54,33\% số lỗ hổng; ngưỡng 9,0 bỏ sót 65,99\%. CVSS có phân biệt được phần nào: xác suất
+vào KEV tăng từ 0,17\% (CVSS 4,0--6,9) lên 1,54\% (CVSS 9,0--10), tức khoảng 9 lần; nhưng tỷ lệ nền
+quá thấp, nên ngay cả nhóm điểm cao nhất cũng chỉ có khoảng 1 trong 65 lỗ hổng bị khai thác. Tỷ lệ
+lỗ hổng KEV có CVSS dưới 8,0 dao động 32--57\% qua các năm 2010--2025 và không có xu hướng rõ rệt.
+Trong 693 lỗ hổng bị bỏ sót, Microsoft chiếm 35,8\%, Apple 7,8\%, Cisco 5,9\%: phần bị bỏ sót tập
+trung ở các nhà cung cấp lớn.
+
+\begin{table}[htbp]
+\caption{So sánh các ngưỡng CVSS, 1999--2025}\label{tab:nguong}
+\centering
+\begin{tabular}{lccc}
+\toprule
+Ngưỡng & Phải vá & Bỏ sót KEV & Độ chính xác \\
+\midrule
+CVSS $\ge 7{,}0$ & 54,33\% & 11,40\% & 1,06\% \\
+CVSS $\ge 8{,}0$ & 27,75\% & 44,14\% & 1,31\% \\
+CVSS $\ge 9{,}0$ & 14,43\% & 65,99\% & 1,54\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Độ nhạy của quy tắc CSA}\label{sec:donhay}
+Bảng~\ref{tab:donhay} lặp lại thống kê mô tả của TN1 với năm cách đọc khuyến nghị. Bản NVD tải
+lại cho thực nghiệm này có thêm 3 lỗ hổng có CVSS 3.x so với TN1, nhưng cách đọc Q0 cho đúng 877
+lỗ hổng KEV được ưu tiên và 693 lỗ hổng bị bỏ sót.
+
+\begin{table*}[t]
+\caption{Năm cách đọc quy tắc CSA, thống kê mô tả 1999--2025; Q2 và Q4 chỉ xét lỗ hổng có vector
+\texttt{AV:N}, trong đó có 1.143 lỗ hổng KEV}\label{tab:donhay}
+\centering
+\begin{tabular}{lrccccc}
+\toprule
+Cách đọc & Phạm vi & Phải vá & Bắt được KEV & Bỏ sót KEV & Độ chính xác & Vá cho 1 ca \\
+\midrule
+Q0. CVSS $\ge 8{,}0$ & 240.412 & 27,75\% & 55,86\% & 44,14\% & 1,31\% & 76,1 \\
+Q1. CVSS $> 8{,}0$ & 240.412 & 27,35\% & 55,29\% & 44,71\% & 1,32\% & 75,8 \\
+Q2. Q0, chỉ \texttt{AV:N} & 174.807 & 35,97\% & 73,75\% & 26,25\% & 1,34\% & 74,6 \\
+Q3. Q0 hoặc có PoC & 240.412 & 29,01\% & 66,88\% & 33,12\% & 1,51\% & 66,4 \\
+Q4. Q3, chỉ \texttt{AV:N} & 174.807 & 37,11\% & 79,27\% & 20,73\% & 1,40\% & 71,6 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+Có ba điểm rút ra. Thứ nhất, đọc ``above 8.0'' theo nghĩa chặt gần như không đổi kết quả: chỉ 968
+lỗ hổng có CVSS đúng bằng 8,0, trong đó 9 lỗ hổng nằm trong KEV. Thứ hai, tỷ lệ bỏ sót phụ thuộc
+mạnh vào cách đọc: 72,80\% lỗ hổng KEV khai thác được qua mạng, và trong phạm vi này quy tắc chỉ bỏ
+sót 26,25\%; thêm điều kiện có PoC công khai, cách đọc sát nhất (Q4) chỉ bỏ sót 20,73\%. Con số
+44\% của TN1 vì vậy là cận trên, ứng với cách đọc đơn giản nhất. Thứ ba, vấn đề vá thừa không đổi:
+ở mọi cách đọc, nhóm phải vá chiếm 27--37\% phạm vi xét và chỉ 1,31--1,51\% trong đó bị khai thác,
+tức phải vá 66--76 lỗ hổng mới trúng một lỗ hổng bị khai thác.
+
+Kiểm thử ngược tại ba ngày đánh giá (Bảng~\ref{tab:donhay2}) cho cùng kết luận. Mọi cách đọc đều
+có hiệu suất 1,7--2,3 lần chọn ngẫu nhiên, rất xa mức 22,6--27,9 lần của ngưỡng $S \ge 70$ ở cùng
+ba ngày (Bảng~\ref{tab:khancap}). Khi vá cùng khối lượng với từng cách đọc, $S$ bắt được bằng hoặc
+nhiều hơn quy tắc ở 13/15 trường hợp. Hai trường hợp ngược lại đều ở năm 2024 với cách đọc có PoC
+(Q3: 55 so với 49; Q4: 51 so với 46). PoC công khai vì vậy là một tín hiệu có giá trị mà $S$ chưa
+dùng, phù hợp với kết quả của Allodi và Massacci~\cite{allodi2014}.
+
+\begin{table}[htbp]
+\caption{Kiểm thử ngược năm cách đọc quy tắc CSA tại 31/12/2023, 31/12/2024 và 30/06/2025; HS:
+hiệu suất (số lần so với chọn ngẫu nhiên); cột cuối là số lỗ hổng vào KEV mà $S$ bắt được nhiều
+hơn quy tắc khi vá cùng khối lượng, lần lượt ở ba ngày}\label{tab:donhay2}
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lcccc}
+\toprule
+Cách đọc & Khối lượng vá & HS quy tắc & HS $S$ & $S$ hơn quy tắc \\
+\midrule
+Q0 & 27,7--29,0\% & 2,1 & 2,1--2,9 & $+13$; $0$; $+11$ \\
+Q1 & 27,3--28,7\% & 2,1 & 2,2--2,9 & $+13$; $+2$; $+13$ \\
+Q2 & 36,1--37,7\% & 1,7--1,9 & 1,9--2,4 & $+14$; $+1$; $+5$ \\
+Q3 & 29,1--30,8\% & 2,2--2,3 & 2,1--2,7 & $+9$; $-6$; $+7$ \\
+Q4 & 37,3--39,4\% & 1,8--2,0 & 1,8--2,3 & $+11$; $-5$; $+3$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \subsection{Điểm S phân biệt được lỗ hổng sắp bị khai thác}
-Ngày 30/06/2025 có 209.623 lỗ hổng chưa có trong KEV, chỉ 91 (0,043\%) vào KEV trong 12 tháng
-sau. Tỷ lệ vào KEV tăng theo mức điểm (Bảng~\ref{tab:mucS}); các mức từ 70 có tỷ lệ
-1,16--1,29\%, gấp 27--30 lần trung bình. Xu hướng lặp lại ở cả ba ngày (Hình~\ref{fig:mucS}).
+Ngày 30/06/2025 có 209.623 lỗ hổng chưa có trong KEV, chỉ 91 (0,043\%) vào KEV trong 12 tháng sau.
+Tỷ lệ vào KEV tăng theo mức điểm (Bảng~\ref{tab:mucS}); các mức từ 70 có tỷ lệ 1,16--1,29\%, gấp
+27--30 lần trung bình. Xu hướng chung này lặp lại ở cả ba ngày (Hình~\ref{fig:mucS}), dù từng mức
+dao động do số lỗ hổng vào KEV ít.
 
 \begin{table}[htbp]
 \caption{Tỷ lệ vào KEV trong 12 tháng theo mức $S$, ngày 30/06/2025}\label{tab:mucS}
@@ -309,15 +520,40 @@ Tổng & 209.623 & 91 & 0,043\% & 1,0 \\
 \caption{Tỷ lệ vào KEV trong 12 tháng sau theo mức điểm $S$, tại ba ngày đánh giá.}\label{fig:mucS}
 \end{figure*}
 
-Vá mọi lỗ hổng có $S \ge 70$ là vá 2.803 lỗ hổng (1,34\%), bắt 34/91 (37,36\%), tức 82 lỗ hổng
-phải vá cho mỗi lỗ hổng bắt được. Quy tắc CSA vá 58.133 lỗ hổng (27,73\%), bắt 54/91, tức 1.076
-lỗ hổng cho mỗi lỗ hổng bắt được: bắt nhiều hơn vì vá nhiều gấp khoảng 20 lần, nhưng hiệu suất
-kém khoảng 13 lần.
+Bảng~\ref{tab:khancap} đặt ngưỡng $S \ge 70$ cạnh quy tắc CSA. Ngày 30/06/2025, vá mọi lỗ hổng có
+$S \ge 70$ là vá 2.803 lỗ hổng (1,34\%), bắt 34/91 (37,36\%), tức 82 lỗ hổng phải vá cho mỗi lỗ hổng
+bắt được; quy tắc CSA vá 58.133 lỗ hổng (27,73\%), bắt 54/91, tức 1.076 lỗ hổng cho mỗi lỗ hổng bắt
+được. Quy tắc CSA bắt nhiều hơn vì vá nhiều gấp khoảng 20 lần. Tính theo hiệu suất, ngưỡng $S \ge 70$
+gấp 22,6--27,9 lần chọn ngẫu nhiên, quy tắc CSA chỉ gấp 2,1 lần, ổn định ở cả ba ngày; TN6 xác nhận
+kết quả này ở 11 ngày (Mục~\ref{sec:ondinh}). Kể cả các lỗ
+hổng đã có trong KEV theo quy tắc ở Mục~\ref{sec:giaiphap}, nhóm vá khẩn cấp chỉ chiếm 1,44--1,98\%
+số lỗ hổng có CVSS 3.x.
 
-Khi cố định cùng khối lượng vá (Bảng~\ref{tab:cungkl}), vá 1\% hoặc 5\% thì $S$ bắt được nhiều
-gấp 2,7--8,9 lần CVSS ở cả ba ngày, khoảng tin cậy 95\% của chênh lệch đều trên 0. Tuy nhiên
-$S$ chỉ tương đương EPSS, và kém nhẹ ở 2025 khi vá 1\% (25 so với 30). Hình~\ref{fig:batduoc}
-cho thấy đường của $S$ và EPSS gần trùng nhau ở phần vá ít.
+\begin{table}[htbp]
+\caption{Ngưỡng $S \ge 70$ và quy tắc CSA trên phần chưa có trong KEV, tại ba ngày đánh giá; HS:
+hiệu suất (số lần so với chọn ngẫu nhiên); nhóm khẩn cấp gồm thêm mọi lỗ hổng đã có trong
+KEV}\label{tab:khancap}
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lccccc}
+\toprule
+ & \multicolumn{3}{c}{Ngưỡng $S \ge 70$} & \multicolumn{2}{c}{Quy tắc CSA} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-6}
+Ngày & Bắt được & HS & Khẩn cấp & Khối lượng & HS \\
+\midrule
+31/12/2023 & 14/61 & 22,6 & 1,72\% & 28,98\% & 2,1 \\
+31/12/2024 & 16/80 & 25,5 & 1,44\% & 28,20\% & 2,1 \\
+30/06/2025 & 34/91 & 27,9 & 1,98\% & 27,73\% & 2,1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Khi cố định cùng khối lượng vá (Bảng~\ref{tab:cungkl}), vá 1\% hoặc 5\% thì $S$ bắt được nhiều gấp
+2,7--8,9 lần CVSS ở cả ba ngày, khoảng tin cậy 95\% của chênh lệch đều trên 0. So với EPSS, chênh
+lệch nhỏ và đổi chiều: bằng nhau ở 1\% và 5\% năm 2023 và ở 1\% năm 2024; $S$ kém 2 ca ở 5\% năm
+2024, kém 5 ca ở 1\% và 1 ca ở 5\% năm 2025; ở khối lượng của quy tắc CSA, $S$ bằng hoặc hơn EPSS
+ở cả ba ngày. Hình~\ref{fig:batduoc} cho thấy đường của $S$ và EPSS gần trùng nhau ở phần vá ít.
 
 \begin{table}[htbp]
 \caption{Số lỗ hổng vào KEV bắt được khi vá cùng số lượng}\label{tab:cungkl}
@@ -343,18 +579,126 @@ Ngày & Vá & Số vá & CVSS & EPSS & $S$ \\
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.85\textwidth]{S_duong_bat_duoc.png}
-\caption{Đường bắt được ngày 30/06/2025: phần trăm lỗ hổng sẽ vào KEV bắt được theo phần trăm
-lỗ hổng phải vá. Chấm đen là quy tắc CSA.}\label{fig:batduoc}
+\caption{Đường bắt được ngày 30/06/2025: phần trăm lỗ hổng sẽ vào KEV bắt được theo phần trăm lỗ
+hổng phải vá. Chấm đen là quy tắc CSA.}\label{fig:batduoc}
 \end{figure*}
 
-\subsection{Điểm trước khi vào KEV}
+\subsection{Độ ổn định qua 11 ngày đánh giá và theo số mũ}\label{sec:ondinh}
+TN6 lặp lại thiết kế của TN2 tại 11 ngày cuối quý. Ba ngày trùng với TN2 cho đúng cùng số lỗ hổng,
+số lỗ hổng vào KEV và số lỗ hổng $S$ bắt được. Tổng cộng có 776 lượt lỗ hổng vào KEV trong 12 tháng
+sau các ngày đánh giá, từ 39 đến 91 mỗi ngày.
+
+Bảng~\ref{tab:ondinh} và Hình~\ref{fig:ondinh} cho thấy ba kết quả. Thứ nhất, ngưỡng $S \ge 70$ ổn
+định: ở cả 11 ngày, nhóm này chỉ chiếm 0,78--1,40\% số lỗ hổng chưa có trong KEV nhưng bắt được
+14,1--44,2\% số lỗ hổng sẽ vào KEV, tức hiệu suất 15,9--34,2 lần chọn ngẫu nhiên; quy tắc CSA chỉ
+đạt 1,7--2,3 lần. Thứ hai, $S$ không kém CVSS ở bất kỳ ngày nào và ở bất kỳ khối lượng vá nào, kể cả
+ba ngày có cửa sổ theo dõi không chồng nhau. So với EPSS, $S$ không kém ở 6 đến 9 trong 11 ngày tùy
+khối lượng vá. Thứ ba, trên tập lỗ hổng tồn đọng này, $S$ và EPSS gần
+như ngang nhau ở mọi khối lượng: khi gộp 11 ngày, chênh lệch không quá 2 điểm phần trăm. Lợi thế
+của $S$ khi vá nhiều chỉ thấy rõ ở dữ liệu lỗ hổng mới công bố của TN4 (Bảng~\ref{tab:a1}).
+
+\begin{table}[htbp]
+\caption{Tỷ lệ lỗ hổng vào KEV trong 12 tháng bắt được khi vá cùng số lượng, gộp 11 ngày cuối quý
+(776 lỗ hổng) và riêng ba ngày có cửa sổ theo dõi không chồng nhau (201 lỗ hổng)}\label{tab:ondinh}
+\centering
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{llccc}
+\toprule
+Nhóm ngày & Khối lượng & CVSS & EPSS & $S$ \\
+\midrule
+11 ngày & 1\%     & 3,7\%  & 25,9\% & 24,9\% \\
+        & 5\%     & 13,8\% & 44,2\% & 43,9\% \\
+        & 10\%    & 26,4\% & 53,0\% & 53,5\% \\
+        & 25\%    & 54,1\% & 66,7\% & 67,0\% \\
+        & như CSA & 59,3\% & 68,8\% & 70,8\% \\
+\midrule
+3 ngày  & 1\%     & 3,0\%  & 28,4\% & 25,9\% \\
+không   & 5\%     & 13,6\% & 43,8\% & 44,3\% \\
+chồng   & 10\%    & 26,9\% & 53,2\% & 55,2\% \\
+nhau    & 25\%    & 52,9\% & 67,7\% & 68,2\% \\
+        & như CSA & 58,2\% & 69,2\% & 70,1\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.85\textwidth]{nhieu_ngay_va_5.png}
+\caption{Vá 5\% số lỗ hổng chưa có trong KEV tại 11 ngày đánh giá: phần trăm lỗ hổng vào KEV trong 12
+tháng sau bắt được. Đường chấm là chọn ngẫu nhiên.}\label{fig:ondinh}
+\end{figure*}
+
+Ngưỡng $S \ge 70$ cũng cho thấy ảnh hưởng của phiên bản EPSS: khối lượng của nhóm này giảm dần từ
+1,17\% xuống 0,78\% trong thời gian dùng mô hình v2023.03.01 (31/03/2023 đến 31/12/2024), rồi tăng
+lên 1,30--1,40\% khi FIRST chuyển sang mô hình v2025.03.14.
+
+Bảng~\ref{tab:somu} quét số mũ của EPSS trên cả 11 ngày. Mọi số mũ từ 0,2 đến 1,0 cho kết quả gần
+như nhau (trung bình bốn khối lượng 47,1--47,8\%). Số mũ 0,1 kém hơn khi vá ít (22,2\% so với 24,9\%
+khi vá 1\%) nhưng tốt nhất khi vá 25\% (69,3\%), vì số mũ càng nhỏ thì CVSS càng có trọng lượng. Không
+có số mũ tối ưu chung; 0,3 nằm trong nhóm cho kết quả tốt, nên kết luận của báo cáo không phụ thuộc
+vào lựa chọn này.
+
+\begin{table}[htbp]
+\caption{Quét số mũ của EPSS trong $S$, gộp 11 ngày: tỷ lệ lỗ hổng vào KEV bắt được theo khối lượng vá}\label{tab:somu}
+\centering
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{cccccc}
+\toprule
+Số mũ & 1\% & 5\% & 10\% & 25\% & Trung bình \\
+\midrule
+0,1 & 22,2\% & 41,1\% & 50,6\% & 69,3\% & 45,8\% \\
+0,2 & 24,7\% & 43,8\% & 52,2\% & 67,5\% & 47,1\% \\
+0,3 & 24,9\% & 43,9\% & 53,5\% & 67,0\% & 47,3\% \\
+0,5 & 25,9\% & 44,3\% & 54,1\% & 66,9\% & 47,8\% \\
+0,7 & 25,8\% & 44,3\% & 54,3\% & 66,6\% & 47,7\% \\
+1,0 & 25,8\% & 44,2\% & 54,0\% & 66,9\% & 47,7\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Điểm trước khi được CISA xác nhận}
 Trong 836 lỗ hổng vào KEV từ 01/04/2023, 227 (27,15\%) chưa có EPSS một ngày trước khi vào KEV;
-226 trong số đó công bố cùng ngày hoặc một ngày trước. Đây là zero-day, chỉ nhánh KEV xử lý
-được. Với 609 lỗ hổng còn lại, $S$ một ngày trước thấp hơn nhiều $S$ khi vào KEV
-(Hình~\ref{fig:truockev}): trung vị khoảng cách 63 điểm, trung vị tỷ số 0,19, vì EPSS chủ yếu
-tăng sau khi việc khai thác được biết đến. Dù vậy, xét theo hiệu suất (Bảng~\ref{tab:truockev}),
-mức $S \ge 70$ chiếm 1,34\% khối lượng vá nhưng chứa 17,73\% lỗ hổng sắp vào KEV, gấp khoảng
-13 lần ngẫu nhiên; quy tắc CSA chỉ gấp 2,3 lần.
+226 trong số đó công bố cùng ngày hoặc một ngày trước. Đây là zero-day: không công thức nào chấm
+được điểm trước, chỉ quy tắc KEV đưa chúng vào nhóm vá khẩn cấp ngay khi được xác nhận.
+
+Với 609 lỗ hổng còn lại, EPSS một ngày trước khi vào KEV thường rất thấp: trung vị chỉ 0,0038. Vì
+vậy $S$ trước khi vào KEV thấp hơn nhiều $S$ khi vào KEV (Hình~\ref{fig:truockev}); điểm khi vào
+KEV bằng $\mathit{CVSS} \times 10$ theo định nghĩa, nên khoảng cách giữa hai điểm phản ánh chính
+EPSS chứ không phải một kết quả riêng. Bảng~\ref{tab:tuoi} chia theo tuổi lỗ hổng: với lỗ hổng
+công bố tối đa 30 ngày trước khi vào KEV, trung vị EPSS chỉ 0,0009 và chỉ 4,46\% có $S \ge 70$;
+với lỗ hổng công bố hơn 1 năm, tỷ lệ này là 35,98\%. Trong 108 lỗ hổng có $S \ge 70$ một ngày
+trước khi vào KEV, 68 (62,96\%) đã công bố hơn 1 năm. Công thức hữu ích với lỗ hổng cũ còn tồn
+đọng, nhưng gần như không cảnh báo trước được lỗ hổng mới công bố, đúng nhóm mà CSA lo ngại.
+
+\begin{table}[htbp]
+\caption{Điểm một ngày trước khi vào KEV theo thời gian từ ngày công bố đến ngày vào KEV}\label{tab:tuoi}
+\centering
+\small
+\begin{tabular}{L{2.5cm}cccc}
+\toprule
+Nhóm lỗ hổng KEV & Số & EPSS trung vị & $S \ge 70$ & $S \ge 50$ \\
+\midrule
+Chưa có EPSS (zero-day) & 227 & -- & -- & -- \\
+Công bố $\le 30$ ngày trước & 224 & 0,0009 & 4,46\% & 7,14\% \\
+Công bố 31--365 ngày trước & 196 & 0,0039 & 15,31\% & 22,96\% \\
+Công bố hơn 1 năm trước & 189 & 0,0709 & 35,98\% & 45,50\% \\
+\midrule
+Tất cả có EPSS & 609 & 0,0038 & 17,73\% & 24,14\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.85\textwidth]{truoc_kev_muc_diem.png}
+\caption{Mức điểm $S$ của 609 lỗ hổng KEV: 30 ngày trước, 1 ngày trước và khi vào KEV (khi vào KEV,
+$S = \mathit{CVSS} \times 10$ theo định nghĩa).}\label{fig:truockev}
+\end{figure*}
+
+Xét theo hiệu suất (Bảng~\ref{tab:truockev}), mức $S \ge 70$ một ngày trước khi vào KEV chiếm 1,34\%
+khối lượng vá nhưng chứa 17,73\% lỗ hổng sắp vào KEV, gấp khoảng 13 lần ngẫu nhiên; quy tắc CSA chỉ
+gấp 2,3 lần. Con số này chỉ là ước lượng: khối lượng vá lấy từ ngày 30/06/2025, còn các lỗ hổng vào
+KEV rải rác từ 2023 đến 2026. Kết quả sạch hơn là của TN2 (Bảng~\ref{tab:khancap}).
 
 \begin{table}[htbp]
 \caption{Trước khi vào KEV: tỷ lệ lỗ hổng sắp vào KEV được ưu tiên}\label{tab:truockev}
@@ -372,77 +716,126 @@ $S \ge 70$ & 17,73\% & 1,34\% & 13,2 \\
 \end{tabular}
 \end{table}
 
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.85\textwidth]{truoc_kev_muc_diem.png}
-\caption{Mức điểm $S$ của 609 lỗ hổng KEV: 30 ngày trước, 1 ngày trước và khi vào KEV.}\label{fig:truockev}
-\end{figure*}
-
-\subsection{Kiểm định giả thuyết}
-\emph{H1 chưa đạt.} Ở khối lượng vá của quy tắc CSA, gộp 2024 và 2025, công thức hơn CVSS
-6,0 ca, khoảng tin cậy 95\% $[-2{,}0;\,+15{,}0]$ chứa 0; năm 2023 công thức còn kém CVSS (19,7
-so với 24 trên 43). Khi vá ít hơn (phân tích khám phá), chênh lệch so với CVSS có ý nghĩa:
-$+12{,}6$ $[+3{,}9;\,+21{,}8]$ khi vá 1\%, $+18{,}2$ $[+8{,}3;\,+28{,}5]$ khi vá 5\%. So với EPSS
-thì không có ý nghĩa: $-1{,}0$ $[-3{,}0;\,+2{,}0]$ và $+4{,}4$ $[-0{,}7;\,+10{,}5]$.
-
-\emph{H2 đạt} (Bảng~\ref{tab:mophong}). Công thức đầy đủ an toàn trong 30 ngày 100\% ở cả hai
-năm, còn CVSS chỉ 55--56\% và bỏ lại 37--42\% lỗ hổng bị khai thác chưa vá. Tuy nhiên cây VMC
-cũng đạt 100\% và công thức bỏ KEV chỉ đạt 91--98\%: lợi ích của H2 chủ yếu đến từ thành phần KEV.
+\subsection{Kiểm định giả thuyết đặt trước}
+\emph{So sánh theo khối lượng vá.} Bảng~\ref{tab:a1} gộp hai năm kiểm thử của TN4. Khi vá 1\%, $S$
+và EPSS gần như bằng nhau (17,2\% và 18,1\%), cùng gấp gần ba lần CVSS. Từ 5\% trở lên, $S$ bằng hoặc
+hơn EPSS; khi vá 25\%, $S$ bắt được 62,1\%, hơn cả EPSS (48,9\%) lẫn CVSS (57,0\%). Ở khối lượng lớn,
+EPSS kém cả CVSS, có thể vì phần lớn lỗ hổng có EPSS rất thấp và gần như bằng nhau nên thứ tự giữa
+chúng gần như ngẫu nhiên; thừa số CVSS trong $S$ giúp sắp thứ tự trong khối này. Kết quả dao động
+theo năm: riêng năm 2024, khi vá 10\%, CVSS bắt được nhiều nhất (41,4\%, so với 27,4\% của $S$ và
+22,0\% của EPSS). Lợi thế của $S$ so với EPSS khi vá nhiều chỉ xuất hiện ở thiết kế này, vốn chấm
+điểm lỗ hổng mới công bố theo từng tháng; trên tập lỗ hổng tồn đọng của TN6, hai cách gần như ngang
+nhau.
 
 \begin{table}[htbp]
-\caption{Mô phỏng vá hằng tháng, ngân sách 25\%: tỷ lệ an toàn trong 30 ngày}\label{tab:mophong}
+\caption{Tỷ lệ lỗ hổng bị khai thác bắt được theo khối lượng vá, gộp 2024 và 2025 (116 lỗ hổng)}\label{tab:a1}
 \centering
-\begin{tabular}{lcc}
+\begin{tabular}{lccc}
 \toprule
-Cách chọn & 2024 (128 ca) & 2025 (172 ca) \\
+Khối lượng vá & CVSS & EPSS & $S$ \\
 \midrule
-CVSS             & 55,5\%  & 56,4\% \\
-EPSS             & 93,8\%  & 98,3\% \\
-Công thức bỏ KEV & 91,4\%  & 98,3\% \\
-Cây VMC          & 100,0\% & 100,0\% \\
-Công thức đầy đủ & 100,0\% & 100,0\% \\
+1\%  & 6,4\%  & 18,1\% & 17,2\% \\
+5\%  & 18,8\% & 30,7\% & 34,5\% \\
+10\% & 34,2\% & 40,5\% & 42,0\% \\
+25\% & 57,0\% & 48,9\% & 62,1\% \\
+Bằng quy tắc CSA & 56,9\% & 49,0\% & 62,1\% \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\emph{Số mũ.} Khi chọn số mũ trên năm trước trong các giá trị 0,1; 0,2; 0,3; 0,5; 0,7 và 1,0,
-cả hai năm kiểm thử đều chọn 0,1. Trên năm kiểm thử, 0,1 và 0,3 cho kết quả gần nhau, nên 0,3
-là lựa chọn hợp lý nhưng chưa được dữ liệu xác nhận là tối ưu.
+\emph{H1 chưa đạt.} Ở khối lượng vá của quy tắc CSA, gộp 2024 và 2025, công thức hơn CVSS 6,0 ca,
+khoảng tin cậy 95\% $[-2{,}0;\,+15{,}0]$ chứa 0. Công thức hơn CVSS ở 2024 (29 so với 27 trên 50) và
+2025 (43 so với 39 trên 66); năm 2023, vốn chỉ dùng để mô tả, công thức kém CVSS (19,7 so với 24
+trên 43). Cũng ở khối lượng này, công thức hơn EPSS 15,2 ca, khoảng tin cậy $[+5{,}2;\,+26{,}7]$,
+chủ yếu nhờ năm 2024. Khi vá ít hơn (phân tích khám phá), chênh lệch so với CVSS có ý nghĩa:
+$+12{,}6$ $[+3{,}9;\,+21{,}8]$ khi vá 1\%, $+18{,}2$ $[+8{,}3;\,+28{,}5]$ khi vá 5\%; so với EPSS thì
+không có ý nghĩa: $-1{,}0$ $[-3{,}0;\,+2{,}0]$ và $+4{,}4$ $[-0{,}7;\,+10{,}5]$.
+
+\emph{H2 đạt} (Bảng~\ref{tab:mophong}). Công thức đầy đủ an toàn trong 30 ngày 100\% ở cả hai năm,
+còn CVSS chỉ 55--56\% và bỏ lại 37--42\% lỗ hổng bị khai thác chưa vá. Biến thể VMC cũng đạt 100\%,
+còn công thức bỏ KEV chỉ đạt 91--98\%: phần lớn lợi ích của H2 đến từ thành phần KEV. Ở chỉ số chủ
+động hơn là vá trước khi bị khai thác, công thức dẫn đầu cả hai năm (23,4\% và 26,7\%), nhưng mọi
+cách chỉ vá trước được 16--27\% số lỗ hổng bị khai thác.
+
+\begin{table*}[t]
+\caption{Mô phỏng vá hằng tháng, ngân sách 25\% số lỗ hổng trong năm}\label{tab:mophong}
+\centering
+\begin{tabular}{lcccccc}
+\toprule
+ & \multicolumn{3}{c}{2024 (128 bị khai thác)} & \multicolumn{3}{c}{2025 (172 bị khai thác)} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+Cách chọn & Vá trước & An toàn 30 ngày & Chưa vá & Vá trước & An toàn 30 ngày & Chưa vá \\
+\midrule
+CVSS             & 20,3\% & 55,5\%  & 42,2\% & 19,2\% & 56,4\%  & 37,2\% \\
+EPSS             & 16,4\% & 93,8\%  & 3,9\%  & 24,4\% & 98,3\%  & 0,6\% \\
+Công thức bỏ KEV & 23,4\% & 91,4\%  & 5,5\%  & 26,7\% & 98,3\%  & 1,7\% \\
+Biến thể VMC     & 22,7\% & 100,0\% & 0,0\%  & 20,3\% & 100,0\% & 0,0\% \\
+Công thức đầy đủ & 23,4\% & 100,0\% & 0,0\%  & 26,7\% & 100,0\% & 0,0\% \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\emph{Số mũ.} Khi chọn số mũ trên năm trước trong các giá trị 0,1; 0,2; 0,3; 0,5; 0,7 và 1,0, cả
+hai năm kiểm thử đều chọn 0,1. Hai số mũ cho kết quả gần nhau ở khối lượng của quy tắc CSA (2025:
+43/66 cả hai), nhưng khác nhau ở một số khối lượng: năm 2024, khi vá 10\%, số mũ 0,1 bắt được
+45,7\% còn 0,3 chỉ 27,4\%. Quét số mũ trên 11 ngày của TN6 cho thấy kết luận không phụ thuộc vào lựa
+chọn này (Bảng~\ref{tab:somu}).
 
 % =====================================================================
-\section{Đánh giá tính khả thi}
+\section{Đánh giá tính khả thi}\label{sec:khathi}
 % =====================================================================
 
 \subsection{Dữ liệu, kỹ thuật và vận hành}
-CVSS, EPSS và KEV đều công khai, miễn phí, cập nhật hằng ngày và có API. Công thức là biểu
-thức đóng, không cần huấn luyện; chấm điểm khoảng 210.000 lỗ hổng mất dưới một giây. Công cụ
-quét lỗ hổng đã xuất mã CVE và CVSS, chỉ cần ghép thêm EPSS và KEV theo mã CVE. Mỗi điểm $S$
-tách được thành ba thừa số rõ nghĩa, dễ đưa vào văn bản chính sách. Về vận hành, tổ chức có
-thể đặt $S \ge 70$ (1,34\% số lỗ hổng) cho hạn 48 giờ thay vì 27,73\% như quy tắc CSA, và dùng
-ngưỡng thấp hơn cho hạn dài hơn. Hệ số $AC$ đòi hỏi danh mục tài sản phân loại theo mức quan
-trọng và mức phơi ra Internet, là điều kiện về quản trị chứ không phải kỹ thuật. Ngưỡng $S$ cần
-hiệu chỉnh lại khi FIRST đổi phiên bản mô hình EPSS.
+CVSS, EPSS và KEV đều công khai, miễn phí, cập nhật hằng ngày và có API. EPSS chấm điểm mọi CVE đã
+công bố; KEV tra được cho mọi CVE vì một CVE hoặc có hoặc không có trong danh mục. Công thức là biểu
+thức đóng, không cần huấn luyện; chấm điểm khoảng 210.000 lỗ hổng mất khoảng 4 ms trên máy tính cá
+nhân. Công cụ quét lỗ hổng đã xuất mã CVE và CVSS, chỉ cần ghép thêm EPSS và KEV theo mã CVE. Mỗi
+điểm $S$ tách được thành ba thừa số rõ nghĩa, dễ đưa vào văn bản chính sách.
+
+Về vận hành, nhóm vá khẩn cấp gồm lỗ hổng trong KEV và lỗ hổng có $S \ge 70$ chỉ chiếm 1,44--1,98\%
+số lỗ hổng (Bảng~\ref{tab:khancap}), thay vì khoảng 28\% như quy tắc CSA; các mức thấp hơn dùng cho
+hạn vá dài hơn. Hệ số $AC$ đòi hỏi danh mục tài sản phân loại theo mức quan trọng và mức phơi ra
+Internet, là điều kiện về quản trị chứ không phải kỹ thuật. Ngưỡng $S$ cần hiệu chỉnh lại khi FIRST
+đổi phiên bản mô hình EPSS: khối lượng nhóm $S \ge 70$ tăng từ 0,78\% (31/12/2024) lên 1,40\%
+(31/03/2025) khi chuyển sang mô hình v2025.03.14. Với lỗ hổng mới công bố, công thức gần như không cảnh báo trước được
+(Bảng~\ref{tab:tuoi}), nên chính sách vẫn phải dựa vào quy tắc KEV, cảnh báo của nhà cung cấp và
+tình báo mối đe dọa.
+
+\subsection{Hệ số tài sản và tấn công di chuyển ngang}
+Hệ số $AC$ nhân trực tiếp vào điểm, nên một lỗ hổng đã bị khai thác có CVSS 9,8 trên máy có
+$AC = 0{,}2$ chỉ được khoảng 20 điểm. Trong khi đó, chính bài báo CSA dẫn kết quả của Incalmo: từ chỗ
+đứng ban đầu, hệ thống tấn công tự động di chuyển ngang và chiếm được tài sản quan trọng ở 37/40 môi
+trường mạng mô phỏng. Hạ quá thấp điểm của máy ít quan trọng vì vậy có thể tạo ra điểm vào cho tấn
+công nhiều bước. Quy tắc KEV giảm bớt rủi ro này với lỗ hổng đã bị khai thác; với phần còn lại, tổ
+chức nên đặt mức sàn cho $AC$ ở các máy có kết nối tới tài sản quan trọng. Phần này chưa kiểm chứng
+được vì không có dữ liệu tài sản.
 
 \subsection{Mức độ đã chứng minh}
-Bảng~\ref{tab:tonghop} tóm tắt. Công thức $S$ khả thi về dữ liệu, chi phí và vận hành, và hiệu
-quả hơn rõ rệt quy tắc ngưỡng CVSS khi nguồn lực vá có hạn. Tuy nhiên năng lực dự báo gần như
-đến hoàn toàn từ EPSS; thừa số CVSS đưa mức nghiêm trọng vào thứ tự ưu tiên chứ không làm dự
-báo chính xác hơn.
+Bảng~\ref{tab:tonghop} tóm tắt. Công thức $S$ khả thi về dữ liệu, chi phí và vận hành, và hiệu quả
+hơn rõ rệt quy tắc ngưỡng CVSS khi nguồn lực vá có hạn. So với EPSS dùng riêng, $S$ gần như ngang ở
+hầu hết các mức; $S$ chỉ hơn rõ khi vá nhiều lỗ hổng mới công bố (TN4), nơi thừa số CVSS giúp sắp thứ
+tự trong khối lỗ hổng có EPSS thấp. Giá trị chính của $S$ so với EPSS vì vậy là đưa mức nghiêm trọng
+và tầm quan trọng của tài sản vào thứ tự ưu tiên mà không làm giảm khả năng dự báo.
 
 \begin{table}[htbp]
 \caption{Tổng hợp mức độ chứng minh}\label{tab:tonghop}
 \centering
-\begin{tabular}{p{4.6cm}p{2.9cm}}
+\small
+\begin{tabular}{L{4.5cm}L{3.2cm}}
 \toprule
 Nhận định & Kết quả \\
 \midrule
 Ngưỡng 8,0 vá thừa và bỏ sót nhiều & Đã chứng minh \\
+Kết luận trên đúng với các cách đọc sát hơn & Vá thừa: mọi cách đọc; bỏ sót: 21--44\% \\
 $S$ cao thì tỷ lệ sắp bị khai thác cao & Đã chứng minh \\
-$S$ tốt hơn CVSS khi vá 1--5\% & Đã chứng minh \\
+Ngưỡng $S \ge 70$ hiệu quả hơn quy tắc CSA & Đã chứng minh (16--34 lần so với 1,7--2,3 lần) \\
+$S$ tốt hơn CVSS khi vá ít & Đã chứng minh, ở cả 11 ngày \\
 $S$ tốt hơn CVSS ở khối lượng CSA & Chưa ổn định (H1) \\
-KEV giúp vá kịp lỗ hổng bị khai thác & Đã chứng minh (H2) \\
-$S$ tốt hơn EPSS dùng riêng & Không \\
-Số mũ 0,3 là tối ưu & Không, chọn được 0,1 \\
+$S$ so với EPSS dùng riêng & Gần như ngang; hơn khi vá nhiều lỗ hổng mới \\
+KEV giúp vá kịp lỗ hổng bị khai thác & Đã chứng minh trong mô phỏng (H2) \\
+Kết quả ổn định qua nhiều ngày đánh giá & Đã chứng minh qua 11 ngày \\
+Số mũ 0,3 là tối ưu & Không có số mũ tối ưu chung \\
+Cảnh báo trước lỗ hổng mới công bố & Gần như không (4,46\%) \\
 Cảnh báo được zero-day & Không thể (27\%) \\
 Hệ số $AC$ cải thiện ưu tiên & Chưa kiểm chứng \\
 \bottomrule
@@ -450,25 +843,46 @@ Hệ số $AC$ cải thiện ưu tiên & Chưa kiểm chứng \\
 \end{table}
 
 \subsection{Mối đe dọa đối với tính hợp lệ}
-KEV chỉ chứa lỗ hổng CISA xác nhận được, nên lỗ hổng bị khai thác nhưng chưa vào KEV bị tính
-là không bị khai thác. Mỗi ngày đánh giá chỉ có 61--91 ca dương, nên kết quả từng mức điểm dao
-động lớn; chúng tôi dùng bootstrap và lặp ở ba ngày. TN1 dùng trạng thái hiện tại, chỉ để mô
-tả. Dữ liệu không cho biết hệ thống nào phơi ra Internet, nên quy tắc CSA được áp rộng hơn
-phạm vi bài báo đề ra.
+KEV chỉ chứa lỗ hổng CISA xác nhận được, nghiêng về sản phẩm phổ biến ở Mỹ, và luôn ghi nhận sau khi
+lỗ hổng đã bị khai thác; lỗ hổng bị khai thác nhưng chưa vào KEV bị tính là không bị khai thác. Tại
+mỗi ngày đánh giá, công thức chỉ chấm được lỗ hổng đã công bố: trong số lỗ hổng vào KEV trong 12
+tháng sau, 64,86--67,35\% là CVE công bố \emph{sau} ngày đánh giá, nên TN2 chỉ kiểm thử được khoảng
+một phần ba, phần còn lại do TN4 xử lý theo từng đợt công bố. Mỗi ngày đánh giá chỉ có 61--91 lỗ
+hổng vào KEV, nên kết quả từng mức điểm dao động lớn; các ngày đánh giá dùng chung phần lớn tập lỗ
+hổng, và TN6 bổ sung ba ngày có cửa sổ theo dõi không chồng nhau nhưng tập lỗ hổng vẫn lồng nhau.
+Cùng quy tắc CSA, TN1 cho 76,1 lỗ hổng phải vá cho mỗi lỗ hổng bắt được vì tính mọi lỗ hổng đã từng
+vào KEV, còn TN2 cho 1.076 vì chỉ tính lỗ hổng vào KEV trong 12 tháng sau ngày đánh giá. TN1, phần mô
+tả của TN5 và bảng phân bổ theo EPSS dùng trạng thái KEV, PoC và EPSS hiện tại, chỉ để mô tả. Cuối
+cùng, vector \texttt{AV:N} chỉ cho biết lỗ hổng khai thác được qua mạng, không cho biết hệ thống có
+thực sự phơi ra Internet; Exploit-DB chỉ là một trong nhiều nguồn PoC công khai.
 
 % =====================================================================
 \section{Kết luận}
 % =====================================================================
 
-Khuyến nghị của CSA xuất phát từ một lo ngại có cơ sở: LLM rút ngắn thời gian từ công bố tới
-khai thác. Nhưng dùng CVSS làm tiêu chí duy nhất là không hiệu quả: 98,69\% lỗ hổng trong diện
-vá khẩn cấp chưa từng bị khai thác, còn 44,14\% lỗ hổng đã bị khai thác bị bỏ qua. Công thức
-$S$ kết hợp CVSS, EPSS, KEV và mức quan trọng của tài sản là một thay thế khả thi: dữ liệu miễn
-phí, tính toán đơn giản, giải thích được, bắt được lỗ hổng sắp bị khai thác nhiều gấp vài lần
-CVSS khi nguồn lực có hạn, và thành phần KEV bảo đảm lỗ hổng đã bị khai thác được vá kịp. Về
-chính sách, chúng tôi khuyến nghị thay ngưỡng CVSS cố định bằng các mức điểm kết hợp. Hướng
-tiếp theo là kiểm chứng $AC$ trên dữ liệu tài sản thực, hiệu chỉnh số mũ theo phiên bản EPSS,
-và bổ sung tín hiệu sớm hơn EPSS để giảm khoảng trễ trước khi lỗ hổng bị khai thác.
+Khuyến nghị của CSA xuất phát từ một lo ngại có cơ sở: LLM rút ngắn thời gian từ công bố tới khai
+thác. Nhưng dùng CVSS làm tiêu chí chính là không hiệu quả: 98,69\% lỗ hổng trong diện vá khẩn cấp
+chưa ghi nhận bị khai thác, còn 44,14\% lỗ hổng đã bị khai thác bị bỏ qua. Đọc khuyến nghị sát hơn làm
+giảm tỷ lệ bỏ sót xuống còn 21--33\%, nhưng ở mọi cách đọc chỉ 1,3--1,5\% lỗ hổng trong nhóm phải vá
+bị khai thác và hiệu suất không quá 2,3 lần chọn ngẫu nhiên. Điều này
+phù hợp với chính lời khuyên của bài báo rằng khung ưu tiên phải coi trọng khả năng bị khai thác.
+
+Công thức $S$ kết hợp CVSS, EPSS, KEV và mức quan trọng của tài sản, cùng quy tắc luôn vá khẩn cấp
+lỗ hổng trong KEV, là một thay thế khả thi: dữ liệu miễn phí, tính toán đơn giản, giải thích được.
+Nhóm vá khẩn cấp theo đề xuất chỉ chiếm khoảng 1,4--2\% số lỗ hổng, và phần được chọn theo ngưỡng
+$S \ge 70$ có hiệu suất 16--34 lần chọn ngẫu nhiên ở cả 11 ngày đánh giá, so với 1,7--2,3 lần của quy
+tắc CSA. Về chính sách, chúng tôi khuyến nghị thay
+ngưỡng CVSS cố định bằng các mức điểm kết hợp, trong đó lỗ hổng trong KEV luôn được vá khẩn cấp và
+lỗ hổng có EPSS cao trên tài sản quan trọng được đặt hạn vá ngắn nhất.
+
+Hạn chế lớn nhất là công thức gần như không cảnh báo trước được lỗ hổng mới công bố, đúng nhóm mà
+CSA lo ngại nhất. Hướng phát triển gồm: bổ sung tín hiệu sớm hơn EPSS cho lỗ hổng mới (mã khai thác
+công khai, cảnh báo của nhà cung cấp, thảo luận trên mạng); kiểm chứng hệ số $AC$ trên dữ liệu tài
+sản của một tổ chức thực; và hiệu chỉnh số mũ theo từng phiên bản EPSS.
+
+\section*{Tuyên bố về xung đột lợi ích}
+Các tác giả không có xung đột lợi ích liên quan tới nội dung báo cáo. Nghiên cứu chỉ dùng dữ liệu mô
+tả lỗ hổng công khai; không tạo hay tải mã khai thác, không quét hay tấn công hệ thống nào.
 
 \begin{thebibliography}{00}
 \bibitem{csa2026} Cloud Security Alliance, ``Automated exploit generation: LLMs cross the
@@ -477,29 +891,33 @@ Unofficial AI-assisted Research, Apr. 2026.
 \bibitem{fang2024} R. Fang, R. Bindu, A. Gupta, and D. Kang, ``LLM agents can autonomously
 exploit one-day vulnerabilities,'' 2024, arXiv:2404.08144.
 \bibitem{allodi2014} L. Allodi and F. Massacci, ``Comparing vulnerability severity and exploits
-using case-control studies,'' \emph{ACM Trans. Inf. Syst. Secur.}, vol. 17, no. 1, pp. 1--20, 2014.
+using case-control studies,'' \emph{ACM Trans. Inf. Syst. Secur.}, vol. 17, no. 1, Art. no. 1,
+2014, doi: 10.1145/2630069.
 \bibitem{jacobs2020} J. Jacobs, S. Romanosky, I. Adjerid, and W. Baker, ``Improving
 vulnerability remediation through better exploit prediction,'' \emph{J. Cybersecurity},
-vol. 6, no. 1, 2020.
-\bibitem{jacobs2021} J. Jacobs, S. Romanosky, B. Edwards, I. Adjerid, and M. Roytman,
+vol. 6, no. 1, Art. no. tyaa015, 2020, doi: 10.1093/cybsec/tyaa015.
+\bibitem{jacobs2021} J. Jacobs, S. Romanosky, B. Edwards, M. Roytman, and I. Adjerid,
 ``Exploit prediction scoring system (EPSS),'' \emph{Digital Threats: Research and Practice},
 vol. 2, no. 3, 2021.
-% TODO: bo sung tieu de day du cua bai bao
-\bibitem{shimizu2026} Shimizu and Hashimoto, ``Cây quyết định VMC kết hợp KEV, EPSS và CVSS
-để ưu tiên vá lỗ hổng,'' \emph{IEEE Access}, 2026.
+\bibitem{shimizu2026} N. Shimizu and M. Hashimoto, ``Vulnerability management chaining: An
+integrated framework for efficient cybersecurity risk prioritization,'' \emph{IEEE Access},
+vol. 14, pp. 31407--31424, 2026, doi: 10.1109/ACCESS.2026.3665768.
 \bibitem{ssvc} J. Spring, E. Hatleback, A. Householder, A. Manion, and D. Shick,
 ``Prioritizing vulnerability response: A stakeholder-specific vulnerability categorization,''
 Carnegie Mellon Univ., Softw. Eng. Inst., 2019.
 \bibitem{cvss31} FIRST, ``Common vulnerability scoring system v3.1: Specification document.''
-[Online]. Available: https://www.first.org/cvss/v3.1/specification-document
+[Online]. Available: \url{https://www.first.org/cvss/v3.1/specification-document}
 \bibitem{epss} FIRST, ``Exploit prediction scoring system (EPSS).'' [Online]. Available:
-https://www.first.org/epss
-\bibitem{nvd} NIST, ``National vulnerability database.'' [Online]. Available: https://nvd.nist.gov
+\url{https://www.first.org/epss}
+\bibitem{nvd} NIST, ``National vulnerability database.'' [Online]. Available:
+\url{https://nvd.nist.gov}
 \bibitem{kev} CISA, ``Known exploited vulnerabilities catalog.'' [Online]. Available:
-https://www.cisa.gov/known-exploited-vulnerabilities-catalog
+\url{https://www.cisa.gov/known-exploited-vulnerabilities-catalog}
 \bibitem{bod2201} CISA, ``Binding operational directive 22-01: Reducing the significant risk of
 known exploited vulnerabilities,'' 2021. [Online]. Available:
-https://www.cisa.gov/binding-operational-directive-22-01
+\url{https://www.cisa.gov/binding-operational-directive-22-01}
+\bibitem{exploitdb} OffSec, ``Exploit database.'' [Online]. Available:
+\url{https://www.exploit-db.com}
 \end{thebibliography}
 
 \end{document}

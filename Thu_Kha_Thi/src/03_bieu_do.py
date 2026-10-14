@@ -19,7 +19,9 @@ for col, lab, st in [("cvss3", "CVSS", "-"), ("epss", "EPSS tại thời điểm
                      ("epss_hien_tai", "EPSS hiện tại (nhìn trước đáp án)", ":")]:
     s = d.sort_values([col, "tie"], ascending=False)
     ax.plot(np.arange(1, len(s) + 1), 100 * s["y"].cumsum() / P, st, lw=1.8, label=lab)
-ax.plot([1, len(d)], [0, 100], color="gray", lw=0.8, label="Chọn ngẫu nhiên")
+# Chon ngau nhien: va k lo hong bat duoc k/N. Truc hoanh la logarit nen phai ve nhieu diem, khong noi thang hai dau
+xs = np.unique(np.logspace(0, np.log10(len(d)), 200).astype(int))
+ax.plot(xs, 100 * xs / len(d), color="gray", lw=0.8, label="Chọn ngẫu nhiên")
 ax.axvline(W, color="black", lw=0.8, ls="-.")
 ax.text(W * 1.08, 6, f"Quy tắc CSA\n({W:,} lỗ hổng)", fontsize=8.5)
 ax.set_xscale("log"); ax.grid(alpha=0.25)

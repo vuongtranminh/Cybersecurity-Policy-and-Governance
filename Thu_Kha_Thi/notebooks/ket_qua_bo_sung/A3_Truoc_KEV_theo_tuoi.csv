@@ -1,0 +1,6 @@
+﻿Nhóm lỗ hổng KEV,Số lượng,Trung vị EPSS 1 ngày trước khi vào KEV,S 1 ngày trước từ 70,S 1 ngày trước từ 50
+Chưa có điểm EPSS 1 ngày trước khi vào KEV,227,,,
+Công bố tối đa 30 ngày trước khi vào KEV,224,"0,0009","10 / 224 = 4,46%","16 / 224 = 7,14%"
+Công bố 31 đến 365 ngày trước khi vào KEV,196,"0,0039","30 / 196 = 15,31%","45 / 196 = 22,96%"
+Công bố hơn 1 năm trước khi vào KEV,189,"0,0709","68 / 189 = 35,98%","86 / 189 = 45,50%"
+Tất cả lỗ hổng có điểm EPSS,609,"0,0038","108 / 609 = 17,73%","147 / 609 = 24,14%"

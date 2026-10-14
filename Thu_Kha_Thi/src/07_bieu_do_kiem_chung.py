@@ -23,7 +23,9 @@ for lab, fn, st in [("CVSS", lambda c, e: c, "-"), ("EPSS", lambda c, e: e, "--"
             c, e, t = yearset(y); h += exp_hits(fn(c, e), t, f * len(c)); P += t.sum()
         ys.append(100 * h / P)
     ax.plot(100 * fr, ys, st, lw=2.2 if "Công" in lab else 1.6, label=lab)
-ax.plot([0.1, 100], [0.1, 100], color="gray", lw=0.8, label="Chọn ngẫu nhiên")
+# Chon ngau nhien: va x% bat duoc x%. Truc hoanh la logarit nen phai ve nhieu diem, khong noi thang hai dau
+xs = np.logspace(-1, 2, 200)
+ax.plot(xs, xs, color="gray", lw=0.8, label="Chọn ngẫu nhiên")
 ax.set_xscale("log"); ax.grid(alpha=0.25)
 ax.set_xlabel("Tỷ lệ lỗ hổng được vá (%), thang logarit")
 ax.set_ylabel("Tỷ lệ lỗ hổng bị khai thác về sau được vá (%)")
