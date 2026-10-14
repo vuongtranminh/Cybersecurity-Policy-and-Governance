@@ -16,3 +16,12 @@ W5_Implementation/output/
 *.pdf
 *.docx
 Thu_Kha_Thi/hinh/
+
+# Tep trung gian khi bien dich LaTeX
+*.aux
+*.log
+*.fls
+*.fdb_latexmk
+*.xdv
+*.out
+*.synctex.gz

@@ -4,7 +4,7 @@ Nhóm 14, học phần Chính sách và Quản trị an ninh mạng.
 
 ## 1. Xuất phát điểm
 
-Bài báo "Automated Exploit Generation: LLMs Cross the Threshold" của CSA (02/04/2026) khuyến nghị vá trong 48 giờ mọi lỗ hổng có điểm CVSS từ 8,0 trở lên. Nhóm đặt câu hỏi: nếu chỉ dựa vào điểm CVSS thì việc ưu tiên vá có đúng không?
+Bài báo "Automated Exploit Generation: LLMs Cross the Threshold" của CSA (02/04/2026) khuyến nghị vá trong 48 giờ các lỗ hổng có điểm CVSS từ 8,0 trở lên ảnh hưởng tới hệ thống phơi ra Internet. Dữ liệu công khai không cho biết lỗ hổng nằm trên hệ thống nào, nên phần kiểm chứng áp ngưỡng 8,0 cho mọi lỗ hổng. Nhóm đặt câu hỏi: nếu chỉ dựa vào điểm CVSS thì việc ưu tiên vá có đúng không?
 
 ## 2. Vấn đề khi chỉ dùng một nguồn thông tin
 

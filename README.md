@@ -1,6 +1,6 @@
 # Chính sách và Quản trị an ninh mạng - Nhóm 14
 
-Đề tài: kiểm chứng khuyến nghị "vá trong 48 giờ mọi lỗ hổng CVSS từ 8,0" trong bài báo *Automated Exploit Generation: LLMs Cross the Threshold* của CSA (02/04/2026), và đề xuất công thức ưu tiên vá lỗ hổng kết hợp CVSS, EPSS, KEV và mức quan trọng của tài sản.
+Đề tài: kiểm chứng khuyến nghị "vá trong 48 giờ các lỗ hổng CVSS từ 8,0 trên hệ thống phơi ra Internet" trong bài báo *Automated Exploit Generation: LLMs Cross the Threshold* của CSA (02/04/2026), và đề xuất công thức ưu tiên vá lỗ hổng kết hợp CVSS, EPSS, KEV và mức quan trọng của tài sản.
 
 Ý tưởng chi tiết: [Thu_Kha_Thi/Y_TUONG.md](Thu_Kha_Thi/Y_TUONG.md)
 
@@ -28,6 +28,11 @@ S = AC × CVSS × [KEV + (1 - KEV) × EPSS^0,3] × 10
 | `Thu_Kha_Thi/src/` | Bộ script kiểm chứng CVSS và EPSS (chạy bằng `run_all.sh`) |
 | `Thu_Kha_Thi/output/` | Kết quả của bộ script trong `src/` |
 | `Thu_Kha_Thi/cong_thuc_risk_score.tex` | Công thức viết bằng LaTeX |
+| `ReportLatexType1/bao_cao.tex` | Báo cáo theo mẫu Springer LNCS (một cột, 15 trang), tiếng Việt |
+| `ReportLatexType2/IEEE-conference-template-062824/bao_cao_ieee.tex` | Báo cáo theo mẫu IEEE conference (hai cột, 6 trang), tiếng Việt |
+| `ReportLatexType1/`, `ReportLatexType2/` (các tệp còn lại) | Mẫu gốc của Springer và IEEE |
+| `tools/latex/Dockerfile` | Môi trường biên dịch LaTeX cho hai bản báo cáo |
+| `SrcPaper/` | Bài báo gốc của CSA (PDF, không đưa lên git) |
 | `W5_Implementation/src/` | Mã của hướng tiếp cận ban đầu (đã thay bằng hướng hiện tại) |
 | `tools/latex_live_preview.py` | Công cụ tự biên dịch và xem trước tệp LaTeX |
 
@@ -43,6 +48,23 @@ jupyter notebook Thu_Kha_Thi/notebooks
 ```
 
 Lần đầu chạy cần tải khoảng 300 MB dữ liệu NVD. Notebook so sánh trước khi vào KEV gọi API EPSS cho khoảng 400 ngày, mất khoảng 25 phút.
+
+## Biên dịch báo cáo
+
+Cần Docker. Lần đầu build môi trường (image khoảng 3,3 GB):
+
+```bash
+docker build -t nhom14-latex tools/latex
+```
+
+Sau đó biên dịch từng bản (chạy tại thư mục gốc của repo):
+
+```bash
+docker run --rm -v "$PWD:/work" -w /work/ReportLatexType1 nhom14-latex latexmk -xelatex bao_cao.tex
+docker run --rm -v "$PWD:/work" -w /work/ReportLatexType2/IEEE-conference-template-062824 nhom14-latex latexmk -xelatex bao_cao_ieee.tex
+```
+
+Trên Git Bash của Windows, thêm `MSYS_NO_PATHCONV=1` vào đầu lệnh `docker run`.
 
 ## Nguồn dữ liệu
 
