@@ -1,0 +1,25 @@
+﻿Mã CVE,Sản phẩm,CVSS,Ngày công bố,Ngày vào KEV,EPSS 30 ngày trước,S 30 ngày trước,S khi vào KEV,Mã độc tống tiền
+CVE-2016-6415,"Cisco IOS, IOS XR, and IOS XE","7,5",19/09/2016,19/05/2023,"0,9727","74,4","75,0",Chưa rõ
+CVE-2016-9079,"Mozilla Firefox, Firefox ESR, and Thunderbird","7,5",11/06/2018,22/06/2023,"0,9719","74,4","75,0",Chưa rõ
+CVE-2020-17519,Apache Flink,"7,5",05/01/2021,23/05/2024,"0,9708","74,3","75,0",Chưa rõ
+CVE-2021-41277,Metabase Metabase,"7,5",17/11/2021,12/11/2024,"0,9515","73,9","75,0",Chưa rõ
+CVE-2021-43798,Grafana Labs Grafana,"7,5",07/12/2021,09/10/2025,"0,9434","73,7","75,0",Chưa rõ
+CVE-2019-5418,Rails Ruby on Rails,"7,5",27/03/2019,07/07/2025,"0,9423","73,7","75,0",Chưa rõ
+CVE-2020-25078,D-Link DCS-2530L and DCS-2670L Devices,"7,5",02/09/2020,05/08/2025,"0,9403","73,6","75,0",Chưa rõ
+CVE-2021-22555,Linux Kernel,"7,8",07/07/2021,06/10/2025,"0,8242","73,6","78,0",Chưa rõ
+CVE-2017-3506,Oracle WebLogic Server,"7,4",24/04/2017,03/06/2024,"0,9688","73,3","74,0",Chưa rõ
+CVE-2019-9621,Synacor Zimbra Collaboration Suite (ZCS),"7,5",30/04/2019,07/07/2025,"0,9181","73,1","75,0",Chưa rõ
+CVE-2015-5477,ISC BIND,"7,5",29/07/2015,08/10/2026,"0,9128","73,0","75,0",Chưa rõ
+CVE-2021-22054,Omnissa Workspace One UEM,"7,5",17/12/2021,09/03/2026,"0,8893","72,4","75,0",Chưa rõ
+CVE-2024-21182,Oracle WebLogic Server,"7,5",16/07/2024,01/06/2026,"0,8767","72,1","75,0",Chưa rõ
+CVE-2024-27199,JetBrains TeamCity,"7,3",04/03/2024,20/04/2026,"0,9449","71,8","73,0",Có
+CVE-2021-21311,Adminer Adminer,"7,2",11/02/2021,29/09/2025,"0,8753","69,2","72,0",Chưa rõ
+CVE-2020-9715,Adobe Acrobat,"7,8",19/08/2020,13/04/2026,"0,5621","65,6","78,0",Chưa rõ
+CVE-2023-32315,Ignite Realtime Openfire,"7,5",26/05/2023,24/08/2023,"0,5255","61,8","75,0",Chưa rõ
+CVE-2018-9276,Paessler PRTG Network Monitor,"7,2",02/07/2018,04/02/2025,"0,5241","59,3","72,0",Chưa rõ
+CVE-2023-27351,PaperCut NG/MF,"7,5",20/04/2023,20/04/2026,"0,4475","58,9","75,0",Có
+CVE-2022-43769,Hitachi Vantara Pentaho Business Analytics (BA) Server,"7,2",03/04/2023,03/03/2025,"0,3560","52,8","72,0",Chưa rõ
+CVE-2023-24955,Microsoft SharePoint Server,"7,2",09/05/2023,26/03/2024,"0,3361","51,9","72,0",Có
+CVE-2021-39935,GitLab Community and Enterprise Editions,"7,5",13/12/2021,03/02/2026,"0,2825","51,3","75,0",Chưa rõ
+CVE-2021-26086,Atlassian Jira Server and Data Center,"5,3",16/08/2021,12/11/2024,"0,8549","50,6","53,0",Chưa rõ
+CVE-2023-0386,Linux Kernel,"7,8",22/03/2023,17/06/2025,"0,2318","50,3","78,0",Chưa rõ

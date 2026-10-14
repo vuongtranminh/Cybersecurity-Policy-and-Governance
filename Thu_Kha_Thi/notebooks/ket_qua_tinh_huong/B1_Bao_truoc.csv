@@ -1,0 +1,25 @@
+﻿Mã CVE,Sản phẩm,CVSS,Tháng đầu tiên S từ 50,Ngày vào KEV,Báo trước (tháng)
+CVE-2015-5477,ISC BIND,"7,5",02/2022,08/10/2026,55
+CVE-2020-9715,Adobe Acrobat,"7,8",01/2022,13/04/2026,50
+CVE-2019-5418,Rails Ruby on Rails,"7,5",05/2021,07/07/2025,49
+CVE-2019-9621,Synacor Zimbra Collaboration Suite (ZCS),"7,5",05/2021,07/07/2025,49
+CVE-2021-22555,Linux Kernel,"7,8",10/2021,06/10/2025,47
+CVE-2021-43798,Grafana Labs Grafana,"7,5",12/2021,09/10/2025,45
+CVE-2020-17519,Apache Flink,"7,5",05/2021,23/05/2024,36
+CVE-2021-22054,Omnissa Workspace One UEM,"7,5",03/2023,09/03/2026,35
+CVE-2018-9276,Paessler PRTG Network Monitor,"7,2",02/2022,04/02/2025,35
+CVE-2020-25078,D-Link DCS-2530L and DCS-2670L Devices,"7,5",03/2023,05/08/2025,28
+CVE-2017-3506,Oracle WebLogic Server,"7,4",02/2022,03/06/2024,27
+CVE-2021-26086,Atlassian Jira Server and Data Center,"5,3",03/2023,12/11/2024,19
+CVE-2021-41277,Metabase Metabase,"7,5",03/2023,12/11/2024,19
+CVE-2022-43769,Hitachi Vantara Pentaho Business Analytics (BA) Server,"7,2",08/2023,03/03/2025,18
+CVE-2016-9079,"Mozilla Firefox, Firefox ESR, and Thunderbird","7,5",02/2022,22/06/2023,16
+CVE-2016-6415,"Cisco IOS, IOS XR, and IOS XE","7,5",02/2022,19/05/2023,15
+CVE-2024-21182,Oracle WebLogic Server,"7,5",03/2025,01/06/2026,14
+CVE-2024-27199,JetBrains TeamCity,"7,3",03/2025,20/04/2026,13
+CVE-2021-39935,GitLab Community and Enterprise Editions,"7,5",04/2025,03/02/2026,9
+CVE-2021-21311,Adminer Adminer,"7,2",03/2025,29/09/2025,6
+CVE-2023-24955,Microsoft SharePoint Server,"7,2",09/2023,26/03/2024,6
+CVE-2023-27351,PaperCut NG/MF,"7,5",12/2025,20/04/2026,4
+CVE-2023-32315,Ignite Realtime Openfire,"7,5",07/2023,24/08/2023,1
+CVE-2023-0386,Linux Kernel,"7,8",05/2025,17/06/2025,1

@@ -1,0 +1,6 @@
+﻿Hạng mục,Số lượng,Ghi chú
+"Lỗ hổng KEV có CVSS dưới 8,0 (quy tắc CSA không ưu tiên lỗ hổng nào)",328,
+Có điểm EPSS 30 ngày trước khi vào KEV,"156 / 328 = 47,56%",
+S từ 50 trở lên 30 ngày trước khi vào KEV,"24 / 156 = 15,38%",Công thức bắt trước
+S từ 70 trở lên 30 ngày trước khi vào KEV,"14 / 156 = 8,97%",Công thức bắt trước
+"S dưới 30, 30 ngày trước khi vào KEV","119 / 156 = 76,28%",Công thức không bắt trước
