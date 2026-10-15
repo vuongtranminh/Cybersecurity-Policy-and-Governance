@@ -7,14 +7,18 @@
 ## Công thức đề xuất
 
 ```
-S = AC × CVSS × [KEV + (1 - KEV) × EPSS^0,3] × 10
+S = AC × CVSS × [ KEV × PE + (1 - KEV) × ( EA × PE + (1 - EA) × EPSS^0,3 ) ] × 10
 ```
 
 - AC: mức quan trọng của tài sản (0 đến 1)
 - CVSS: mức nghiêm trọng (0 đến 10)
 - KEV: 1 nếu lỗ hổng đã có trong danh mục KEV của CISA, ngược lại 0
+- EA: 1 nếu CISA đánh giá việc khai thác tự động hóa được (Automatable, Chỉ thị BOD 26-04), ngược lại 0
+- PE: 1 nếu tài sản phơi ra Internet (Publicly Exposed, Chỉ thị BOD 26-04), ngược lại 0
 - EPSS: xác suất bị khai thác trong 30 ngày tới (0 đến 1)
 - S: điểm ưu tiên (0 đến 100)
+
+Với tài sản phơi ra Internet (PE = 1) và khi chưa dùng thông tin tự động hóa (EA = 0), công thức rút gọn thành `S = AC × CVSS × [KEV + (1 - KEV) × EPSS^0,3] × 10`. Các notebook kiểm chứng dạng rút gọn này với AC = 1.
 
 ## Cấu trúc
 

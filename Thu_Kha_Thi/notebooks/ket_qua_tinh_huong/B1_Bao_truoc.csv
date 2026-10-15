@@ -1,8 +1,8 @@
 ﻿Mã CVE,Sản phẩm,CVSS,Tháng đầu tiên S từ 50,Ngày vào KEV,Báo trước (tháng),Ngày gần nhất trở lại S từ 50,Báo trước liên tục (tháng),Số tháng rơi dưới 50 sau lần đầu,Lần đầu đạt 50
 CVE-2015-5477,ISC BIND,"7,5",02/2022,08/10/2026,55,28/02/2022,55,0,Trùng tháng EPSS đổi mô hình
 CVE-2020-9715,Adobe Acrobat,"7,8",01/2022,13/04/2026,50,31/05/2023,34,15,Tăng theo EPSS
-CVE-2019-9621,Synacor Zimbra Collaboration Suite (ZCS),"7,5",05/2021,07/07/2025,49,31/05/2021,49,0,Tháng đầu có điểm
 CVE-2019-5418,Rails Ruby on Rails,"7,5",05/2021,07/07/2025,49,31/05/2021,49,0,Tháng đầu có điểm
+CVE-2019-9621,Synacor Zimbra Collaboration Suite (ZCS),"7,5",05/2021,07/07/2025,49,31/05/2021,49,0,Tháng đầu có điểm
 CVE-2021-22555,Linux Kernel,"7,8",10/2021,06/10/2025,47,31/03/2025,6,37,Tăng theo EPSS
 CVE-2021-43798,Grafana Labs Grafana,"7,5",12/2021,09/10/2025,45,31/12/2021,45,0,Tháng đầu có điểm
 CVE-2020-17519,Apache Flink,"7,5",05/2021,23/05/2024,36,31/05/2021,36,0,Tháng đầu có điểm
@@ -10,8 +10,8 @@ CVE-2021-22054,Omnissa Workspace One UEM,"7,5",03/2023,09/03/2026,35,31/03/2023,
 CVE-2018-9276,Paessler PRTG Network Monitor,"7,2",02/2022,04/02/2025,35,28/02/2022,35,0,Trùng tháng EPSS đổi mô hình
 CVE-2020-25078,D-Link DCS-2530L and DCS-2670L Devices,"7,5",03/2023,05/08/2025,28,31/03/2023,28,0,Trùng tháng EPSS đổi mô hình
 CVE-2017-3506,Oracle WebLogic Server,"7,4",02/2022,03/06/2024,27,28/02/2022,27,0,Trùng tháng EPSS đổi mô hình
-CVE-2021-41277,Metabase Metabase,"7,5",03/2023,12/11/2024,19,29/02/2024,8,5,Trùng tháng EPSS đổi mô hình
 CVE-2021-26086,Atlassian Jira Server and Data Center,"5,3",03/2023,12/11/2024,19,29/02/2024,8,5,Trùng tháng EPSS đổi mô hình
+CVE-2021-41277,Metabase Metabase,"7,5",03/2023,12/11/2024,19,29/02/2024,8,5,Trùng tháng EPSS đổi mô hình
 CVE-2022-43769,Hitachi Vantara Pentaho Business Analytics (BA) Server,"7,2",08/2023,03/03/2025,18,31/12/2023,14,3,Tăng theo EPSS
 CVE-2016-9079,"Mozilla Firefox, Firefox ESR, and Thunderbird","7,5",02/2022,22/06/2023,16,28/02/2022,16,0,Trùng tháng EPSS đổi mô hình
 CVE-2016-6415,"Cisco IOS, IOS XR, and IOS XE","7,5",02/2022,19/05/2023,15,28/02/2022,15,0,Trùng tháng EPSS đổi mô hình

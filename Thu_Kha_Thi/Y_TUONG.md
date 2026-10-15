@@ -135,8 +135,8 @@ Hai cách tính thời gian báo trước khác nhau ở 5 lỗ hổng mà đi�
 Cột "Ngày gần nhất trở lại S từ 50" là ngày cuối tháng bắt đầu chuỗi tháng liên tục có S từ 50 kéo dài tới khi vào KEV; cột "Báo trước liên tục" tính từ ngày này:
 
 ```
-Báo trước          = (Ngày vào KEV − ngày cuối tháng đầu tiên S từ 50) / 30,44
-Báo trước liên tục = (Ngày vào KEV − ngày gần nhất trở lại S từ 50) / 30,44
+Báo trước          = (Ngày vào KEV - ngày cuối tháng đầu tiên S từ 50) / 30,44
+Báo trước liên tục = (Ngày vào KEV - ngày gần nhất trở lại S từ 50) / 30,44
 ```
 
 Với 19 lỗ hổng điểm không rơi dưới 50 sau lần đầu, ngày này trùng với tháng đầu tiên S từ 50. Ví dụ CVE-2021-41277: S đạt 50 lần đầu ngày 31/03/2023, rơi xuống 31,9 đến 39,3 từ 09/2023 đến 01/2024, trở lại 74,0 ngày 29/02/2024 và giữ tới khi vào KEV ngày 12/11/2024, nên báo trước liên tục là 257 / 30,44 = 8 tháng thay vì 592 / 30,44 = 19 tháng.
@@ -350,7 +350,52 @@ def calculate_integrated_risk_v2(cvss, epss, kev, ea, pe, ac):
     return round(ac * cvss * threat_filter * 10, 2)
 ```
 
-## 9. Tài liệu và mã nguồn
+## 9. Thang điểm S và khuyến nghị xử lý
+
+Thang điểm dựa trên kết quả kiểm chứng ngày 30/06/2025: 209.623 lỗ hổng chưa có trong KEV, theo dõi 12 tháng sau có 91 lỗ hổng vào KEV, tỷ lệ trung bình 0,043%. Hạn vá bám theo các bậc 3, 14, 60 ngày của BOD 26-04.
+
+### 9.1. Thang điểm S và ý nghĩa
+
+| Mức điểm S | Phân loại | Ý nghĩa | Hạn vá khuyến nghị |
+|---|---|---|---|
+| Không xét điểm: KEV = 1 và PE = 1 | **Khẩn cấp, đã bị khai thác** | Lỗ hổng đã bị khai thác thực tế và tài sản tiếp cận được từ Internet. | **3 ngày**, kèm kiểm tra dấu hiệu xâm nhập |
+| Không xét điểm: KEV = 0, EA = 1, PE = 1 | **Khẩn cấp, tự động hóa được** | Chưa có bằng chứng khai thác, nhưng có thể bị quét và tấn công tự động trên diện rộng, và tài sản phơi ra Internet. | **3 ngày** |
+| 70 đến 100 | **Nghiêm trọng** | Khả năng bị khai thác rất cao so với mặt bằng. Cần CVSS 9,8 với EPSS từ khoảng 0,33, hoặc CVSS 7,5 với EPSS từ khoảng 0,79. Lỗ hổng CVSS dưới 7,0 không thể vào mức này. | **7 ngày** |
+| 50 đến 69 | **Cao** | Khả năng bị khai thác cao. Cần CVSS 9,8 với EPSS từ khoảng 0,11, hoặc CVSS 7,5 với EPSS từ khoảng 0,26. | **14 ngày** |
+| 30 đến 49 | **Trung bình** | Đáng chú ý, cao hơn mặt bằng khoảng 2 lần. Cần CVSS 9,8 với EPSS từ khoảng 0,019, hoặc CVSS 7,5 với EPSS từ khoảng 0,047. | **30 ngày** |
+| 10 đến 29 | **Thấp** | Khả năng bị khai thác thấp hơn trung bình. Phần lớn lỗ hổng CVSS cao nhưng EPSS nhỏ nằm ở đây. | **60 ngày** |
+| 0 đến 9 | **Rất thấp** | Gần như chưa có tín hiệu khai thác. Với CVSS 9,8, tương ứng EPSS dưới khoảng 0,0005. | Vá ở lần nâng cấp hệ thống kế tiếp |
+
+### 9.2. Trường hợp công thức cho S = 0 nhưng vẫn phải xử lý
+
+Hai trường hợp dưới đây công thức cho S = 0 vì tài sản nằm trong mạng nội bộ (PE = 0), nhưng theo Bảng 1 của BOD 26-04 vẫn phải có hạn vá:
+
+| Điều kiện | Phân loại | Hạn vá khuyến nghị (theo BOD 26-04) |
+|---|---|---|
+| KEV = 1, PE = 0 | Đã bị khai thác, trên tài sản nội bộ | **14 ngày**; **3 ngày kèm kiểm tra xâm nhập** nếu tự động hóa được và chiếm toàn quyền |
+| KEV = 0, EA = 1, PE = 0 | Tự động hóa được, trên tài sản nội bộ | **60 ngày** |
+
+### 9.3. Căn cứ số liệu của từng mức (ngày 30/06/2025, AC = 1)
+
+| Mức S | Số lỗ hổng trong mức | Vào KEV trong 12 tháng | So với trung bình | Cộng dồn từ mức này trở lên: khối lượng vá | Cộng dồn: lỗ hổng sắp bị khai thác bắt được |
+|---|---|---|---|---|---|
+| 70 đến 100 | 2.803 / 209.623 = 1,34% | 34 / 2.803 = 1,21% | gấp 28 lần | 2.803 / 209.623 = 1,34% | 34 / 91 = 37,36% |
+| 50 đến 69 | 4.065 / 209.623 = 1,94% | 12 / 4.065 = 0,30% | gấp 7 lần | 6.868 / 209.623 = 3,28% | 46 / 91 = 50,55% |
+| 30 đến 49 | 11.310 / 209.623 = 5,40% | 11 / 11.310 = 0,097% | gấp 2,2 lần | 18.178 / 209.623 = 8,67% | 57 / 91 = 62,64% |
+| 10 đến 29 | 90.626 / 209.623 = 43,23% | 23 / 90.626 = 0,025% | 0,6 lần | 108.804 / 209.623 = 51,90% | 80 / 91 = 87,91% |
+| 0 đến 9 | 100.819 / 209.623 = 48,10% | 11 / 100.819 = 0,011% | 0,3 lần | 209.623 / 209.623 = 100% | 91 / 91 = 100% |
+
+Ngưỡng 70 được chọn vì ba mức 70 đến 79, 80 đến 89 và 90 đến 100 có tỷ lệ vào KEV gần như nhau (1,16%, 1,29% và 1,22%), nên được gộp thành một mức thay vì chia nhỏ. Qua 11 ngày đánh giá, mức từ 70 chỉ chiếm 0,78% đến 1,40% số lỗ hổng nhưng hiệu quả gấp 15,9 đến 34,2 lần chọn ngẫu nhiên.
+
+### 9.4. Cách đọc và lưu ý
+
+1. **Xét điều kiện trước, xét điểm sau.** Trước hết xem lỗ hổng có thuộc hai dòng "Khẩn cấp" ở mục 9.1 hoặc một trong hai dòng ở mục 9.2 không, sau đó mới tra mức điểm. Lý do: một lỗ hổng KEV có CVSS 6,5 trên máy phơi ra Internet chỉ được 65 điểm nhưng vẫn phải vá trong 3 ngày.
+2. **Hệ số AC làm lỗ hổng tụt bậc trên tài sản ít quan trọng.** Điểm ở mục 9.1 đã nhân với AC. Ví dụ một lỗ hổng 72,7 điểm trên máy chủ thanh toán (AC = 1), nếu nằm trên máy trạm (AC = 0,5) chỉ còn 36,3 điểm, tức thuộc mức Trung bình.
+3. **Các mức hạn vá 7, 14, 30, 60 ngày là đề xuất của nhóm, chưa được kiểm chứng bằng dữ liệu.** Phần đã kiểm chứng là thứ tự ưu tiên và tỷ lệ bị khai thác theo từng mức. Các hạn 3, 14, 60 ngày lấy theo Bảng 1 của BOD 26-04.
+4. **Cần hiệu chỉnh ngưỡng khi EPSS đổi mô hình.** Ví dụ khối lượng mức từ 70 tăng từ 0,78% lên 1,40% khi EPSS chuyển sang mô hình v2025.03.14.
+5. **So với các thang điểm thương mại** (ví dụ thang QDS của Qualys, mô tả mỗi mức bằng tình trạng mã khai thác như đã có vũ khí hay có PoC): công thức S không dùng trực tiếp thông tin này, nên cột "Ý nghĩa" ở đây mô tả bằng tổ hợp CVSS và EPSS cùng tỷ lệ bị khai thác đo được.
+
+## 10. Tài liệu và mã nguồn
 
 | Tệp | Nội dung |
 |---|---|

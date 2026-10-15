@@ -41,7 +41,7 @@ VIEC 3. SO SANH CVSS VA EPSS
                       phuong_phap  can_va_de_bat_50pct  can_va_de_bat_80pct  can_va_de_bang_CSA  bat_khi_va_bang_CSA
                              CVSS                 9055                17643               11194                   39
               EPSS luc quyet dinh                 3954                20368                6576                   42
-EPSS hien tai (nhin truoc dap an)                   74                  976                 130                   64
+EPSS hien tai (nhin truoc dap an)                   74                  975                 130                   64
 
 Cung va 11,252 lo hong: EPSS bat nhieu hon CVSS +3 ca (khoang tin cay 95% bootstrap: -6 den +12)
   Ket luan: khong co khac biet co y nghia thong ke
