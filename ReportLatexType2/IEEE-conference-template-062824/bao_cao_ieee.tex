@@ -373,6 +373,22 @@ khối lượng vá.
 30/09/2025, xét riêng ba ngày có cửa sổ 365 ngày không chồng nhau (31/03 các năm 2023, 2024,
 2025), và thử các số mũ 0,1; 0,2; 0,3; 0,5; 0,7 và 1,0.
 
+\textbf{TN7 -- tình huống điển hình.} Chọn tình huống theo tiêu chí đặt trước và báo cáo cả số
+trường hợp không đạt. Phần A lấy lỗ hổng vào KEV từ 01/04/2023 có CVSS dưới 8,0 và $S \ge 50$ 30
+ngày trước khi vào KEV (dữ liệu của TN3), tính lại $S$ vào cuối mỗi tháng $t_1 < \dots < t_n$ từ
+tháng công bố (sớm nhất 05/2021) tới tháng cuối trước khi vào KEV, và đo thời gian báo trước theo
+hai cách:
+\begin{equation}
+B = \frac{d_{\mathrm{KEV}} - t_{\text{đầu}}}{30{,}44}, \qquad
+B_{\text{lt}} = \frac{d_{\mathrm{KEV}} - t_{j^*}}{30{,}44},
+\end{equation}
+với $t_{\text{đầu}} = \min \lbrace t_i : S_i \ge 50 \rbrace$ và $t_{j^*}$ là ngày gần nhất trở
+lại $S \ge 50$, tức đầu chuỗi tháng liên tục có $S \ge 50$ kéo dài tới $t_n$. $B_{\text{lt}}$ đo
+thời gian tổ chức thực sự giữ lỗ hổng trong nhóm ưu tiên. Tháng đầu đạt 50 được phân loại: trùng
+tháng EPSS đổi mô hình (02/2022, 03/2023, 03/2025), tháng đầu có điểm, hoặc tăng dần. Phần C xét
+lỗ hổng CVSS $\ge 9{,}0$ chưa có trong KEV ngày 30/06/2025, theo dõi 12 tháng; phần D nêu trường
+hợp công thức không bắt được.
+
 % =====================================================================
 \section{Kết quả thực nghiệm}\label{sec:ketqua}
 % =====================================================================
@@ -716,6 +732,111 @@ $S \ge 70$ & 17,73\% & 1,34\% & 13,2 \\
 \end{tabular}
 \end{table}
 
+\subsection{Tình huống điển hình}\label{sec:tinhhuong}
+\emph{Công thức bắt trước, quy tắc CSA bỏ qua.} Trong 836 lỗ hổng vào KEV từ 01/04/2023, 328 có CVSS
+dưới 8,0 nên quy tắc CSA không bao giờ ưu tiên; 156 trong số đó có EPSS 30 ngày trước khi vào KEV.
+Có 24 lỗ hổng đạt $S \ge 50$ (15,38\% của 156; 7,32\% của 328) và 14 đạt ngưỡng vá khẩn cấp
+$S \ge 70$ (8,97\%; 4,27\%); 119 (76,28\%) vẫn có $S < 30$. Bảng~\ref{tab:baotruoc} liệt kê đủ 24
+lỗ hổng.
+
+\begin{table*}[t]
+\caption{24 lỗ hổng CVSS dưới 8,0 có $S \ge 50$ 30 ngày trước khi vào KEV; $B$ và $B_{\text{lt}}$
+tính bằng tháng}\label{tab:baotruoc}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{2pt}
+\begin{tabular}{lccccccl@{\hspace{1em}}lccccccl}
+\toprule
+Mã CVE & CVSS & Lần đầu & Trở lại & Vào KEV & $B$ & $B_{\text{lt}}$ & Lần đầu đạt &
+Mã CVE & CVSS & Lần đầu & Trở lại & Vào KEV & $B$ & $B_{\text{lt}}$ & Lần đầu đạt \\
+\midrule
+CVE-2015-5477 & 7,5 & 02/2022 & 02/2022 & 10/2026 & 55 & 55 & Đổi MH &
+CVE-2016-6415 & 7,5 & 02/2022 & 02/2022 & 05/2023 & 15 & 15 & Đổi MH \\
+CVE-2019-9621 & 7,5 & 05/2021 & 05/2021 & 07/2025 & 49 & 49 & Tháng đầu &
+CVE-2022-43769 & 7,2 & 08/2023 & 12/2023 & 03/2025 & 18 & 14 & Tăng dần \\
+CVE-2019-5418 & 7,5 & 05/2021 & 05/2021 & 07/2025 & 49 & 49 & Tháng đầu &
+CVE-2024-21182 & 7,5 & 03/2025 & 03/2025 & 06/2026 & 14 & 14 & Đổi MH \\
+CVE-2021-43798 & 7,5 & 12/2021 & 12/2021 & 10/2025 & 45 & 45 & Tháng đầu &
+CVE-2024-27199 & 7,3 & 03/2025 & 03/2025 & 04/2026 & 13 & 13 & Đổi MH \\
+CVE-2020-17519 & 7,5 & 05/2021 & 05/2021 & 05/2024 & 36 & 36 & Tháng đầu &
+CVE-2021-39935 & 7,5 & 04/2025 & 04/2025 & 02/2026 & 9 & 9 & Tăng dần \\
+CVE-2021-22054 & 7,5 & 03/2023 & 03/2023 & 03/2026 & 35 & 35 & Đổi MH &
+CVE-2021-41277 & 7,5 & 03/2023 & 02/2024 & 11/2024 & 19 & 8 & Đổi MH \\
+CVE-2018-9276 & 7,2 & 02/2022 & 02/2022 & 02/2025 & 35 & 35 & Đổi MH &
+CVE-2021-26086 & 5,3 & 03/2023 & 02/2024 & 11/2024 & 19 & 8 & Đổi MH \\
+CVE-2020-9715 & 7,8 & 01/2022 & 05/2023 & 04/2026 & 50 & 34 & Tăng dần &
+CVE-2021-22555 & 7,8 & 10/2021 & 03/2025 & 10/2025 & 47 & 6 & Tăng dần \\
+CVE-2020-25078 & 7,5 & 03/2023 & 03/2023 & 08/2025 & 28 & 28 & Đổi MH &
+CVE-2021-21311 & 7,2 & 03/2025 & 03/2025 & 09/2025 & 6 & 6 & Đổi MH \\
+CVE-2017-3506 & 7,4 & 02/2022 & 02/2022 & 06/2024 & 27 & 27 & Đổi MH &
+CVE-2023-24955 & 7,2 & 09/2023 & 09/2023 & 03/2024 & 6 & 6 & Tăng dần \\
+CVE-2016-9079 & 7,5 & 02/2022 & 02/2022 & 06/2023 & 16 & 16 & Đổi MH &
+CVE-2023-27351 & 7,5 & 12/2025 & 12/2025 & 04/2026 & 4 & 4 & Tăng dần \\
+ & & & & & & & &
+CVE-2023-32315 & 7,5 & 07/2023 & 07/2023 & 08/2023 & 1 & 1 & Tăng dần \\
+ & & & & & & & &
+CVE-2023-0386 & 7,8 & 05/2025 & 05/2025 & 06/2025 & 1 & 1 & Tăng dần \\
+\midrule
+\multicolumn{16}{l}{Trung vị: $B$ = 19,4 tháng, $B_{\text{lt}}$ = 14,3 tháng. Báo trước từ 12 tháng: $B$ 18/24, $B_{\text{lt}}$ 15/24.
+Đổi MH: lần đầu đạt 50 trùng tháng EPSS đổi mô hình.} \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\emph{Thời gian báo trước.} Năm lỗ hổng có điểm rơi lại dưới 50 sau lần đầu, nên tổ chức vá theo
+công thức sẽ đẩy chúng ra khỏi nhóm ưu tiên một thời gian. CVE-2021-22555 (Linux, CVSS 7,8) đạt
+56--58 điểm từ 10/2021 đến 01/2022, ở mức 12--45 suốt 37 tháng, chỉ trở lại 74 điểm từ 03/2025:
+$B = 47$ nhưng $B_{\text{lt}} = 6$ tháng. Theo chuỗi liên tục, trung vị là 14,3 tháng (thay vì
+19,4) và 15/24 lỗ hổng được giữ trong nhóm ưu tiên ít nhất 12 tháng trước khi CISA xác nhận. Tháng
+đầu đạt 50 của 12/24 lỗ hổng trùng tháng EPSS đổi mô hình, 4 đạt ngay tháng đầu có điểm (3 ở
+05/2021, đầu chuỗi dữ liệu) và chỉ 8 tăng dần theo EPSS: thời gian báo trước dài chủ yếu do mô
+hình EPSS mới chấm lại lỗ hổng cũ.
+
+\emph{Ba tình huống} chọn theo quy tắc (Hình~\ref{fig:tinhhuong}). CVE-2021-26086 (Jira, CVSS 5,3,
+thấp nhất) đạt 50 ở 03/2023, rơi dưới 50 trong 5 tháng, trở lại từ 02/2024 tới khi vào KEV ngày
+12/11/2024 ($B = 19$, $B_{\text{lt}} = 8$); vì CVSS 5,3, $S$ tối đa 53 nên chỉ quy tắc KEV đưa nó
+vào nhóm vá khẩn cấp. CVE-2015-5477 (BIND, báo trước lâu nhất) giữ $S \approx 73$ từ 02/2022,
+khi lần đầu có EPSS, tới khi vào KEV ngày 08/10/2026 (55 tháng). CVE-2023-32315 (Openfire, khoảng
+công bố đến KEV ngắn nhất) tăng từ 7 (05/2023) lên 34 (06/2023) và 62 (07/2023) trước khi vào KEV
+ngày 24/08/2023, dù 62 chưa tới ngưỡng vá khẩn cấp.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.7\textwidth]{tinh_huong_lich_su_diem.png}
+\caption{Điểm $S$ theo tháng của ba tình huống. Đường nét đứt ở 80 ứng với ngưỡng CVSS 8,0 của CSA
+(nhân 10), đường chấm ở 50 là ngưỡng ưu tiên cao, đường đứng là ngày vào KEV; cả ba có CVSS dưới
+8,0 nên quy tắc CSA không ưu tiên ở bất kỳ thời điểm nào.}\label{fig:tinhhuong}
+\end{figure*}
+
+\emph{Chiều ngược lại} (Bảng~\ref{tab:vathua}). Ngày 30/06/2025 có 30.308 lỗ hổng CVSS
+$\ge 9{,}0$ chưa có trong KEV, một phần nhóm quy tắc CSA bắt vá; chỉ 25 (0,082\%) vào KEV trong 12
+tháng sau. Công thức hạ 73,40\% xuống $S < 30$; nhóm $S \ge 70$ chỉ chiếm 6,20\% nhưng chứa 13/25
+lỗ hổng bị khai thác. Cái giá là nhóm bị hạ vẫn chứa 7/25 = 28\%.
+
+\begin{table}[htbp]
+\caption{CVSS $\ge 9{,}0$ chưa có trong KEV ngày 30/06/2025, vào KEV trong 12 tháng sau}\label{tab:vathua}
+\centering
+\begin{tabular}{lccc}
+\toprule
+Nhóm theo $S$ & Số lỗ hổng & Vào KEV & Tỷ lệ \\
+\midrule
+$S < 30$ & 22.245 & 7 & 0,031\% \\
+$30 \le S < 50$ & 4.622 & 1 & 0,022\% \\
+$50 \le S < 70$ & 1.562 & 4 & 0,256\% \\
+$S \ge 70$ & 1.879 & 13 & 0,692\% \\
+\midrule
+Tổng (CSA vá tất cả) & 30.308 & 25 & 0,082\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\emph{Không bắt được.} Ngoài 227 lỗ hổng zero-day (TN3), CVE-2025-13956 (LearnPress, CVSS 5,3) bị
+khai thác từ 4/2026 theo CrowdSec nhưng chưa có trong KEV; $S$ cao nhất chỉ 22,9 (30/04/2026) rồi
+giảm về 12,9. Dữ liệu tấn công trực tiếp nhanh hơn EPSS ở đây, nhưng không phải nguồn nào cũng vậy
+(Mục~\ref{sec:khonghieuqua}). Cuối cùng, ``báo trước'' là trước khi CISA xác nhận, chưa chắc trước
+khi bị khai thác, và các tình huống không thay cho kiểm chứng thống kê: công thức chỉ bắt trước
+24/328 lỗ hổng KEV có CVSS thấp.
+
 \subsection{Kiểm định giả thuyết đặt trước}
 \emph{So sánh theo khối lượng vá.} Bảng~\ref{tab:a1} gộp hai năm kiểm thử của TN4. Khi vá 1\%, $S$
 và EPSS gần như bằng nhau (17,2\% và 18,1\%), cùng gấp gần ba lần CVSS. Từ 5\% trở lên, $S$ bằng hoặc
@@ -781,6 +902,84 @@ hai năm kiểm thử đều chọn 0,1. Hai số mũ cho kết quả gần nhau
 45,7\% còn 0,3 chỉ 27,4\%. Quét số mũ trên 11 ngày của TN6 cho thấy kết luận không phụ thuộc vào lựa
 chọn này (Bảng~\ref{tab:somu}).
 
+\subsection{Các cải tiến đã thử nhưng không hiệu quả}\label{sec:khonghieuqua}
+Giới hạn lớn nhất của $S$ là gần như không cảnh báo trước được lỗ hổng mới công bố
+(Bảng~\ref{tab:tuoi}). Nhóm thử ba cách bổ sung tín hiệu có sẵn sớm hơn EPSS, đều theo đúng thiết
+kế của TN4 (mỗi tháng công bố là một đợt, ngày quyết định $D$ là cuối tháng, nhãn là vào KEV trong
+180 ngày sau $D$, kiểm thử 2024 và 2025: 84.821 lỗ hổng, 116 bị khai thác). Mọi lỗ hổng trong tập
+mới công bố tối đa 31 ngày; với công thức gốc, thiết kế này cho lại đúng số của
+Bảng~\ref{tab:a1}. Tham số của các biến thể chỉ học trên những đợt có cửa sổ nhãn kết thúc trước
+01/01 của năm kiểm thử, và mọi tín hiệu chỉ tính nếu có trước hoặc đúng ngày $D$.
+
+Hai biến thể PoC và nhà cung cấp giữ dạng của~\eqref{eq:S}, chỉ nâng sàn cho EPSS ở nhánh chưa có
+trong KEV:
+\begin{equation}
+\begin{split}
+S' = {}& AC \times \mathit{CVSS} \times 10 \\
+&\times \left[\mathit{KEV} + (1-\mathit{KEV}) \times \max(\mathit{EPSS}, p)^{0{,}3}\right],
+\end{split}
+\end{equation}
+trong đó $p$ là tỷ lệ vào KEV học được của nhóm lỗ hổng có cùng tín hiệu. Lỗ hổng có EPSS cao giữ
+nguyên điểm; chỉ lỗ hổng có EPSS gần 0 nhưng đã có tín hiệu khác được nâng lên. Biến thể thứ ba
+không đổi EPSS mà mở rộng thành phần KEV. Trong tập phân tích $\mathit{KEV}=0$ với mọi lỗ hổng, còn
+$AC$ và hệ số 10 không đổi thứ tự, nên chỉ cần xếp theo $\mathit{CVSS} \times \max(\mathit{EPSS},
+p)^{0{,}3}$. Kết quả ở Bảng~\ref{tab:khonghieuqua}.
+
+\begin{table*}[t]
+\caption{Số lỗ hổng bị khai thác bắt được khi vá cùng số lượng, gộp 2024 và 2025 (116 lỗ hổng bị
+khai thác); chênh lệch so với $S$ gốc kèm khoảng tin cậy 95\% bootstrap 1.000 lần}\label{tab:khonghieuqua}
+\centering
+\begin{tabular}{lccccc}
+\toprule
+Cách xếp & Vá 1\% & Vá 5\% & Vá 10\% & Vá 25\% & Vá bằng CSA \\
+\midrule
+$S$ gốc & 20,0 & 40,0 & 48,7 & 72,0 & 72,0 \\
+$S$ + PoC (Exploit-DB) & 20,0 & 40,0 & 48,7 & 72,0 & 72,0 \\
+$S$ + nhà cung cấp theo CPE & 21,9 & 43,6 & 59,1 & 87,4 & 87,5 \\
+$S$ + nhà cung cấp theo CNA & 21,4 & 40,4 & 49,1 & 75,8 & 77,0 \\
+$S$ + cờ Exploited của Microsoft & 22,0 & 42,0 & 50,6 & 73,0 & 73,0 \\
+\midrule
+\multicolumn{6}{l}{Chênh lệch so với $S$ gốc} \\
+\quad Nhà cung cấp theo CPE & $+1{,}9$ & $+3{,}6$ & $+10{,}4$ & $+15{,}4^{*}$ & $+15{,}5^{*}$ \\
+\quad Nhà cung cấp theo CNA & $+1{,}4$ & $+0{,}4$ & $+0{,}4$ & $+3{,}8$ & $+5{,}0$ \\
+\quad Cờ Exploited của Microsoft & $+2{,}0$ & $+2{,}0$ & $+1{,}9$ & $+1{,}0$ & $+1{,}0$ \\
+\bottomrule
+\multicolumn{6}{l}{\footnotesize $^{*}$ khoảng tin cậy không chứa 0; mọi chênh lệch khác đều chứa 0.}
+\end{tabular}
+\end{table*}
+
+\emph{PoC công khai.} TN5 cho thấy điều kiện có PoC giúp quy tắc CSA ở tập lỗ hổng tồn đọng. Với lỗ
+hổng mới thì không: tại ngày $D$, chỉ 3 trong 116 lỗ hổng bị khai thác (2,6\%) đã có PoC trên
+Exploit-DB, và chỉ 0,10\% lỗ hổng trong tập đã có PoC. Tỷ lệ vào KEV của nhóm có PoC trên dữ liệu
+huấn luyện bằng 0 (kiểm thử 2024) và 0,71\% (kiểm thử 2025), quá thấp để thay đổi thứ hạng ở mọi
+khối lượng vá được xét.
+
+\emph{Lịch sử của nhà cung cấp.} Lỗ hổng mới chưa có lịch sử, nhưng nhà cung cấp của nó thì có.
+Biến thể chia lỗ hổng theo số mục KEV của nhà cung cấp tính đến ngày $D$ (0, 1--4, 5--19, 20--99,
+từ 100). Lấy nhà cung cấp từ CPE trong cấu hình của NVD, biến thể bắt thêm 15,5 ca ở khối lượng
+CSA, khoảng tin cậy $[+4{,}0;\,+27{,}9]$. Nhưng phần lớn mức tăng này là rò rỉ: CPE do NVD gán khi
+phân tích, thường sau ngày công bố; 100\% lỗ hổng bị khai thác có CPE trong khi nhóm còn lại chỉ
+81,1\% (2024) và 66,4\% (2025), nên lỗ hổng thiếu CPE tự động rơi vào bậc thấp nhất và gần như toàn
+là lỗ hổng không bị khai thác. Lấy nhà cung cấp từ CNA (\texttt{sourceIdentifier}, có ngay khi công
+bố), mức tăng chỉ còn $+5{,}0$ ca $[-3{,}3;\,+13{,}8]$, một phần vì CNA lớn nhất là
+\texttt{cve@mitre.org}, gộp nhiều nhà cung cấp làm một. Chỉ so trên lỗ hổng đã có CPE, mức tăng là
+$+13{,}2$ ca $[+1{,}6;\,+25{,}5]$ ở khối lượng CSA nhưng chỉ $+0{,}9$ ca $[-1{,}9;\,+3{,}2]$ khi vá
+1\%: lịch sử nhà cung cấp có tín hiệu thật khi vá nhiều, nhưng không giúp nhóm vá khẩn cấp, đúng nơi
+cần cảnh báo sớm.
+
+\emph{Nguồn cảnh báo sớm hơn CISA KEV.} Microsoft đánh dấu \texttt{Exploited:Yes} trong tài liệu
+CVRF của MSRC, có ghi ngày trong lịch sử sửa đổi. Trong 108 lỗ hổng có cả hai nguồn, Microsoft báo
+cùng ngày với CISA ở 85 trường hợp (79\%), báo trước ở 20 (10 trường hợp chỉ trước 1 ngày) và báo
+sau ở 3; trung vị độ trễ bằng 0 ngày. Mở rộng thành phần KEV thành ``CISA KEV hoặc Microsoft đã báo
+bị khai thác'' chỉ bắt thêm 1--2 ca, không có ý nghĩa thống kê: trong tập phân tích chỉ 4 lỗ hổng
+đã được Microsoft báo trước ngày $D$, và 2 trong số đó vào CISA KEV trong 180 ngày sau.
+
+\emph{Nhận xét.} Không cách nào bù được giới hạn với lỗ hổng mới công bố. Tín hiệu có ích nhất (lịch
+sử nhà cung cấp) chỉ cải thiện thứ tự khi vá nhiều, và tổ chức có thể dùng nó trong chu kỳ vá thông
+thường nhờ danh mục tài sản của chính mình. Với nhóm vá khẩn cấp, kết luận ở Mục~\ref{sec:khathi}
+giữ nguyên: phải dựa vào quy tắc KEV, biện pháp giảm thiểu tạm thời cho hệ thống mở ra Internet và
+tốc độ phản ứng, không dựa vào dự báo.
+
 % =====================================================================
 \section{Đánh giá tính khả thi}\label{sec:khathi}
 % =====================================================================
@@ -835,6 +1034,7 @@ $S$ so với EPSS dùng riêng & Gần như ngang; hơn khi vá nhiều lỗ h�
 KEV giúp vá kịp lỗ hổng bị khai thác & Đã chứng minh trong mô phỏng (H2) \\
 Kết quả ổn định qua nhiều ngày đánh giá & Đã chứng minh qua 11 ngày \\
 Số mũ 0,3 là tối ưu & Không có số mũ tối ưu chung \\
+Bắt trước lỗ hổng KEV CSA bỏ qua & 24/328; liên tục trung vị 14,3 tháng \\
 Cảnh báo trước lỗ hổng mới công bố & Gần như không (4,46\%) \\
 Cảnh báo được zero-day & Không thể (27\%) \\
 Hệ số $AC$ cải thiện ưu tiên & Chưa kiểm chứng \\
@@ -855,6 +1055,32 @@ vào KEV, còn TN2 cho 1.076 vì chỉ tính lỗ hổng vào KEV trong 12 thán
 tả của TN5 và bảng phân bổ theo EPSS dùng trạng thái KEV, PoC và EPSS hiện tại, chỉ để mô tả. Cuối
 cùng, vector \texttt{AV:N} chỉ cho biết lỗ hổng khai thác được qua mạng, không cho biết hệ thống có
 thực sự phơi ra Internet; Exploit-DB chỉ là một trong nhiều nguồn PoC công khai.
+
+\emph{Thời điểm của dữ liệu.} Các thực nghiệm lấy điểm CVSS do NVD chấm khi có, nếu không thì lấy
+điểm của CNA hoặc CISA-ADP, và bỏ lỗ hổng không có điểm. Điểm NVD và CISA-ADP thường được bổ sung
+sau ngày công bố, nên chưa chắc có tại ngày quyết định. NVD chấm cao hơn CNA ở 49,5\% số lỗ hổng có
+cả hai điểm và thấp hơn ở 27,8\%; năm 2025, 100\% lỗ hổng KEV có điểm, nhóm còn lại chỉ 94,2\%.
+Bảng~\ref{tab:cvssngayD} chạy lại TN4 với bốn cách chọn điểm. Khi chỉ dùng điểm CNA (có ngay khi
+công bố), lợi thế của $S$ so với CVSS khi vá 5\% giảm từ $+18{,}2$ ca $[+7{,}5;\,+28{,}8]$ xuống
+$+5{,}3$ ca $[-6{,}2;\,+16{,}0]$, còn quy tắc CSA chỉ chọn 11,7\% lỗ hổng và bỏ sót 57,8\% lỗ hổng
+bị khai thác. Kết luận ``quy tắc CSA bỏ sót nhiều'' vì vậy còn mạnh hơn khi dùng điểm có tại thời
+điểm quyết định, nhưng một phần lợi thế của $S$ so với CVSS có thể đến từ điểm NVD chấm muộn.
+
+\begin{table*}[t]
+\caption{TN4 với bốn cách chọn điểm CVSS, gộp 2024 và 2025; cột cuối là số ca $S$ bắt được nhiều
+hơn CVSS khi vá 5\%, kèm khoảng tin cậy 95\%}\label{tab:cvssngayD}
+\centering
+\begin{tabular}{lrrrc}
+\toprule
+Cách chọn điểm & Lỗ hổng & CSA phải vá & CSA bỏ sót & $S$ hơn CVSS, vá 5\% \\
+\midrule
+NVD trước (như các thực nghiệm) & 84.821 & 25,1\% & 43,1\% & $+18{,}2$ $[+7{,}5;\,+28{,}8]$ \\
+Nguồn sớm trước (CNA, ADP, NVD) & 84.821 & 20,2\% & 37,9\% & $+12{,}4$ $[+1{,}2;\,+24{,}2]$ \\
+Chỉ CNA, giữ lỗ hổng không có điểm & 87.910 & 11,7\% & 57,8\% & $+5{,}3$ $[-6{,}2;\,+16{,}0]$ \\
+Chỉ CNA, bỏ lỗ hổng không có điểm & 56.985 & 18,0\% & 33,8\% & $+1{,}1$ $[-8{,}8;\,+10{,}9]$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
 
 % =====================================================================
 \section{Kết luận}

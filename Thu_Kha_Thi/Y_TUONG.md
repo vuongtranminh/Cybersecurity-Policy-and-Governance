@@ -67,7 +67,7 @@ Nghiên cứu gần nhất là Vulnerability Management Chaining (VMC) của Shi
 - Ngưỡng S từ 70 ổn định qua 11 ngày cuối quý (31/03/2023 đến 30/09/2025): chỉ chiếm 0,78% đến 1,40% số lỗ hổng chưa có trong KEV nhưng hiệu suất gấp 15,9 đến 34,2 lần chọn ngẫu nhiên, trong khi quy tắc CSA chỉ 1,7 đến 2,3 lần ở mọi cách đọc.
 - Khi chỉ vá 1% hoặc 5% số lỗ hổng, công thức bắt được nhiều gấp 2,7 đến 8,9 lần so với xếp theo CVSS ở ba ngày đánh giá cũ, và không kém CVSS ở cả 11 ngày, kể cả ba ngày có cửa sổ theo dõi không chồng nhau.
 - Điểm càng cao thì tỷ lệ vào KEV càng cao. Ngày 30/06/2025, các mức từ 70 điểm có tỷ lệ vào KEV gấp khoảng 27 đến 30 lần trung bình.
-- Thành phần KEV là bắt buộc: 226 / 836 = 27,03% lỗ hổng KEV là lỗ hổng zero-day, vừa công bố đã bị khai thác, không thể chấm điểm trước. Trong mô phỏng vá hằng tháng, công thức có KEV an toàn trong 30 ngày 100% ở cả hai năm.
+- Thành phần KEV là bắt buộc: 227 / 836 = 27,15% lỗ hổng KEV là lỗ hổng zero-day, vừa công bố đã bị khai thác, không thể chấm điểm trước. Trong mô phỏng vá hằng tháng, công thức có KEV an toàn trong 30 ngày 100% ở cả hai năm.
 - Kết luận không phụ thuộc số mũ 0,3: mọi số mũ từ 0,2 đến 1,0 cho kết quả gần như nhau.
 
 **Chưa chứng minh được hoặc là hạn chế:**
@@ -75,7 +75,8 @@ Nghiên cứu gần nhất là Vulnerability Management Chaining (VMC) của Shi
 - So với EPSS dùng riêng, công thức gần như ngang ở hầu hết các mức. Công thức chỉ hơn rõ khi vá nhiều lỗ hổng mới công bố (thực nghiệm 4: hơn 15,2 ca, khoảng tin cậy 95% từ 5,2 đến 26,7); trên tập lỗ hổng tồn đọng, hai cách gần như ngang nhau.
 - Khi vá bằng khối lượng của quy tắc CSA, công thức hơn CVSS chưa có ý nghĩa thống kê (H1: hơn 6,0 ca, khoảng tin cậy từ âm 2,0 đến 15,0).
 - Công thức gần như không cảnh báo trước được lỗ hổng mới công bố: trong số lỗ hổng công bố tối đa 30 ngày trước khi vào KEV, trung vị EPSS một ngày trước khi vào KEV chỉ 0,0009 và chỉ 4,46% có S từ 70. Điểm cao một ngày trước khi vào KEV chủ yếu thuộc về lỗ hổng cũ (63% đã công bố hơn 1 năm).
-- PoC công khai là tín hiệu có giá trị mà công thức chưa dùng: năm 2024, quy tắc CSA có thêm điều kiện PoC bắt được nhiều hơn công thức ở cùng khối lượng vá.
+- PoC công khai là tín hiệu có giá trị mà công thức chưa dùng, nhưng chỉ với lỗ hổng tồn đọng: năm 2024, quy tắc CSA có thêm điều kiện PoC bắt được nhiều hơn công thức ở cùng khối lượng vá. Với lỗ hổng mới công bố thì không: tại cuối tháng công bố chỉ 3 / 116 lỗ hổng sắp bị khai thác đã có PoC trên Exploit-DB.
+- Đã thử ba cách bổ sung tín hiệu sớm cho lỗ hổng mới công bố (PoC, lịch sử nhà cung cấp, cờ "Exploited" của Microsoft) theo thiết kế của thực nghiệm 4; không cách nào cải thiện có ý nghĩa thống kê khi đã loại rò rỉ dữ liệu (báo cáo, mục "Các cải tiến đã thử nhưng không hiệu quả"). Khi chỉ dùng điểm CVSS có tại ngày quyết định (điểm của CNA), lợi thế của công thức so với CVSS khi vá 5% giảm từ 18,2 xuống 5,3 ca và không còn ý nghĩa thống kê.
 - Hệ số AC chưa kiểm chứng được vì không có dữ liệu tài sản.
 
 ## 6. Tình huống điển hình: CVSS nói thấp, thực tế nói cao
@@ -91,9 +92,10 @@ Phần này trình bày các tình huống cụ thể theo kiểu "case in point
 
 - Lỗ hổng Jira Server and Data Center, công bố 16/08/2021, CVSS 5,3 (mức trung bình).
 - Quy tắc CSA: không bao giờ ưu tiên lỗ hổng này.
-- Công thức S: điểm tăng dần theo EPSS, từ 11 (09/2021) lên 45 (03/2022). Từ 03/2023, S giữ quanh mức 50, nằm trong khoảng 3% lỗ hổng có điểm cao nhất.
+- Công thức S: điểm tăng dần theo EPSS, từ 11 (09/2021) lên 45 (03/2022). S đạt 50 lần đầu vào 03/2023 (đúng tháng EPSS đổi mô hình), sau đó có 5 tháng rơi lại dưới 50; chuỗi liên tục từ 50 bắt đầu khoảng 8 tháng trước khi vào KEV.
 - CISA đưa vào KEV ngày 12/11/2024. Ba mươi ngày trước đó, EPSS đã là 0,8549 và S = 50,6.
-- Kết quả: công thức đưa lỗ hổng vào nhóm ưu tiên cao khoảng 19 tháng trước khi CISA xác nhận. Quy tắc CVSS để nó nằm trong danh sách tồn đọng suốt thời gian đó.
+- Kết quả: công thức đưa lỗ hổng vào nhóm ưu tiên cao (S từ 50) khoảng 8 đến 19 tháng trước khi CISA xác nhận, tùy tính từ chuỗi liên tục hay từ lần đầu. Quy tắc CVSS để nó nằm trong danh sách tồn đọng suốt thời gian đó.
+- Giới hạn: với CVSS 5,3, S tối đa chỉ 53, nên lỗ hổng này không bao giờ vào nhóm vá khẩn cấp (S từ 70) trước khi vào KEV. Quy tắc KEV mới đưa nó vào nhóm khẩn cấp.
 
 ### 6.2. Tình huống 2: từ 7 lên 62 điểm trong hai tháng (CVE-2023-32315, Ignite Realtime Openfire)
 
@@ -104,7 +106,7 @@ Phần này trình bày các tình huống cụ thể theo kiểu "case in point
 | 31/07/2023 | 62 | Không ưu tiên |
 | 24/08/2023: vào KEV | 75 (CVSS × 10) | Không ưu tiên |
 
-Đây là dạng "chuyển pha": lỗ hổng chuyển nhanh từ bình thường sang bị khai thác. Công thức tính lại điểm hằng ngày theo EPSS nên nhận ra thay đổi gần một tháng trước khi CISA xác nhận. Khi lỗ hổng vào KEV, thành phần KEV đẩy điểm lên mức cao nhất của nó. Điểm CVSS vẫn là 7,5 như ngày công bố.
+Đây là dạng "chuyển pha": lỗ hổng chuyển nhanh từ bình thường sang bị khai thác. Công thức tính lại điểm hằng ngày theo EPSS nên nhận ra thay đổi gần một tháng trước khi CISA xác nhận, dù điểm 62 mới ở mức ưu tiên cao, chưa tới ngưỡng vá khẩn cấp 70. Khi lỗ hổng vào KEV, thành phần KEV đẩy điểm lên mức cao nhất của nó. Điểm CVSS vẫn là 7,5 như ngày công bố.
 
 ### 6.3. Tình huống 3: CISA xác nhận muộn hơn 4 năm (CVE-2015-5477, ISC BIND)
 
@@ -122,39 +124,51 @@ Lỗ hổng vào KEV từ 01/04/2023 có CVSS dưới 8,0: 328 lỗ hổng, quy 
 | Hạng mục | Số lượng |
 |---|---|
 | Có điểm EPSS 30 ngày trước khi vào KEV | 156 / 328 = 47,56% |
-| S từ 50 trở lên 30 ngày trước khi vào KEV (công thức bắt trước) | 24 / 156 = 15,38% |
-| S từ 70 trở lên 30 ngày trước khi vào KEV | 14 / 156 = 8,97% |
-| Trong 24 lỗ hổng bắt trước, báo trước từ 12 tháng trở lên | 18 / 24 = 75,00% (trung vị 19,4 tháng) |
+| S từ 50 trở lên 30 ngày trước khi vào KEV (công thức bắt trước) | 24 / 156 = 15,38% (tính trên cả 328: 24 / 328 = 7,32%) |
+| S từ 70 trở lên 30 ngày trước khi vào KEV (ngưỡng vá khẩn cấp) | 14 / 156 = 8,97% (tính trên cả 328: 14 / 328 = 4,27%) |
+| Trong 24 lỗ hổng bắt trước, báo trước từ 12 tháng trở lên, tính từ lần đầu S từ 50 | 18 / 24 = 75,00% (trung vị 19,4 tháng) |
+| Như trên, tính từ đầu chuỗi tháng liên tục có S từ 50 đến khi vào KEV | 15 / 24 = 62,50% (trung vị 14,3 tháng) |
 | S dưới 30, 30 ngày trước khi vào KEV (công thức không bắt trước) | 119 / 156 = 76,28% |
+
+Hai cách tính thời gian báo trước khác nhau ở 5 lỗ hổng mà điểm rơi lại dưới 50 sau lần đầu vượt ngưỡng (CVE-2021-22555, CVE-2020-9715, CVE-2021-26086, CVE-2021-41277, CVE-2022-43769). Cách tính liên tục sát hơn với việc tổ chức thực sự giữ lỗ hổng trong nhóm ưu tiên.
+
+Cột "Ngày gần nhất trở lại S từ 50" là ngày cuối tháng bắt đầu chuỗi tháng liên tục có S từ 50 kéo dài tới khi vào KEV; cột "Báo trước liên tục" tính từ ngày này:
+
+```
+Báo trước          = (Ngày vào KEV − ngày cuối tháng đầu tiên S từ 50) / 30,44
+Báo trước liên tục = (Ngày vào KEV − ngày gần nhất trở lại S từ 50) / 30,44
+```
+
+Với 19 lỗ hổng điểm không rơi dưới 50 sau lần đầu, ngày này trùng với tháng đầu tiên S từ 50. Ví dụ CVE-2021-41277: S đạt 50 lần đầu ngày 31/03/2023, rơi xuống 31,9 đến 39,3 từ 09/2023 đến 01/2024, trở lại 74,0 ngày 29/02/2024 và giữ tới khi vào KEV ngày 12/11/2024, nên báo trước liên tục là 257 / 30,44 = 8 tháng thay vì 592 / 30,44 = 19 tháng.
 
 Danh sách đầy đủ 24 lỗ hổng công thức bắt trước (sắp theo S 30 ngày trước khi vào KEV):
 
-| STT | Mã CVE | Sản phẩm | CVSS | Ngày công bố | Ngày vào KEV | EPSS 30 ngày trước | S 30 ngày trước | S khi vào KEV | Tháng đầu tiên S từ 50 | Báo trước (tháng) | Mã độc tống tiền |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | CVE-2016-6415 | Cisco IOS, IOS XR, and IOS XE | 7,5 | 19/09/2016 | 19/05/2023 | 0,9727 | 74,4 | 75,0 | 02/2022 | 15 | Chưa rõ |
-| 2 | CVE-2016-9079 | Mozilla Firefox, Firefox ESR, and Thunderbird | 7,5 | 11/06/2018 | 22/06/2023 | 0,9719 | 74,4 | 75,0 | 02/2022 | 16 | Chưa rõ |
-| 3 | CVE-2020-17519 | Apache Flink | 7,5 | 05/01/2021 | 23/05/2024 | 0,9708 | 74,3 | 75,0 | 05/2021 | 36 | Chưa rõ |
-| 4 | CVE-2021-41277 | Metabase Metabase | 7,5 | 17/11/2021 | 12/11/2024 | 0,9515 | 73,9 | 75,0 | 03/2023 | 19 | Chưa rõ |
-| 5 | CVE-2021-43798 | Grafana Labs Grafana | 7,5 | 07/12/2021 | 09/10/2025 | 0,9434 | 73,7 | 75,0 | 12/2021 | 45 | Chưa rõ |
-| 6 | CVE-2019-5418 | Rails Ruby on Rails | 7,5 | 27/03/2019 | 07/07/2025 | 0,9423 | 73,7 | 75,0 | 05/2021 | 49 | Chưa rõ |
-| 7 | CVE-2020-25078 | D-Link DCS-2530L and DCS-2670L Devices | 7,5 | 02/09/2020 | 05/08/2025 | 0,9403 | 73,6 | 75,0 | 03/2023 | 28 | Chưa rõ |
-| 8 | CVE-2021-22555 | Linux Kernel | 7,8 | 07/07/2021 | 06/10/2025 | 0,8242 | 73,6 | 78,0 | 10/2021 | 47 | Chưa rõ |
-| 9 | CVE-2017-3506 | Oracle WebLogic Server | 7,4 | 24/04/2017 | 03/06/2024 | 0,9688 | 73,3 | 74,0 | 02/2022 | 27 | Chưa rõ |
-| 10 | CVE-2019-9621 | Synacor Zimbra Collaboration Suite (ZCS) | 7,5 | 30/04/2019 | 07/07/2025 | 0,9181 | 73,1 | 75,0 | 05/2021 | 49 | Chưa rõ |
-| 11 | CVE-2015-5477 | ISC BIND | 7,5 | 29/07/2015 | 08/10/2026 | 0,9128 | 73,0 | 75,0 | 02/2022 | 55 | Chưa rõ |
-| 12 | CVE-2021-22054 | Omnissa Workspace One UEM | 7,5 | 17/12/2021 | 09/03/2026 | 0,8893 | 72,4 | 75,0 | 03/2023 | 35 | Chưa rõ |
-| 13 | CVE-2024-21182 | Oracle WebLogic Server | 7,5 | 16/07/2024 | 01/06/2026 | 0,8767 | 72,1 | 75,0 | 03/2025 | 14 | Chưa rõ |
-| 14 | CVE-2024-27199 | JetBrains TeamCity | 7,3 | 04/03/2024 | 20/04/2026 | 0,9449 | 71,8 | 73,0 | 03/2025 | 13 | Có |
-| 15 | CVE-2021-21311 | Adminer Adminer | 7,2 | 11/02/2021 | 29/09/2025 | 0,8753 | 69,2 | 72,0 | 03/2025 | 6 | Chưa rõ |
-| 16 | CVE-2020-9715 | Adobe Acrobat | 7,8 | 19/08/2020 | 13/04/2026 | 0,5621 | 65,6 | 78,0 | 01/2022 | 50 | Chưa rõ |
-| 17 | CVE-2023-32315 | Ignite Realtime Openfire | 7,5 | 26/05/2023 | 24/08/2023 | 0,5255 | 61,8 | 75,0 | 07/2023 | 1 | Chưa rõ |
-| 18 | CVE-2018-9276 | Paessler PRTG Network Monitor | 7,2 | 02/07/2018 | 04/02/2025 | 0,5241 | 59,3 | 72,0 | 02/2022 | 35 | Chưa rõ |
-| 19 | CVE-2023-27351 | PaperCut NG/MF | 7,5 | 20/04/2023 | 20/04/2026 | 0,4475 | 58,9 | 75,0 | 12/2025 | 4 | Có |
-| 20 | CVE-2022-43769 | Hitachi Vantara Pentaho Business Analytics (BA) Server | 7,2 | 03/04/2023 | 03/03/2025 | 0,3560 | 52,8 | 72,0 | 08/2023 | 18 | Chưa rõ |
-| 21 | CVE-2023-24955 | Microsoft SharePoint Server | 7,2 | 09/05/2023 | 26/03/2024 | 0,3361 | 51,9 | 72,0 | 09/2023 | 6 | Có |
-| 22 | CVE-2021-39935 | GitLab Community and Enterprise Editions | 7,5 | 13/12/2021 | 03/02/2026 | 0,2825 | 51,3 | 75,0 | 04/2025 | 9 | Chưa rõ |
-| 23 | CVE-2021-26086 | Atlassian Jira Server and Data Center | 5,3 | 16/08/2021 | 12/11/2024 | 0,8549 | 50,6 | 53,0 | 03/2023 | 19 | Chưa rõ |
-| 24 | CVE-2023-0386 | Linux Kernel | 7,8 | 22/03/2023 | 17/06/2025 | 0,2318 | 50,3 | 78,0 | 05/2025 | 1 | Chưa rõ |
+| STT | Mã CVE | Sản phẩm | CVSS | Ngày công bố | Ngày vào KEV | EPSS 30 ngày trước | S 30 ngày trước | S khi vào KEV | Tháng đầu tiên S từ 50 | Báo trước (tháng) | Ngày gần nhất trở lại S từ 50 | Báo trước liên tục (tháng) | Mã độc tống tiền |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | CVE-2016-6415 | Cisco IOS, IOS XR, and IOS XE | 7,5 | 19/09/2016 | 19/05/2023 | 0,9727 | 74,4 | 75,0 | 02/2022 | 15 | 28/02/2022 | 15 | Chưa rõ |
+| 2 | CVE-2016-9079 | Mozilla Firefox, Firefox ESR, and Thunderbird | 7,5 | 11/06/2018 | 22/06/2023 | 0,9719 | 74,4 | 75,0 | 02/2022 | 16 | 28/02/2022 | 16 | Chưa rõ |
+| 3 | CVE-2020-17519 | Apache Flink | 7,5 | 05/01/2021 | 23/05/2024 | 0,9708 | 74,3 | 75,0 | 05/2021 | 36 | 31/05/2021 | 36 | Chưa rõ |
+| 4 | CVE-2021-41277 | Metabase Metabase | 7,5 | 17/11/2021 | 12/11/2024 | 0,9515 | 73,9 | 75,0 | 03/2023 | 19 | 29/02/2024 | 8 | Chưa rõ |
+| 5 | CVE-2021-43798 | Grafana Labs Grafana | 7,5 | 07/12/2021 | 09/10/2025 | 0,9434 | 73,7 | 75,0 | 12/2021 | 45 | 31/12/2021 | 45 | Chưa rõ |
+| 6 | CVE-2019-5418 | Rails Ruby on Rails | 7,5 | 27/03/2019 | 07/07/2025 | 0,9423 | 73,7 | 75,0 | 05/2021 | 49 | 31/05/2021 | 49 | Chưa rõ |
+| 7 | CVE-2020-25078 | D-Link DCS-2530L and DCS-2670L Devices | 7,5 | 02/09/2020 | 05/08/2025 | 0,9403 | 73,6 | 75,0 | 03/2023 | 28 | 31/03/2023 | 28 | Chưa rõ |
+| 8 | CVE-2021-22555 | Linux Kernel | 7,8 | 07/07/2021 | 06/10/2025 | 0,8242 | 73,6 | 78,0 | 10/2021 | 47 | 31/03/2025 | 6 | Chưa rõ |
+| 9 | CVE-2017-3506 | Oracle WebLogic Server | 7,4 | 24/04/2017 | 03/06/2024 | 0,9688 | 73,3 | 74,0 | 02/2022 | 27 | 28/02/2022 | 27 | Chưa rõ |
+| 10 | CVE-2019-9621 | Synacor Zimbra Collaboration Suite (ZCS) | 7,5 | 30/04/2019 | 07/07/2025 | 0,9181 | 73,1 | 75,0 | 05/2021 | 49 | 31/05/2021 | 49 | Chưa rõ |
+| 11 | CVE-2015-5477 | ISC BIND | 7,5 | 29/07/2015 | 08/10/2026 | 0,9128 | 73,0 | 75,0 | 02/2022 | 55 | 28/02/2022 | 55 | Chưa rõ |
+| 12 | CVE-2021-22054 | Omnissa Workspace One UEM | 7,5 | 17/12/2021 | 09/03/2026 | 0,8893 | 72,4 | 75,0 | 03/2023 | 35 | 31/03/2023 | 35 | Chưa rõ |
+| 13 | CVE-2024-21182 | Oracle WebLogic Server | 7,5 | 16/07/2024 | 01/06/2026 | 0,8767 | 72,1 | 75,0 | 03/2025 | 14 | 31/03/2025 | 14 | Chưa rõ |
+| 14 | CVE-2024-27199 | JetBrains TeamCity | 7,3 | 04/03/2024 | 20/04/2026 | 0,9449 | 71,8 | 73,0 | 03/2025 | 13 | 31/03/2025 | 13 | Có |
+| 15 | CVE-2021-21311 | Adminer Adminer | 7,2 | 11/02/2021 | 29/09/2025 | 0,8753 | 69,2 | 72,0 | 03/2025 | 6 | 31/03/2025 | 6 | Chưa rõ |
+| 16 | CVE-2020-9715 | Adobe Acrobat | 7,8 | 19/08/2020 | 13/04/2026 | 0,5621 | 65,6 | 78,0 | 01/2022 | 50 | 31/05/2023 | 34 | Chưa rõ |
+| 17 | CVE-2023-32315 | Ignite Realtime Openfire | 7,5 | 26/05/2023 | 24/08/2023 | 0,5255 | 61,8 | 75,0 | 07/2023 | 1 | 31/07/2023 | 1 | Chưa rõ |
+| 18 | CVE-2018-9276 | Paessler PRTG Network Monitor | 7,2 | 02/07/2018 | 04/02/2025 | 0,5241 | 59,3 | 72,0 | 02/2022 | 35 | 28/02/2022 | 35 | Chưa rõ |
+| 19 | CVE-2023-27351 | PaperCut NG/MF | 7,5 | 20/04/2023 | 20/04/2026 | 0,4475 | 58,9 | 75,0 | 12/2025 | 4 | 31/12/2025 | 4 | Có |
+| 20 | CVE-2022-43769 | Hitachi Vantara Pentaho Business Analytics (BA) Server | 7,2 | 03/04/2023 | 03/03/2025 | 0,3560 | 52,8 | 72,0 | 08/2023 | 18 | 31/12/2023 | 14 | Chưa rõ |
+| 21 | CVE-2023-24955 | Microsoft SharePoint Server | 7,2 | 09/05/2023 | 26/03/2024 | 0,3361 | 51,9 | 72,0 | 09/2023 | 6 | 30/09/2023 | 6 | Có |
+| 22 | CVE-2021-39935 | GitLab Community and Enterprise Editions | 7,5 | 13/12/2021 | 03/02/2026 | 0,2825 | 51,3 | 75,0 | 04/2025 | 9 | 30/04/2025 | 9 | Chưa rõ |
+| 23 | CVE-2021-26086 | Atlassian Jira Server and Data Center | 5,3 | 16/08/2021 | 12/11/2024 | 0,8549 | 50,6 | 53,0 | 03/2023 | 19 | 29/02/2024 | 8 | Chưa rõ |
+| 24 | CVE-2023-0386 | Linux Kernel | 7,8 | 22/03/2023 | 17/06/2025 | 0,2318 | 50,3 | 78,0 | 05/2025 | 1 | 31/05/2025 | 1 | Chưa rõ |
 
 ### 6.5. Chiều ngược lại: CVSS nói 9,8, thực tế không có gì
 
@@ -168,7 +182,8 @@ Ngày 30/06/2025 có 30.308 lỗ hổng CVSS từ 9,0 chưa có trong KEV. Quy t
 | S từ 70 trở lên | 1.879 / 30.308 = 6,20% | 13 / 1.879 = 0,692% | 13 / 25 = 52,00% |
 | Tổng (quy tắc CSA vá tất cả) | 30.308 | 25 / 30.308 = 0,082% | 25 |
 
-- Công thức hạ ưu tiên 73,40% số lỗ hổng mà quy tắc CSA bắt vá gấp.
+- Bảng chỉ xét lỗ hổng CVSS từ 9,0, một phần trong nhóm CVSS từ 8,0 mà quy tắc CSA bắt vá.
+- Công thức hạ ưu tiên 73,40% số lỗ hổng mà quy tắc CSA bắt vá gấp. Cái giá là nhóm bị hạ này vẫn chứa 7 / 25 = 28,00% số lỗ hổng sau đó bị khai thác.
 - Nhóm S từ 70 chỉ bằng 6,20% khối lượng nhưng chứa 52,00% số lỗ hổng thực sự bị khai thác. Tỷ lệ bị khai thác của nhóm này (0,692%) gấp khoảng 22 lần nhóm S dưới 30 (0,031%).
 
 Ba ví dụ chọn ngẫu nhiên (hạt giống cố định) trong nhóm S dưới 30 và chưa vào KEV:
@@ -198,15 +213,16 @@ Ba ví dụ chọn ngẫu nhiên (hạt giống cố định) trong nhóm S dư�
 | 31/08/2026 | 0,00906 | 12,9 | Không ưu tiên |
 | 30/09/2026 | 0,00892 | 12,9 | Không ưu tiên |
 
-Điểm S tăng gần 4 lần khi lỗ hổng bắt đầu bị khai thác, nhưng cao nhất chỉ khoảng 23, chưa vào nhóm ưu tiên, rồi giảm lại khi EPSS giảm. Ở tình huống này, dữ liệu theo dõi tấn công trực tiếp (như của CrowdSec) nhanh hơn EPSS.
+Điểm S tăng gần 4 lần khi lỗ hổng bắt đầu bị khai thác, nhưng cao nhất chỉ khoảng 23, chưa vào nhóm ưu tiên, rồi giảm lại khi EPSS giảm. Ở tình huống này, dữ liệu theo dõi tấn công trực tiếp (như của CrowdSec) nhanh hơn EPSS. Không phải nguồn cảnh báo nào cũng vậy: với cờ "Exploited" của Microsoft, 85 / 108 lần Microsoft báo cùng ngày với CISA KEV, và đưa cờ này vào công thức chỉ bắt thêm 1 đến 2 lỗ hổng mới công bố (báo cáo, mục "Các cải tiến đã thử nhưng không hiệu quả").
 
 **Lỗ hổng zero-day.** 227 / 836 = 27,15% lỗ hổng vào KEV từ 01/04/2023 không có điểm EPSS một ngày trước khi vào KEV, vì được công bố và đưa vào KEV gần như cùng lúc. Với nhóm này chỉ thành phần KEV xử lý được.
 
 ### 6.7. Lưu ý khi dùng các tình huống
 
 1. **"Báo trước" là báo trước khi CISA xác nhận, chưa chắc là trước khi bị khai thác.** Nhiều lỗ hổng như Jira, BIND đã bị khai thác từ lâu, chỉ là KEV ghi nhận muộn. Kết luận đúng: công thức dùng tín hiệu khai thác sớm hơn KEV, còn quy tắc CVSS không dùng tín hiệu khai thác nào.
-2. **Một số bước nhảy điểm trùng với lúc EPSS đổi mô hình** (02/2022, 03/2023, 03/2025). Điểm tại các thời điểm đó vẫn là điểm có thật mà tổ chức nhận được vào lúc đó, nhưng cần ghi chú.
-3. **Tình huống minh họa không thay cho kiểm chứng thống kê ở mục 5.** Công thức chỉ bắt trước được 24 / 156 = 15,38% lỗ hổng KEV có CVSS thấp; 76,28% vẫn có S dưới 30 trước khi vào KEV.
+2. **Một nửa số lần vượt ngưỡng trùng với lúc EPSS đổi mô hình.** Trong 24 lỗ hổng bắt trước, 12 lỗ hổng đạt S từ 50 lần đầu đúng tháng EPSS đổi mô hình (02/2022, 03/2023, 03/2025), 4 lỗ hổng đạt ngay tháng đầu có điểm (3 lỗ hổng ở 05/2021, tháng đầu của chuỗi dữ liệu, nên thời gian báo trước chỉ là cận dưới), và chỉ 8 lỗ hổng có điểm tăng dần theo EPSS giữa hai lần đổi mô hình. Điểm tại các thời điểm đó vẫn là điểm có thật mà tổ chức nhận được vào lúc đó, nhưng thời gian báo trước dài chủ yếu phản ánh việc mô hình EPSS mới chấm lại lỗ hổng cũ, không phải công thức phát hiện sớm.
+3. **Ngưỡng 50 dùng ở đây thấp hơn ngưỡng vá khẩn cấp 70.** Chỉ 14 / 24 lỗ hổng bắt trước đạt S từ 70; lỗ hổng có CVSS dưới 7,0 (như Jira, CVSS 5,3) không bao giờ đạt 70 nếu chưa vào KEV.
+4. **Tình huống minh họa không thay cho kiểm chứng thống kê ở mục 5.** Công thức chỉ bắt trước được 24 / 156 = 15,38% lỗ hổng KEV có CVSS thấp và có điểm EPSS (24 / 328 = 7,32% nếu tính cả lỗ hổng chưa có điểm); 76,28% vẫn có S dưới 30 trước khi vào KEV.
 
 ## 7. Kết luận ý tưởng
 
